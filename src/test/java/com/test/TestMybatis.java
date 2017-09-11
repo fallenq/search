@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
+import com.service.tool.EncodeTool;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
 //import com.service.tool.StringTool;
@@ -54,7 +55,7 @@ public class TestMybatis {
 //		System.out.println(uniqId.getUniqID());
 //		System.out.println(StringTool.uuCode("-"));
 //		
-//		System.out.println(EncodeTool.encrypt("123"));
+		System.out.println(EncodeTool.encrypt("123"));
 //		System.out.println(EncodeTool.match("123", "0cde0dea90bdbe33a6a4001b85abe5341babdea2265f6b36e97bfe275eab8f4158e15fd30bb42f47"));
 //		SparrowUser sparrowTest = testService.getSparrowUserById(1, 2);
 //		System.out.println(sparrowTest.getNickname());
