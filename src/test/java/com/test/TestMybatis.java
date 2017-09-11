@@ -34,6 +34,7 @@ public class TestMybatis {
 	@Test
 	public void test() {
 //		System.out.println(new Date());
+		
 		SparrowUser user = testService.getSparrowUserById(1);
 		try {
 			System.out.println(user.getNickname());
