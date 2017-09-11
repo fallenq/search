@@ -18,9 +18,9 @@ public class StringTool {
 	 * @param point
 	 * @return
 	 */
-	public static String uuCode(String point) {
+	public static String uuCode() {
 		String uuString = StringTool.uuId();
-		String[] uSplit = uuString.split(point);
+		String[] uSplit = uuString.split("-");
 		return uSplit[uSplit.length-1];
 	}
 	
