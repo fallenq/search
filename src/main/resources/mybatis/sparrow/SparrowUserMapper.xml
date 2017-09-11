@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sparrow.mapper.SparrowUserMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.sparrow.entity.SparrowUser">
+		<id column="id" property="id" />
+		<result column="user_type" property="userType" />
+		<result column="nickname" property="nickname" />
+		<result column="user_mobile_id" property="userMobileId" />
+		<result column="salt" property="salt" />
+		<result column="login_pwd" property="loginPwd" />
+		<result column="user_device_id" property="userDeviceId" />
+		<result column="status" property="status" />
+		<result column="created_at" property="createdAt" />
+		<result column="update_at" property="updateAt" />
+		<result column="delete_flag" property="deleteFlag" />
+		<result column="delete_at" property="deleteAt" />
+		<result column="last_login_at" property="lastLoginAt" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_type AS userType, nickname, user_mobile_id AS userMobileId, salt, login_pwd AS loginPwd, user_device_id AS userDeviceId, status, created_at AS createdAt, update_at AS updateAt, delete_flag AS deleteFlag, delete_at AS deleteAt, last_login_at AS lastLoginAt
+    </sql>
+
+</mapper>
