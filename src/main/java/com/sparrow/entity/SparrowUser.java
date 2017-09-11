@@ -71,6 +71,8 @@ public class SparrowUser extends Model<SparrowUser> {
 	 */
 	@TableField("last_login_at")
 	private Date lastLoginAt;
+	
+	private SparrowUserMobile userMobile;
 
 	public Integer getId() {
 		return id;
@@ -174,6 +176,14 @@ public class SparrowUser extends Model<SparrowUser> {
 
 	public void setLastLoginAt(Date lastLoginAt) {
 		this.lastLoginAt = lastLoginAt;
+	}
+
+	public SparrowUserMobile getUserMobile() {
+		return userMobile;
+	}
+
+	public void setUserMobile(SparrowUserMobile userMobile) {
+		this.userMobile = userMobile;
 	}
 
 	@Override

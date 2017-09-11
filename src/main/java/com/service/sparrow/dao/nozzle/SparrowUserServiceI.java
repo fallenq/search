@@ -14,5 +14,6 @@ import com.baomidou.mybatisplus.service.IService;
 public interface SparrowUserServiceI extends IService<SparrowUser> {
 
 	public SparrowUser getSparrowUserById(int userId);
+	public SparrowUser getSparrowUserByMobile(String mobile);
 	
 }

@@ -37,9 +37,9 @@ public class TestMybatis {
 	public void test() {
 		System.out.println(new Date());
 		
-		SparrowUser user = testService.getSparrowUserById(1);
+		SparrowUser user = testService.getSparrowUserByMobile("13212345678");
 		try {
-			System.out.println(user.getSalt());
+			System.out.println(user.getNickname());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println(user);
