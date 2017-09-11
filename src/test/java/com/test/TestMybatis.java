@@ -1,6 +1,7 @@
 package com.test;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,9 +47,9 @@ public class TestMybatis {
 //		System.out.println(testService.updateById(user));
 		
 //		System.out.println(testService.deleteById(1));
-//		UUID uuid = UUID.randomUUID();
-//		String s = uuid.toString();//用来生成数据库的主键id非常不错..
-//		System.out.println(s);
+		UUID uuid = UUID.randomUUID();
+		String s = uuid.toString();//用来生成数据库的主键id非常不错..
+		System.out.println(s);
 //		UniqId uniqId = UniqId.getInstance();
 //		System.out.println(uniqId.getUniqID());
 //		System.out.println(StringTool.uuCode("-"));
