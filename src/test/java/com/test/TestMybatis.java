@@ -41,8 +41,9 @@ public class TestMybatis {
 			// TODO Auto-generated catch block
 			System.out.println(user);
 		}
-		user.setNickname("1233ss3");
-		System.out.println(testService.updateById(user));
+//		user.setNickname("1233ss3");
+//		System.out.println(testService.updateById(user));
+		
 //		System.out.println(testService.deleteById(1));
 //		UUID uuid = UUID.randomUUID();
 //		String s = uuid.toString();//用来生成数据库的主键id非常不错..
