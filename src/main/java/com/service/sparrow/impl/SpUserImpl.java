@@ -62,7 +62,7 @@ public class SpUserImpl implements SpUserServiceI {
 		SparrowUser sparrowUser = null;
 		switch (type) {
 			case 1:
-				sparrowUser = userService.getSparrowUserByMobile(refer);
+				sparrowUser = getUserByMobile(refer);
 				break;
 			case 2:
 				sparrowUser = getUserByNickname(refer);
