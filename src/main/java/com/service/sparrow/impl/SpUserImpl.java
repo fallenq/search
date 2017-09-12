@@ -34,6 +34,14 @@ public class SpUserImpl implements SpUserServiceI {
 	}
 
 	/**
+	 * Get user through nickname
+	 */
+	@Override
+	public SparrowUser getUserByNickname(String nickname) {
+		return userService.selectOne(new EntityWrapper<SparrowUser>().setSqlSelect(baseColumnList).eq("nickName", nickname));
+	}
+
+	/**
 	 * Get user through mobile
 	 */
 	@Override
@@ -57,7 +65,7 @@ public class SpUserImpl implements SpUserServiceI {
 				sparrowUser = userService.getSparrowUserByMobile(refer);
 				break;
 			case 2:
-				sparrowUser = userService.selectOne(new EntityWrapper<SparrowUser>().setSqlSelect(baseColumnList).eq("nickName", refer));
+				sparrowUser = getUserByNickname(refer);
 				break;
 			default:
 				sparrowUser = null;

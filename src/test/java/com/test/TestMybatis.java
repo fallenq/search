@@ -49,8 +49,8 @@ public class TestMybatis {
 	public void test() {
 		System.out.println(new Date());
 		
-		SparrowUser user = userService.getUserByMobile("13212345678");
-//		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
+//		SparrowUser user = userService.getUserByMobile("13212345678");
+		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
 		try {
 			System.out.println(user.toString());
 		} catch (Exception e) {
