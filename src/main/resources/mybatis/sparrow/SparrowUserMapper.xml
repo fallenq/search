@@ -61,7 +61,7 @@
 	    a.id, user_type, nickname, user_mobile_id, salt, login_pwd, user_device_id, a.status, 
 	    a.created_at, a.update_at, a.delete_at, a.last_login_at, m.mobile
 	    from sparrow_user a
-	    left join sparrow_user_mobile m on a.id = m.user_id
+	    left join sparrow_user_mobile m on a.user_mobile_id = m.id
 	    <where>
 	    	m.mobile = #{mobile,jdbcType=VARCHAR}
 		    <if test="method == null">
