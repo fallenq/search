@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
+import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
@@ -22,22 +23,33 @@ import com.sparrow.entity.SparrowUser;
 @ContextConfiguration(locations = {"classpath:config/spring/spring.xml"})
 public class TestMybatis {
 
-	private SparrowUserServiceI testService;
+//	private SparrowUserServiceI testService;
+//
+//	public SparrowUserServiceI getTestService() {
+//		return testService;
+//	}
+//
+//	@Autowired
+//	public void setTestService(SparrowUserServiceI testService) {
+//		this.testService = testService;
+//	}
+	
+	private SpUserServiceI userService;
 
-	public SparrowUserServiceI getTestService() {
-		return testService;
+	public SpUserServiceI getUserService() {
+		return userService;
 	}
-
+	
 	@Autowired
-	public void setTestService(SparrowUserServiceI testService) {
-		this.testService = testService;
+	public void setUserService(SpUserServiceI userService) {
+		this.userService = userService;
 	}
 
 	@Test
 	public void test() {
 		System.out.println(new Date());
 		
-		SparrowUser user = testService.getSparrowUserByMobile("13212345678");
+		SparrowUser user = userService.getUserByMobile("13212345678");
 		try {
 			System.out.println(user.getNickname());
 		} catch (Exception e) {

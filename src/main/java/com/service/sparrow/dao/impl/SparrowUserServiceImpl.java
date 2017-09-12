@@ -18,12 +18,6 @@ import org.springframework.stereotype.Service;
 public class SparrowUserServiceImpl extends ServiceImpl<SparrowUserMapper, SparrowUser> implements SparrowUserServiceI {
 
 	@Override
-	public SparrowUser getSparrowUserById(int userId) {
-		// TODO Auto-generated method stub
-		return baseMapper.selectById(userId);
-	}
-
-	@Override
 	public SparrowUser getSparrowUserByMobile(String mobile) {
 		// TODO Auto-generated method stub
 		return baseMapper.selectByMobile(mobile, null);
