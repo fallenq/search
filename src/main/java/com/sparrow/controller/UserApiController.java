@@ -54,7 +54,13 @@ public class UserApiController {
 		}
 		return response.combineMap();
 	}
-	
+
+	@ResponseBody
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public Map<String, Object> register() {
+		return null;
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public Map<String, Object> test() {
