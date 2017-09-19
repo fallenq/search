@@ -13,8 +13,7 @@ import com.service.tool.ResponseTool;
 import com.sparrow.entity.SparrowUser;
 
 @Controller
-//@RequestMapping("/api/sparrow/user")
-@RequestMapping("/api")
+@RequestMapping("/api/sparrow/user")
 public class UserApiController {
 
 	private SpUserServiceI userService;
@@ -57,7 +56,7 @@ public class UserApiController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public Map<String, Object> test() {
 		ResponseTool response = ResponseTool.getInstance();
 		response.setStatus(ResponseTool.FAILURE);
