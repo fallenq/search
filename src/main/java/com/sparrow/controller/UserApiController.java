@@ -13,20 +13,29 @@ import com.service.tool.ResponseTool;
 import com.sparrow.entity.SparrowUser;
 
 @Controller
-@RequestMapping("/api/sparrow/user")
+//@RequestMapping("/api/sparrow/user")
+@RequestMapping("/")
 public class UserApiController {
-	
+
 	private SpUserServiceI userService;
 
 	public SpUserServiceI getUserService() {
 		return userService;
 	}
-	
+
 	@Autowired
 	public void setUserService(SpUserServiceI userService) {
 		this.userService = userService;
 	}
-	
+
+	/**
+	 * Check the user's info for login
+	 * 
+	 * @param username
+	 * @param password
+	 * @param type
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
 	public Map<String, Object> loginCheck(String username, String password, Integer type) {
@@ -47,4 +56,12 @@ public class UserApiController {
 		return response.combineMap();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public Map<String, Object> test() {
+		ResponseTool response = ResponseTool.getInstance();
+		response.setStatus(ResponseTool.FAILURE);
+		return response.combineMap();
+	}
+
 }
