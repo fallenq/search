@@ -14,7 +14,7 @@ import com.sparrow.entity.SparrowUser;
 
 @Controller
 //@RequestMapping("/api/sparrow/user")
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserApiController {
 
 	private SpUserServiceI userService;
