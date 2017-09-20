@@ -49,3 +49,7 @@ dependencies {
 	compile 'org.springframework.security:spring-security-config:4.2.3.RELEASE'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
