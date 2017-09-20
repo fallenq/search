@@ -91,9 +91,11 @@
 	    <property name="sqlInjector" ref="logicSqlInjector" />
 	    <property name="logicDeleteValue" value="-1" />
 	    <property name="logicNotDeleteValue" value="1" />
+	    <!-- 
         <property name="metaObjectHandler">
             <bean class="com.sparrow.common.MyMetaObjectHandler" />
         </property>
+         -->
 	</bean>
 	
 	<bean id="logicSqlInjector" class="com.baomidou.mybatisplus.mapper.LogicSqlInjector" />

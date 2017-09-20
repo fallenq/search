@@ -1,6 +1,5 @@
 package com.sparrow.entity;
 
-import com.baomidou.mybatisplus.enums.FieldFill;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -57,9 +56,11 @@ public class SparrowUser extends Model<SparrowUser> {
 	 * 状态
 	 */
 	private Integer status;
-	@TableField(value = "created_at", fill = FieldFill.INSERT)
+//	@TableField(value = "created_at", fill = FieldFill.INSERT)
+	@TableField("created_at")
 	private Date createdAt;
-	@TableField(value = "update_at", fill = FieldFill.INSERT_UPDATE)
+//	@TableField(value = "update_at", fill = FieldFill.INSERT_UPDATE)
+	@TableField("update_at")
 	private Date updateAt;
 	@TableField("delete_flag")
 	@TableLogic

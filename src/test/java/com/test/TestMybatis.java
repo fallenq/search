@@ -61,7 +61,7 @@ public class TestMybatis {
 //		user.setNickname("1233ss3");
 //		System.out.println(userService.updateById(user));
 		
-//		SparrowUser user = new SparrowUser();
+		SparrowUser user = new SparrowUser();
 //		user.setNickname("test");
 //		System.out.println(userService.insert(user));
 //		System.out.println(user.getId());
