@@ -49,16 +49,22 @@ public class TestMybatis {
 	public void test() {
 		System.out.println(new Date());
 		
-		SparrowUser user = userService.getUserByMobile("13212345678");
+//		SparrowUser user = userService.getUserByMobile("13212345678");
+//		SparrowUser user = userService.getUserById(1);
 //		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
-		try {
-			System.out.println(user.toString());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(user);
-		}
+//		try {
+//			System.out.println(user.toString());
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			System.out.println(user);
+//		}
 //		user.setNickname("1233ss3");
-//		System.out.println(testService.updateById(user));
+//		System.out.println(userService.updateById(user));
+		
+//		SparrowUser user = new SparrowUser();
+//		user.setNickname("test");
+//		System.out.println(userService.insert(user));
+//		System.out.println(user.getId());
 		
 //		System.out.println(testService.deleteById(1));
 //		UUID uuid = UUID.randomUUID();

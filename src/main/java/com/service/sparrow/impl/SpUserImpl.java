@@ -19,6 +19,8 @@ public class SpUserImpl implements SpUserServiceI {
 	private String baseColumnList = "id, user_type AS userType, nickname, user_mobile_id AS userMobileId, salt, login_pwd AS loginPwd, user_device_id AS userDeviceId, status, created_at AS createdAt, update_at AS updateAt, delete_flag AS deleteFlag, delete_at AS deleteAt, last_login_at AS lastLoginAt";
 	
 	private SparrowUserServiceI userService;
+	
+	
 
 	public SparrowUserServiceI getUserService() {
 		return userService;
@@ -30,11 +32,27 @@ public class SpUserImpl implements SpUserServiceI {
 	}
 	
 	/**
+	 * Insert user
+	 */
+	@Override
+	public int insert(SparrowUser sparrowUser) {
+		return userService.insertSelective(sparrowUser);
+	}
+	
+	/**
+	 * Edit user by Id
+	 */
+	@Override
+	public int update(SparrowUser sparrowUser) {
+		return userService.updateByPrimaryKeySelective(sparrowUser);
+	}
+	
+	/**
 	 * Get user through userId
 	 */
 	@Override
 	public SparrowUser getUserById(int userId) {
-		return userService.selectById(userId);
+		return userService.selectOne(new EntityWrapper<SparrowUser>().setSqlSelect(baseColumnList).eq("id", userId));
 	}
 
 	/**

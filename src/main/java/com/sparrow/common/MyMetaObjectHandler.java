@@ -1,5 +1,6 @@
 package com.sparrow.common;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import org.apache.ibatis.reflection.MetaObject;
@@ -15,13 +16,14 @@ public class MyMetaObjectHandler extends MetaObjectHandler {
 	public void insertFill(MetaObject metaObject) {
 		Object createdAt = metaObject.getValue("createdAt");
 		if (null == createdAt) {
-			metaObject.setValue("createdAt", new Date());
+			setFieldValByName("createdAt", new Timestamp(System.currentTimeMillis()), metaObject);
 		}    
-		insertFill(metaObject);
+//		insertFill(metaObject);
 	}
 
 	@Override
 	public void updateFill(MetaObject metaObject) {
-		metaObject.setValue("updateAt", new Date());
+//		metaObject.setValue("updateAt", new Timestamp(System.currentTimeMillis()));
+		setFieldValByName("updateAt", new Timestamp(System.currentTimeMillis()), metaObject);
 	}
 }
