@@ -21,6 +21,7 @@ public class ResponseTool {
 
 	public ResponseTool() {
 		this.data = CommonTool.emptyMap();
+		failStatus();
 	}
 
 	public static ResponseTool getInstance() {

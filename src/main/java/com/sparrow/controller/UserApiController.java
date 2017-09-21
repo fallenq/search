@@ -63,7 +63,6 @@ public class UserApiController {
 	public Map<String, Object> loginCheck(String username, String password, Integer type) {
 		boolean isPass = false;
 		ResponseTool response = ResponseTool.getInstance();
-		response.setStatus(ResponseTool.FAILURE);
 		SparrowUser sparrowUser = userService.getUserByParams(username, type);
 		try {
 			isPass = userService.compareUserLoginPwd(sparrowUser, password);
@@ -102,7 +101,6 @@ public class UserApiController {
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public Map<String, Object> test() {
 		ResponseTool response = ResponseTool.getInstance();
-		response.setStatus(ResponseTool.FAILURE);
 		return response.combineMap();
 	}
 
