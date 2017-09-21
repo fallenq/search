@@ -14,9 +14,5 @@ import com.baomidou.mybatisplus.service.IService;
 public interface SparrowUserServiceI extends IService<SparrowUser> {
 	
 	public SparrowUser getSparrowUserByMobile(String mobile);
-	public Integer insertRecord(SparrowUser record);
-	public int insertSelective(SparrowUser record);
-	public int updateByPrimaryKeySelective(SparrowUser record);
-	public int updateByPrimaryKey(SparrowUser record);
 	
 }

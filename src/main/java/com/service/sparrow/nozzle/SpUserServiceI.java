@@ -6,7 +6,7 @@ import com.sparrow.entity.SparrowUser;
 
 public interface SpUserServiceI {
 	public int insert(SparrowUser sparrowUser);
-	public int update(SparrowUser sparrowUser);
+	public int updateById(SparrowUser sparrowUser);
 	public SparrowUser getUserById(int userId);
 	public SparrowUser getUserByNickname(String nickname);
 	public SparrowUser getUserByMobile(String mobile);

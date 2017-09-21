@@ -1,5 +1,6 @@
 package com.service.sparrow.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +37,22 @@ public class SpUserImpl implements SpUserServiceI {
 	 */
 	@Override
 	public int insert(SparrowUser sparrowUser) {
-		return userService.insertSelective(sparrowUser);
+		sparrowUser.setCreatedAt(new Date());
+		boolean insertRes = userService.insert(sparrowUser);
+		if(insertRes) {
+			return sparrowUser.getId();
+		}
+		return 0;
 	}
 	
 	/**
 	 * Edit user by Id
 	 */
 	@Override
-	public int update(SparrowUser sparrowUser) {
-		return userService.updateByPrimaryKeySelective(sparrowUser);
+	public int updateById(SparrowUser sparrowUser) {
+		sparrowUser.setUpdateAt(new Date());
+		boolean updateRes = userService.updateById(sparrowUser);
+		return updateRes? 1: 0;
 	}
 	
 	/**
@@ -52,7 +60,7 @@ public class SpUserImpl implements SpUserServiceI {
 	 */
 	@Override
 	public SparrowUser getUserById(int userId) {
-		return userService.selectOne(new EntityWrapper<SparrowUser>().setSqlSelect(baseColumnList).eq("id", userId));
+		return userService.selectById(userId);
 	}
 
 	/**

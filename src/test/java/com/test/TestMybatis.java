@@ -50,7 +50,8 @@ public class TestMybatis {
 		System.out.println(new Date());
 		
 //		SparrowUser user = userService.getUserByMobile("13212345678");
-//		SparrowUser user = userService.getUserById(1);
+		SparrowUser user = userService.getUserById(2);
+//		System.out.println(user.getUserMobile().getMobile());
 //		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
 //		try {
 //			System.out.println(user.toString());
@@ -58,13 +59,12 @@ public class TestMybatis {
 //			// TODO Auto-generated catch block
 //			System.out.println(user);
 //		}
-//		user.setNickname("1233ss3");
-//		System.out.println(userService.updateById(user));
+		user.setNickname("test2");
+		System.out.println(userService.updateById(user));
 		
-		SparrowUser user = new SparrowUser();
+//		SparrowUser user = new SparrowUser();
 //		user.setNickname("test");
 //		System.out.println(userService.insert(user));
-//		System.out.println(user.getId());
 		
 //		System.out.println(testService.deleteById(1));
 //		UUID uuid = UUID.randomUUID();
