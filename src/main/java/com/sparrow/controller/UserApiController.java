@@ -55,7 +55,7 @@ public class UserApiController {
 	 * 
 	 * @param username
 	 * @param password
-	 * @param type
+	 * @param type	1-mobile 2-nickname
 	 * @return
 	 */
 	@ResponseBody
