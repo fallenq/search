@@ -1,13 +1,12 @@
 package com.sparrow.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
@@ -60,7 +59,7 @@ public class UserApiController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
-	public Map<String, Object> loginCheck(String username, String password, Integer type) {
+	public ResponseModel loginCheck(String username, String password, Integer type) {
 		boolean isPass = false;
 		ResponseTool response = ResponseTool.getInstance();
 		SparrowUser sparrowUser = userService.getUserByParams(username, type);
@@ -86,7 +85,7 @@ public class UserApiController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
-	public Map<String, Object> register(String mobile, String vcode) {
+	public ResponseModel register(String mobile, String vcode) {
 		ResponseTool response = ResponseTool.getInstance();
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
@@ -99,7 +98,7 @@ public class UserApiController {
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public Map<String, Object> test() {
+	public ResponseModel test() {
 		ResponseTool response = ResponseTool.getInstance();
 		return response.combineMap();
 	}

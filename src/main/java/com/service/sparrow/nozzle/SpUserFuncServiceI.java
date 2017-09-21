@@ -1,7 +1,7 @@
 package com.service.sparrow.nozzle;
 
-import java.util.Map;
+import com.service.model.ResponseModel;
 
 public interface SpUserFuncServiceI {
-	public Map<String, Object> registerByMobile(String mobile, String vcode);
+	public ResponseModel registerByMobile(String mobile, String vcode);
 }

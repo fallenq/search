@@ -68,24 +68,23 @@ public class ResponseTool {
 		return this.status == ResponseTool.SUCCESS;
 	}
 
-	protected Map<String, Object> excuteMap(int status, String message, Map<String, Object> data) {
-		ResponseModel resposnseModel = new ResponseModel(status, message, data);
-		return resposnseModel.transform();
+	protected ResponseModel excuteMap(int status, String message, Map<String, Object> data) {
+		return new ResponseModel(status, message, data);
 	}
 
-	public Map<String, Object> combineMap() {
+	public ResponseModel combineMap() {
 		return this.excuteMap(this.status, this.message, this.data);
 	}
 
-	public Map<String, Object> combineMap(String message) {
+	public ResponseModel combineMap(String message) {
 		return this.excuteMap(this.status, message, this.data);
 	}
 
-	public Map<String, Object> combineMap(Map<String, Object> data) {
+	public ResponseModel combineMap(Map<String, Object> data) {
 		return this.excuteMap(this.status, this.message, data);
 	}
 
-	public Map<String, Object> combineMap(String message, Map<String, Object> data) {
+	public ResponseModel combineMap(String message, Map<String, Object> data) {
 		return this.excuteMap(this.status, message, data);
 	}
 

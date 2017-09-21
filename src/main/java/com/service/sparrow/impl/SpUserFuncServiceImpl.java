@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.config.SparrowConfig;
+import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
@@ -37,7 +38,7 @@ public class SpUserFuncServiceImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
-	public Map<String, Object> registerByMobile(String mobile, String vcode) {
+	public ResponseModel registerByMobile(String mobile, String vcode) {
 		ResponseTool response = ResponseTool.getInstance();
 		SparrowUserMobile userMobile = new SparrowUserMobile();
 		userMobile.setMobile(mobile);
