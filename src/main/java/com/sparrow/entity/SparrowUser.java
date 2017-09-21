@@ -72,7 +72,9 @@ public class SparrowUser extends Model<SparrowUser> {
 	 */
 	@TableField("last_login_at")
 	private Date lastLoginAt;
-
+	/**
+	 * 关联用户电话对象
+	 */
 	@TableField(exist = false)
 	private SparrowUserMobile userMobile;
 
