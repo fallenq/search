@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.service.config.SparrowConfig;
+import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.ResponseTool;
@@ -21,6 +21,7 @@ public class UserApiController {
 
 	private SpUserServiceI userService;
 	private SpUserMobileServiceI mobileService;
+	private SpUserFuncServiceI userFuncService;
 
 	public SpUserServiceI getUserService() {
 		return userService;
@@ -38,6 +39,15 @@ public class UserApiController {
 	@Autowired
 	public void setMobileService(SpUserMobileServiceI mobileService) {
 		this.mobileService = mobileService;
+	}
+
+	public SpUserFuncServiceI getUserFuncService() {
+		return userFuncService;
+	}
+
+	@Autowired
+	public void setUserFuncService(SpUserFuncServiceI userFuncService) {
+		this.userFuncService = userFuncService;
 	}
 
 	/**
@@ -79,31 +89,9 @@ public class UserApiController {
 	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
 	public Map<String, Object> register(String mobile, String vcode) {
 		ResponseTool response = ResponseTool.getInstance();
-		response.setStatus(ResponseTool.FAILURE);
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
-			userMobile = new SparrowUserMobile();
-			userMobile.setMobile(mobile);
-			int mobileId = mobileService.insert(userMobile);
-			if (mobileId > 0) {
-				Map<String, Object> pwdSet = userService.createUserPwd();
-				SparrowUser user = new SparrowUser();
-				user.setNickname(mobile);
-				user.setUserType(SparrowConfig.MOBILE_USER_TYPE);
-				user.setSalt((String) pwdSet.get("salt"));
-				user.setLoginPwd((String) pwdSet.get("password"));
-				user.setUserMobileId(mobileId);
-				int userId = userService.insert(user);
-				if (userId > 0) {
-					userMobile.setUserId(userId);
-					mobileService.updateById(userMobile);
-					response.setStatus(ResponseTool.SUCCESS);
-					response.setMessage("注册成功");
-				}
-			}
-			if (response.getStatus() != ResponseTool.SUCCESS) {
-				response.setMessage("注册失败，请稍后尝试");
-			}
+			return userFuncService.registerByMobile(mobile, vcode);
 		} else {
 			response.setMessage("该手机号已注册");
 		}
