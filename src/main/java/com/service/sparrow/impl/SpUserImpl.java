@@ -17,11 +17,7 @@ import com.sparrow.entity.SparrowUser;
 @Service("spUserImpl")
 public class SpUserImpl implements SpUserServiceI {
 	
-	private String baseColumnList = "id, user_type AS userType, nickname, user_mobile_id AS userMobileId, salt, login_pwd AS loginPwd, user_device_id AS userDeviceId, status, created_at AS createdAt, update_at AS updateAt, delete_flag AS deleteFlag, delete_at AS deleteAt, last_login_at AS lastLoginAt";
-	
 	private SparrowUserServiceI userService;
-	
-	
 
 	public SparrowUserServiceI getUserService() {
 		return userService;
@@ -65,7 +61,7 @@ public class SpUserImpl implements SpUserServiceI {
 	 */
 	@Override
 	public SparrowUser getUserByNickname(String nickname) {
-		return userService.selectOne(new EntityWrapper<SparrowUser>().setSqlSelect(baseColumnList).eq("nickName", nickname));
+		return userService.selectOne(new EntityWrapper<SparrowUser>().eq("nickName", nickname));
 	}
 
 	/**
@@ -117,7 +113,8 @@ public class SpUserImpl implements SpUserServiceI {
 	private Map<String, Object> userPwdMap(String password, String salt) {
 		Map<String, Object> passwordMap = CommonTool.emptyMap();
 		passwordMap.put("salt", salt);
-		passwordMap.put("key", password);
+//		passwordMap.put("key", password);
+		passwordMap.put("key", "123456");
 		passwordMap.put("password", EncodeTool.encrypt(password + salt));
 		return passwordMap;
 	}
