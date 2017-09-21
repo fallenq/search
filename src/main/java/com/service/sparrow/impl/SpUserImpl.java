@@ -39,10 +39,7 @@ public class SpUserImpl implements SpUserServiceI {
 	public int insert(SparrowUser sparrowUser) {
 		sparrowUser.setCreatedAt(new Date());
 		boolean insertRes = userService.insert(sparrowUser);
-		if(insertRes) {
-			return sparrowUser.getId();
-		}
-		return 0;
+		return insertRes? sparrowUser.getId(): 0;
 	}
 	
 	/**
@@ -52,7 +49,7 @@ public class SpUserImpl implements SpUserServiceI {
 	public int updateById(SparrowUser sparrowUser) {
 		sparrowUser.setUpdateAt(new Date());
 		boolean updateRes = userService.updateById(sparrowUser);
-		return updateRes? 1: 0;
+		return updateRes? sparrowUser.getId(): 0;
 	}
 	
 	/**
