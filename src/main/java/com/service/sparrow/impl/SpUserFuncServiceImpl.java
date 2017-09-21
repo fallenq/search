@@ -54,11 +54,11 @@ public class SpUserFuncServiceImpl implements SpUserFuncServiceI {
 			if (userId > 0) {
 				userMobile.setUserId(userId);
 				mobileService.updateById(userMobile);
-				response.setStatus(ResponseTool.SUCCESS);
+				response.successStatus();
 				response.setMessage("注册成功");
 			}
 		}
-		if (response.getStatus() != ResponseTool.SUCCESS) {
+		if (!response.isSuccess()) {
 			response.setMessage("注册失败，请稍后尝试");
 		}
 		return response.combineMap();

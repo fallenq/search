@@ -54,6 +54,18 @@ public class ResponseTool {
 	protected void emptyData() {
 		this.data.clear();
 	}
+	
+	public void successStatus()	{
+		this.status = ResponseTool.SUCCESS;
+	}
+	
+	public void failStatus()	{
+		this.status = ResponseTool.FAILURE;
+	}
+	
+	public boolean isSuccess() {
+		return this.status == ResponseTool.SUCCESS;
+	}
 
 	protected Map<String, Object> excuteMap(int status, String message, Map<String, Object> data) {
 		ResponseModel resposnseModel = new ResponseModel(status, message, data);

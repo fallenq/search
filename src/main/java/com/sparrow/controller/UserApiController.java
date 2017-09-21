@@ -68,7 +68,7 @@ public class UserApiController {
 		try {
 			isPass = userService.compareUserLoginPwd(sparrowUser, password);
 			if (isPass) {
-				response.setStatus(ResponseTool.SUCCESS);
+				response.successStatus();
 			} else {
 				response.setMessage("用户名与密码不一致");
 			}
