@@ -5,7 +5,6 @@ import com.sparrow.mapper.SparrowUserMapper;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,17 +17,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SparrowUserServiceImpl extends ServiceImpl<SparrowUserMapper, SparrowUser> implements SparrowUserServiceI {
-
-	private SparrowUserMapper sparrowUserMapper;
-	
-	public SparrowUserMapper getSparrowUserMapper() {
-		return sparrowUserMapper;
-	}
-	
-	@Autowired
-	public void setSparrowUserMapper(SparrowUserMapper sparrowUserMapper) {
-		this.sparrowUserMapper = sparrowUserMapper;
-	}
 
 	@Override
 	public SparrowUser getSparrowUserByMobile(String mobile) {
