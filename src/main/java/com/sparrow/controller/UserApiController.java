@@ -111,7 +111,6 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public ResponseModel test(HttpServletRequest request) {
-		request.getSession().setAttribute("test", "hello");
 		return ResponseTool.getInstance().combineResponse();
 	}
 
@@ -119,7 +118,6 @@ public class UserApiController {
 	@RequestMapping(value = "/test/session", method = RequestMethod.POST)
 	public ResponseModel testSession(HttpServletRequest request) {
 		ResponseTool response = ResponseTool.getInstance();
-		response.setData("test", (String)request.getSession().getAttribute("test"));
 		return response.combineResponse();
 	}
 
