@@ -33,6 +33,7 @@ dependencies {
     compile "org.springframework:spring-webmvc:4.3.11.RELEASE"
     compile "org.springframework:spring-test:4.3.11.RELEASE"
     compile "org.springframework:spring-orm:4.3.11.RELEASE" 
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
     compile 'javax.servlet:jstl:1.2'
     compile 'mysql:mysql-connector-java:5.1.44'
     compile 'com.alibaba:druid:1.1.3' 

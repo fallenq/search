@@ -1,5 +1,7 @@
 package com.sparrow.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,7 +110,7 @@ public class UserApiController {
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public ResponseModel test() {
+	public ResponseModel test(HttpServletRequest request) {
 		return ResponseTool.getInstance().combineResponse();
 	}
 
