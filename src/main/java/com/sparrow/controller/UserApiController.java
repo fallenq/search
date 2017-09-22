@@ -97,7 +97,7 @@ public class UserApiController {
 	}
 	
 	/**
-	 * 退出登录
+	 * Login out
 	 * @return
 	 */
 	@ResponseBody
