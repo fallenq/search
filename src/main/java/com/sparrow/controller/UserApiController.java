@@ -103,15 +103,13 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout() {
-		ResponseTool response = ResponseTool.getInstance();
-		return response.combineResponse();
+		return ResponseTool.getInstance().combineResponse();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public ResponseModel test() {
-		ResponseTool response = ResponseTool.getInstance();
-		return response.combineResponse();
+		return ResponseTool.getInstance().combineResponse();
 	}
 
 }
