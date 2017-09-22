@@ -54,7 +54,8 @@ public class UserApiController {
 	 * 
 	 * @param username
 	 * @param password
-	 * @param type	1-mobile 2-nickname
+	 * @param type
+	 *            1-mobile 2-nickname
 	 * @return
 	 */
 	@ResponseBody
@@ -95,9 +96,10 @@ public class UserApiController {
 		}
 		return response.combineResponse();
 	}
-	
+
 	/**
 	 * Login out
+	 * 
 	 * @return
 	 */
 	@ResponseBody
