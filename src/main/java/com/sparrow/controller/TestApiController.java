@@ -15,13 +15,13 @@ import com.service.tool.ResponseTool;
 public class TestApiController {
 
 	@ResponseBody
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseModel test(HttpServletRequest request) {
 		return ResponseTool.getInstance().combineResponse();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/test/session", method = RequestMethod.POST)
+	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	public ResponseModel testSession(HttpServletRequest request) {
 		ResponseTool response = ResponseTool.getInstance();
 		return response.combineResponse();
