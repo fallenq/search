@@ -62,7 +62,7 @@ public class SpUserFuncServiceImpl implements SpUserFuncServiceI {
 		if (!response.isSuccess()) {
 			response.setMessage("注册失败，请稍后尝试");
 		}
-		return response.combineMap();
+		return response.combineResponse();
 	}
 
 }

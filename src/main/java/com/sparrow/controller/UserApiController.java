@@ -73,7 +73,7 @@ public class UserApiController {
 		} catch (Exception e) {
 			response.setMessage("账号不存在");
 		}
-		return response.combineMap();
+		return response.combineResponse();
 	}
 
 	/**
@@ -93,14 +93,25 @@ public class UserApiController {
 		} else {
 			response.setMessage("该手机号已注册");
 		}
-		return response.combineMap();
+		return response.combineResponse();
+	}
+	
+	/**
+	 * 退出登录
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public ResponseModel logout() {
+		ResponseTool response = ResponseTool.getInstance();
+		return response.combineResponse();
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	public ResponseModel test() {
 		ResponseTool response = ResponseTool.getInstance();
-		return response.combineMap();
+		return response.combineResponse();
 	}
 
 }

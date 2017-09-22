@@ -72,19 +72,19 @@ public class ResponseTool {
 		return new ResponseModel(status, message, data);
 	}
 
-	public ResponseModel combineMap() {
+	public ResponseModel combineResponse() {
 		return this.excuteMap(this.status, this.message, this.data);
 	}
 
-	public ResponseModel combineMap(String message) {
+	public ResponseModel combineResponse(String message) {
 		return this.excuteMap(this.status, message, this.data);
 	}
 
-	public ResponseModel combineMap(Map<String, Object> data) {
+	public ResponseModel combineResponse(Map<String, Object> data) {
 		return this.excuteMap(this.status, this.message, data);
 	}
 
-	public ResponseModel combineMap(String message, Map<String, Object> data) {
+	public ResponseModel combineResponse(String message, Map<String, Object> data) {
 		return this.excuteMap(this.status, message, data);
 	}
 
