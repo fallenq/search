@@ -12,6 +12,7 @@
         	classpath:config/spring/contexts/spring-context-*.xml
         </param-value>
     </context-param>
+    <!-- session 过滤器 -->
 	<filter>
 	    <filter-name>springSessionRepositoryFilter</filter-name>
 	    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

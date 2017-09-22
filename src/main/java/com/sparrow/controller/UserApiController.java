@@ -1,7 +1,5 @@
 package com.sparrow.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,19 +104,6 @@ public class UserApiController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout() {
 		return ResponseTool.getInstance().combineResponse();
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public ResponseModel test(HttpServletRequest request) {
-		return ResponseTool.getInstance().combineResponse();
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/test/session", method = RequestMethod.POST)
-	public ResponseModel testSession(HttpServletRequest request) {
-		ResponseTool response = ResponseTool.getInstance();
-		return response.combineResponse();
 	}
 
 }
