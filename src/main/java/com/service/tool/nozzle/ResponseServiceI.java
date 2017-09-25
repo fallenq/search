@@ -7,8 +7,8 @@ import com.service.model.ResponseModel;
 public interface ResponseServiceI {
 	public void setStatus(int status);
 	public void setMessage(String message);
-	public void setDataValue(String column, String value);
 	public void setData(Map<String, Object> data);
+	public void setDataValue(String column, String value);
 	public void setDataValue(String column, Object object);
 	public void emptyData();
 	public void successStatus();
