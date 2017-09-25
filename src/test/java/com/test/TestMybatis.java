@@ -13,6 +13,7 @@ import com.service.config.WarnMsgConfig;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
+import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
 //import com.service.tool.StringTool;
@@ -36,6 +37,8 @@ public class TestMybatis {
 //	}
 	
 	private SpUserServiceI userService;
+	@Autowired
+	private RedisServiceI redisService;
 
 	public SpUserServiceI getUserService() {
 		return userService;
@@ -49,7 +52,8 @@ public class TestMybatis {
 	@Test
 	public void test() {
 		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
-		
+//		redisService.set("test", "test1");
+		System.out.println(redisService.get("test"));
 //		SparrowUser user = userService.getUserByMobile("13212345678");
 //		SparrowUser user = userService.getUserById(2);
 //		System.out.println(user.getUserMobile().getMobile());
