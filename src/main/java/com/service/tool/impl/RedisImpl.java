@@ -24,6 +24,10 @@ public class RedisImpl implements RedisServiceI {
 		}
 		return operationValue;
 	}
+	
+	public static RedisImpl getInstance() {
+		return new RedisImpl();
+	}
 
 	@Override
 	public void set(String name, String value) {
