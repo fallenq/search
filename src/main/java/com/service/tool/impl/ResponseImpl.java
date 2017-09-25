@@ -1,33 +1,21 @@
-package com.service.tool;
+package com.service.tool.impl;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
+import com.service.config.ToolConfig;
 import com.service.model.ResponseModel;
+import com.service.tool.CommonTool;
+import com.service.tool.nozzle.ResponseServiceI;
 
-/**
- * 
- * 
- * @author Fallen
- *
- */
-public class ResponseTool {
-
-	public static int SUCCESS = 200;
-	public static int FAILURE = 500;
+@Service("responseImpl")
+public class ResponseImpl implements ResponseServiceI {
 
 	private int status = 0;
 	private String message = "";
 	private Map<String, Object> data = null;
-
-	public ResponseTool() {
-		this.data = CommonTool.emptyMap();
-		failStatus();
-	}
-
-	public static ResponseTool getInstance() {
-		return new ResponseTool();
-	}
-
+	
 	public int getStatus() {
 		return status;
 	}
@@ -44,46 +32,73 @@ public class ResponseTool {
 		this.message = message;
 	}
 
-	public Map<String, Object> responeseData() {
-		return this.data;
+	public Map<String, Object> getData() {
+		return data;
 	}
 
-	public void setData(String column, String value) {
+	public void setData(Map<String, Object> data) {
+		this.data = data;
+	}
+	
+	public ResponseImpl() {
+		this.data = CommonTool.emptyMap();
+		failStatus();
+	}
+
+	public static ResponseImpl getInstance() {
+		return new ResponseImpl();
+	}
+
+	@Override
+	public void emptyData() {
+		this.data.clear();
+	}
+
+	@Override
+	public void setDataValue(String column, String value) {
 		this.data.put(column, value);
 	}
 
-	protected void emptyData() {
-		this.data.clear();
-	}
-	
-	public void successStatus()	{
-		this.status = ResponseTool.SUCCESS;
-	}
-	
-	public void failStatus()	{
-		this.status = ResponseTool.FAILURE;
-	}
-	
-	public boolean isSuccess() {
-		return this.status == ResponseTool.SUCCESS;
+	@Override
+	public void setDataValue(String column, Object value) {
+		this.data.put(column, value);
 	}
 
+	@Override
+	public void successStatus()	{
+		this.status = ToolConfig.RESPONSE_SUCCESS;
+	}
+
+	@Override
+	public void failStatus()	{
+		this.status = ToolConfig.RESPONSE_FAILURE;
+	}
+
+	@Override
+	public boolean isSuccess() {
+		return this.status == ToolConfig.RESPONSE_SUCCESS;
+	}
+	
 	protected ResponseModel excuteMap(int status, String message, Map<String, Object> data) {
 		return new ResponseModel(status, message, data);
 	}
 
+	@Override
 	public ResponseModel combineResponse() {
 		return this.excuteMap(this.status, this.message, this.data);
 	}
 
+	@Override
 	public ResponseModel combineResponse(String message) {
 		return this.excuteMap(this.status, message, this.data);
 	}
 
+	@Override
 	public ResponseModel combineResponse(Map<String, Object> data) {
 		return this.excuteMap(this.status, this.message, data);
 	}
 
+	@Override
 	public ResponseModel combineResponse(String message, Map<String, Object> data) {
 		return this.excuteMap(this.status, message, data);
 	}

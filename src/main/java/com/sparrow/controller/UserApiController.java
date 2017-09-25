@@ -10,7 +10,7 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
-import com.service.tool.ResponseTool;
+import com.service.tool.nozzle.ResponseServiceI;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
 
@@ -18,9 +18,19 @@ import com.sparrow.entity.SparrowUserMobile;
 @RequestMapping("/api/sparrow/user")
 public class UserApiController {
 
+	private ResponseServiceI responseService;
 	private SpUserServiceI userService;
 	private SpUserMobileServiceI mobileService;
 	private SpUserFuncServiceI userFuncService;
+
+	public ResponseServiceI getRepsonseService() {
+		return responseService;
+	}
+
+	@Autowired
+	public void setRepsonseService(ResponseServiceI responseService) {
+		this.responseService = responseService;
+	}
 
 	public SpUserServiceI getUserService() {
 		return userService;
@@ -62,19 +72,18 @@ public class UserApiController {
 	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
 	public ResponseModel loginCheck(String username, String password, Integer type) {
 		boolean isPass = false;
-		ResponseTool response = ResponseTool.getInstance();
 		SparrowUser sparrowUser = userService.getUserByParams(username, type);
 		try {
 			isPass = userService.compareUserLoginPwd(sparrowUser, password);
 			if (isPass) {
-				response.successStatus();
+				responseService.successStatus();
 			} else {
-				response.setMessage("用户名与密码不一致");
+				responseService.setMessage("用户名与密码不一致");
 			}
 		} catch (Exception e) {
-			response.setMessage("账号不存在");
+			responseService.setMessage("账号不存在");
 		}
-		return response.combineResponse();
+		return responseService.combineResponse();
 	}
 
 	/**
@@ -87,14 +96,13 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
 	public ResponseModel register(String mobile, String vcode) {
-		ResponseTool response = ResponseTool.getInstance();
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
 			return userFuncService.registerByMobile(mobile, vcode);
 		} else {
-			response.setMessage("该手机号已注册");
+			responseService.setMessage("该手机号已注册");
 		}
-		return response.combineResponse();
+		return responseService.combineResponse();
 	}
 
 	/**
@@ -105,7 +113,7 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout() {
-		return ResponseTool.getInstance().combineResponse();
+		return responseService.combineResponse();
 	}
 
 }

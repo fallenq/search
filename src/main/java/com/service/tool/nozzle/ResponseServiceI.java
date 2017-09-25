@@ -1,0 +1,21 @@
+package com.service.tool.nozzle;
+
+import java.util.Map;
+
+import com.service.model.ResponseModel;
+
+public interface ResponseServiceI {
+	public void setStatus(int status);
+	public void setMessage(String message);
+	public void setDataValue(String column, String value);
+	public void setData(Map<String, Object> data);
+	public void setDataValue(String column, Object object);
+	public void emptyData();
+	public void successStatus();
+	public void failStatus();
+	public boolean isSuccess();
+	public ResponseModel combineResponse();
+	public ResponseModel combineResponse(String message);
+	public ResponseModel combineResponse(Map<String, Object> data);
+	public ResponseModel combineResponse(String message, Map<String, Object> data);
+}
