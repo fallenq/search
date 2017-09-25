@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.config.SparrowConfig;
+import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
@@ -56,11 +57,11 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				userMobile.setUserId(userId);
 				mobileService.updateById(userMobile);
 				response.successStatus();
-				response.setMessage("注册成功");
+				response.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS));
 			}
 		}
 		if (!response.isSuccess()) {
-			response.setMessage("注册失败，请稍后尝试");
+			response.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE));
 		}
 		return response.combineResponse();
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.nozzle.ResponseServiceI;
 
@@ -29,6 +30,7 @@ public class TestApiController {
 	@ResponseBody
 	@RequestMapping(value = "/index", method = RequestMethod.POST)
 	public ResponseModel test(HttpServletRequest request) {
+		responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 		return responseService.combineResponse();
 	}
 

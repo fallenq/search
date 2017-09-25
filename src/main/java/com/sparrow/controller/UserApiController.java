@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
@@ -78,10 +79,10 @@ public class UserApiController {
 			if (isPass) {
 				responseService.successStatus();
 			} else {
-				responseService.setMessage("用户名与密码不一致");
+				responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 			}
 		} catch (Exception e) {
-			responseService.setMessage("账号不存在");
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_NOEXISTS));
 		}
 		return responseService.combineResponse();
 	}
@@ -100,7 +101,7 @@ public class UserApiController {
 		if (userMobile == null) {
 			return userFuncService.registerByMobile(mobile, vcode);
 		} else {
-			responseService.setMessage("该手机号已注册");
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_MOBILE_EXISTS));
 		}
 		return responseService.combineResponse();
 	}

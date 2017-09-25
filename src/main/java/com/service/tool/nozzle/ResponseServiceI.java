@@ -14,6 +14,7 @@ public interface ResponseServiceI {
 	public void successStatus();
 	public void failStatus();
 	public boolean isSuccess();
+	public boolean isSuccess(ResponseModel model);
 	public ResponseModel combineResponse();
 	public ResponseModel combineResponse(String message);
 	public ResponseModel combineResponse(Map<String, Object> data);

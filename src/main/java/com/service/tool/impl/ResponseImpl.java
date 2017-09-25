@@ -78,6 +78,11 @@ public class ResponseImpl implements ResponseServiceI {
 	public boolean isSuccess() {
 		return this.status == ToolConfig.RESPONSE_SUCCESS;
 	}
+
+	@Override
+	public boolean isSuccess(ResponseModel model) {
+		return model.getStatus() == ToolConfig.RESPONSE_SUCCESS;
+	}
 	
 	protected ResponseModel excuteMap(int status, String message, Map<String, Object> data) {
 		return new ResponseModel(status, message, data);
