@@ -41,8 +41,21 @@ public class ResponseImpl implements ResponseServiceI {
 	}
 	
 	public ResponseImpl() {
+		init();
+	}
+
+	@Override
+	public void init() {
 		this.data = CommonTool.emptyMap();
+		this.message = "";
 		failStatus();
+	}
+
+	@Override
+	public void init(ResponseModel model) {
+		status = model.getStatus();
+		message = model.getMessage();
+		data = model.getData();
 	}
 
 	public static ResponseImpl getInstance() {

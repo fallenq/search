@@ -16,16 +16,8 @@ import com.service.tool.nozzle.ResponseServiceI;
 @RequestMapping("/api/sparrow/test")
 public class TestApiController {
 
-	private ResponseServiceI responseService;
-
-	public ResponseServiceI getRepsonseService() {
-		return responseService;
-	}
-
 	@Autowired
-	public void setRepsonseService(ResponseServiceI responseService) {
-		this.responseService = responseService;
-	}
+	private ResponseServiceI responseService;
 
 	@ResponseBody
 	@RequestMapping(value = "/index", method = RequestMethod.POST)

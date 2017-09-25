@@ -11,17 +11,9 @@ import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.sparrow.entity.SparrowUserMobile;
 @Service("spUserMobileImpl")
 public class SpUserMobileImpl implements SpUserMobileServiceI {
-	
-	private SparrowUserMobileServiceI mobileService;
 
-	public SparrowUserMobileServiceI getMoibleService() {
-		return mobileService;
-	}
-	
 	@Autowired
-	public void setMoibleService(SparrowUserMobileServiceI mobileService) {
-		this.mobileService = mobileService;
-	}
+	private SparrowUserMobileServiceI mobileService;
 	
 	/**
 	 * Insert record

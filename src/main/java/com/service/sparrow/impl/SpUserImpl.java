@@ -16,17 +16,9 @@ import com.sparrow.entity.SparrowUser;
 
 @Service("spUserImpl")
 public class SpUserImpl implements SpUserServiceI {
-	
-	private SparrowUserServiceI userService;
 
-	public SparrowUserServiceI getUserService() {
-		return userService;
-	}
-	
 	@Autowired
-	public void setUserService(SparrowUserServiceI userService) {
-		this.userService = userService;
-	}
+	private SparrowUserServiceI userService;
 	
 	/**
 	 * Insert user

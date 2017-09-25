@@ -11,36 +11,21 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
-import com.service.tool.impl.ResponseImpl;
+import com.service.tool.nozzle.ResponseServiceI;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
 @Service("userFuncImpl")
 public class SpUserFuncImpl implements SpUserFuncServiceI {
-
+	
+	@Autowired
+	private ResponseServiceI responseService;
+	@Autowired
 	private SpUserServiceI userService;
+	@Autowired
 	private SpUserMobileServiceI mobileService;
-
-	public SpUserServiceI getUserService() {
-		return userService;
-	}
-
-	@Autowired
-	public void setUserService(SpUserServiceI userService) {
-		this.userService = userService;
-	}
-
-	public SpUserMobileServiceI getMobileService() {
-		return mobileService;
-	}
-
-	@Autowired
-	public void setMobileService(SpUserMobileServiceI mobileService) {
-		this.mobileService = mobileService;
-	}
 
 	@Override
 	public ResponseModel registerByMobile(String mobile, String vcode) {
-		ResponseImpl response = ResponseImpl.getInstance();
 		SparrowUserMobile userMobile = new SparrowUserMobile();
 		userMobile.setMobile(mobile);
 		int mobileId = mobileService.insert(userMobile);
@@ -56,14 +41,14 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			if (userId > 0) {
 				userMobile.setUserId(userId);
 				mobileService.updateById(userMobile);
-				response.successStatus();
-				response.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS));
+				responseService.successStatus();
+				responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS));
 			}
 		}
-		if (!response.isSuccess()) {
-			response.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE));
+		if (!responseService.isSuccess()) {
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE));
 		}
-		return response.combineResponse();
+		return responseService.combineResponse();
 	}
 
 }

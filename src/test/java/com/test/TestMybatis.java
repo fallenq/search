@@ -53,9 +53,10 @@ public class TestMybatis {
 	public void test() {
 		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 //		redisService.set("test", "test1");
-		System.out.println(redisService.get("test"));
+//		System.out.println(redisService.get("test"));
 //		SparrowUser user = userService.getUserByMobile("13212345678");
-//		SparrowUser user = userService.getUserById(2);
+		SparrowUser user = userService.getUserById(1);
+		System.out.println(user.getNickname());
 //		System.out.println(user.getUserMobile().getMobile());
 //		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
 //		try {

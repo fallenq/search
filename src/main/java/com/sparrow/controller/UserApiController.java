@@ -19,46 +19,14 @@ import com.sparrow.entity.SparrowUserMobile;
 @RequestMapping("/api/sparrow/user")
 public class UserApiController {
 
+	@Autowired
 	private ResponseServiceI responseService;
+	@Autowired
 	private SpUserServiceI userService;
+	@Autowired
 	private SpUserMobileServiceI mobileService;
+	@Autowired
 	private SpUserFuncServiceI userFuncService;
-
-	public ResponseServiceI getRepsonseService() {
-		return responseService;
-	}
-
-	@Autowired
-	public void setRepsonseService(ResponseServiceI responseService) {
-		this.responseService = responseService;
-	}
-
-	public SpUserServiceI getUserService() {
-		return userService;
-	}
-
-	@Autowired
-	public void setUserService(SpUserServiceI userService) {
-		this.userService = userService;
-	}
-
-	public SpUserMobileServiceI getMobileService() {
-		return mobileService;
-	}
-
-	@Autowired
-	public void setMobileService(SpUserMobileServiceI mobileService) {
-		this.mobileService = mobileService;
-	}
-
-	public SpUserFuncServiceI getUserFuncService() {
-		return userFuncService;
-	}
-
-	@Autowired
-	public void setUserFuncService(SpUserFuncServiceI userFuncService) {
-		this.userFuncService = userFuncService;
-	}
 
 	/**
 	 * Check the user's info for login

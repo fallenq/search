@@ -5,6 +5,8 @@ import java.util.Map;
 import com.service.model.ResponseModel;
 
 public interface ResponseServiceI {
+	public void init();
+	public void init(ResponseModel model);
 	public void setStatus(int status);
 	public void setMessage(String message);
 	public void setData(Map<String, Object> data);
