@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.service.config.WarnMsgConfig;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
@@ -47,10 +48,10 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
-		System.out.println(new Date());
+		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 		
 //		SparrowUser user = userService.getUserByMobile("13212345678");
-		SparrowUser user = userService.getUserById(2);
+//		SparrowUser user = userService.getUserById(2);
 //		System.out.println(user.getUserMobile().getMobile());
 //		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
 //		try {
@@ -59,8 +60,8 @@ public class TestMybatis {
 //			// TODO Auto-generated catch block
 //			System.out.println(user);
 //		}
-		user.setNickname("test2");
-		System.out.println(userService.updateById(user));
+//		user.setNickname("test2");
+//		System.out.println(userService.updateById(user));
 		
 //		SparrowUser user = new SparrowUser();
 //		user.setNickname("test");
