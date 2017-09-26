@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.config.ToolConfig;
 import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
+import com.service.tool.CommonTool;
 import com.service.tool.MobileTool;
 import com.service.tool.nozzle.ResponseServiceI;
 
@@ -36,6 +37,7 @@ public class MobileApiController {
 				responseService.setMessage(sendResponse.getMessage());
 			}
 		}
+		responseService.setDataValue("ip", CommonTool.getCLientIp(request));
 		return responseService.combineResponse();
 	}
 	
