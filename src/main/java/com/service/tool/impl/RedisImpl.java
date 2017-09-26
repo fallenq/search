@@ -35,45 +35,34 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
-	public void setWithTimeout(String name, String value, int timeout, int method) {
+	public void setWithTimeout(String name, String value, int timeout, TimeUnit unit) {
 		if (timeout <= 0) {
 			timeout = ToolConfig.REDIS_DEFAULT_TIMEOUT;
 		}
-		if (method == ToolConfig.REDIS_TIMEUNIT_SECONDS) {
-			getValueOperation().set(name, value, timeout, TimeUnit.SECONDS);
-		} else if (method == ToolConfig.REDIS_TIMEUNIT_MINUTES) {
-			getValueOperation().set(name, value, timeout, TimeUnit.MINUTES);
-		} else if (method == ToolConfig.REDIS_TIMEUNIT_HOURS) {
-			getValueOperation().set(name, value, timeout, TimeUnit.HOURS);
-		} else if (method == ToolConfig.REDIS_TIMEUNIT_DAYS) {
-			getValueOperation().set(name, value, timeout, TimeUnit.DAYS);
-		} else if (method == ToolConfig.REDIS_TIMEUNIT_MILLISECONDS) {
-			getValueOperation().set(name, value, timeout, TimeUnit.MILLISECONDS);
-		} else if (method == ToolConfig.REDIS_TIMEUNIT_MICROSECONDS) {
-			getValueOperation().set(name, value, timeout, TimeUnit.MICROSECONDS);
-		} else {
-			getValueOperation().set(name, value, timeout, TimeUnit.SECONDS);
+		if (unit == null) {
+			unit = TimeUnit.SECONDS;
 		}
+		getValueOperation().set(name, value, timeout, unit);
 	}
 
 	@Override
 	public void setWithSeconds(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, ToolConfig.REDIS_TIMEUNIT_SECONDS);
+		setWithTimeout(name, value, timeout, TimeUnit.SECONDS);
 	}
 
 	@Override
 	public void setWithMinutes(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, ToolConfig.REDIS_TIMEUNIT_MINUTES);
+		setWithTimeout(name, value, timeout, TimeUnit.MINUTES);
 	}
 
 	@Override
 	public void setWithHours(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, ToolConfig.REDIS_TIMEUNIT_HOURS);
+		setWithTimeout(name, value, timeout, TimeUnit.HOURS);
 	}
 
 	@Override
 	public void setWithDays(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, ToolConfig.REDIS_TIMEUNIT_DAYS);
+		setWithTimeout(name, value, timeout, TimeUnit.DAYS);
 	}
 
 	@Override
