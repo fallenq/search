@@ -35,6 +35,11 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
+	public void set(String name, String value, int timeout) {
+		setWithTimeout(name, value, timeout, TimeUnit.SECONDS);
+	}
+
+	@Override
 	public void setForever(String name, String value) {
 		getValueOperation().set(name, value);
 	}
