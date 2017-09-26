@@ -31,7 +31,12 @@ public class RedisImpl implements RedisServiceI {
 
 	@Override
 	public void set(String name, String value) {
-		setWithSeconds(name, value, ToolConfig.REDIS_DEFAULT_TIMEOUT);
+		setWithTimeout(name, value, ToolConfig.REDIS_DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public void setForever(String name, String value) {
+		getValueOperation().set(name, value);
 	}
 
 	@Override
@@ -45,34 +50,29 @@ public class RedisImpl implements RedisServiceI {
 		getValueOperation().set(name, value, timeout, unit);
 	}
 
-	@Override
-	public void setWithSeconds(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, TimeUnit.SECONDS);
-	}
-
-	@Override
-	public void setWithMinutes(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, TimeUnit.MINUTES);
-	}
-
-	@Override
-	public void setWithHours(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, TimeUnit.HOURS);
-	}
-
-	@Override
-	public void setWithDays(String name, String value, int timeout) {
-		setWithTimeout(name, value, timeout, TimeUnit.DAYS);
-	}
-
-	@Override
-	public void setForever(String name, String value) {
-		getValueOperation().set(name, value);
-	}
+//	@Override
+//	public void setWithSeconds(String name, String value, int timeout) {
+//		setWithTimeout(name, value, timeout, TimeUnit.SECONDS);
+//	}
+//
+//	@Override
+//	public void setWithMinutes(String name, String value, int timeout) {
+//		setWithTimeout(name, value, timeout, TimeUnit.MINUTES);
+//	}
+//
+//	@Override
+//	public void setWithHours(String name, String value, int timeout) {
+//		setWithTimeout(name, value, timeout, TimeUnit.HOURS);
+//	}
+//
+//	@Override
+//	public void setWithDays(String name, String value, int timeout) {
+//		setWithTimeout(name, value, timeout, TimeUnit.DAYS);
+//	}
 
 	@Override
 	public String get(String name) {
-		return (String) redisTemplate.opsForValue().get(name);
+		return (String) getValueOperation().get(name);
 	}
 
 }
