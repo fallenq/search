@@ -55,26 +55,6 @@ public class RedisImpl implements RedisServiceI {
 		getValueOperation().set(name, value, timeout, unit);
 	}
 
-//	@Override
-//	public void setWithSeconds(String name, String value, int timeout) {
-//		setWithTimeout(name, value, timeout, TimeUnit.SECONDS);
-//	}
-//
-//	@Override
-//	public void setWithMinutes(String name, String value, int timeout) {
-//		setWithTimeout(name, value, timeout, TimeUnit.MINUTES);
-//	}
-//
-//	@Override
-//	public void setWithHours(String name, String value, int timeout) {
-//		setWithTimeout(name, value, timeout, TimeUnit.HOURS);
-//	}
-//
-//	@Override
-//	public void setWithDays(String name, String value, int timeout) {
-//		setWithTimeout(name, value, timeout, TimeUnit.DAYS);
-//	}
-
 	@Override
 	public String get(String name) {
 		return (String) getValueOperation().get(name);
