@@ -26,7 +26,7 @@ public class MobileApiController {
 	@RequestMapping(value = "/validate/code", method = RequestMethod.POST)
 	public ResponseModel validateCode(HttpServletRequest request) {
 		String mobile = request.getParameter("mobile");
-		String validateCode = MobileTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
+		String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 		if (validateCode.length() == 0) {
 			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 		} else {

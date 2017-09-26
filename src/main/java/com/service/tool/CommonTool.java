@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.service.config.ToolConfig;
+
 public class CommonTool {
 
 	public static Map<String, Object> emptyMap() {
@@ -33,6 +35,23 @@ public class CommonTool {
 	 */
 	public static int createRandomInt(int min, int max) {
 		return (int) (min + Math.random() * (max - min + 1));
+	}
+
+	/**
+	 * Get validate code in number limited by length
+	 * 
+	 * @param length
+	 * @return
+	 */
+	public static String getValidateNumber(int length) {
+		if (length == 0) {
+			length = ToolConfig.VALIDATE_CODE_LENGTH_DEFAULT;
+		}
+		String validateCode = "";
+		for (int countIndex = 0; countIndex < length; countIndex++) {
+			validateCode += String.valueOf(CommonTool.createRandomInt(0, 9));
+		}
+		return validateCode;
 	}
 
 	/**
