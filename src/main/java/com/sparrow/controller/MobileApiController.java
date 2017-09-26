@@ -1,5 +1,7 @@
 package com.sparrow.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,8 @@ public class MobileApiController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/validate/code", method = RequestMethod.POST)
-	public ResponseModel validateCode(String mobile) {
+	public ResponseModel validateCode(HttpServletRequest request) {
+		String mobile = request.getParameter("mobile");
 		String validateCode = MobileTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 		if (validateCode.length() == 0) {
 			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
