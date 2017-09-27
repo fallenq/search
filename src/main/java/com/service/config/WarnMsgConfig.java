@@ -9,6 +9,7 @@ public class WarnMsgConfig {
 	 * common
 	 */
 	public static int COMMON_SUBMIT_ERROR = 1;
+	public static int COMMON_SYSTEM_BUSY  = 2;
 	/**
 	 * sparrow
 	 */
@@ -28,6 +29,7 @@ public class WarnMsgConfig {
 	public static Map<Integer, String> getCommonMap() {
 		Map<Integer, String> commonMap = CommonTool.emptyIntMap();
 		commonMap.put(1, "提交失败");
+		commonMap.put(2, "系统繁忙，清稍后");
 		return commonMap;
 	}
 	
