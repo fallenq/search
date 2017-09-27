@@ -34,7 +34,6 @@ public class MobileApiController {
 				responseService.setMessage(sendResponse.getMessage());
 			}
 		}
-		responseService.setDataValue("ip", CommonTool.getCLientIp(request));
 		return responseService.combineResponse();
 	}
 	
