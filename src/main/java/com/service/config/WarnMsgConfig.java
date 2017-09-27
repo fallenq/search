@@ -32,8 +32,8 @@ public class WarnMsgConfig {
 	public static synchronized Map<Integer, String> getCommonMap() {
 		if (commonMap == null) {
 			commonMap = CommonTool.emptyIntMap();
-			commonMap.put(1, "提交失败");
-			commonMap.put(2, "系统繁忙，清稍后");
+			commonMap.put(WarnMsgConfig.COMMON_SUBMIT_ERROR, "提交失败");
+			commonMap.put(WarnMsgConfig.COMMON_SYSTEM_BUSY, "系统繁忙，清稍后");
 		}
 		return commonMap;
 	}
@@ -41,13 +41,13 @@ public class WarnMsgConfig {
 	public static synchronized Map<Integer, String> getSparrowMap() {
 		if (sparrowMap == null) {
 			sparrowMap = CommonTool.emptyIntMap();
-			sparrowMap.put(1, "提交成功");
-			sparrowMap.put(2, "提交失败");
-			sparrowMap.put(3, "注册成功");
-			sparrowMap.put(4, "注册失败，请稍后尝试");
-			sparrowMap.put(5, "该手机号已注册");
-			sparrowMap.put(6, "账号不存在");
-			sparrowMap.put(7, "用户名与密码不一致");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_SUCCESS, "提交成功");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_FAILURE, "提交失败");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS, "注册成功");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE, "注册失败，请稍后尝试");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_MOBILE_EXISTS, "该手机号已注册");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_NOEXISTS, "账号不存在");
+			sparrowMap.put(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR, "用户名与密码不一致");
 		}
 		return sparrowMap;
 	}
