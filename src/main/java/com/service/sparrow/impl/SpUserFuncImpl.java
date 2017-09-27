@@ -11,14 +11,12 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
-import com.service.tool.nozzle.ResponseServiceI;
+import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
 @Service("userFuncImpl")
 public class SpUserFuncImpl implements SpUserFuncServiceI {
 	
-	@Autowired
-	private ResponseServiceI responseService;
 	@Autowired
 	private SpUserServiceI userService;
 	@Autowired
@@ -26,6 +24,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 
 	@Override
 	public ResponseModel registerByMobile(String mobile, String vcode) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
 		SparrowUserMobile userMobile = new SparrowUserMobile();
 		userMobile.setMobile(mobile);
 		int mobileId = mobileService.insert(userMobile);

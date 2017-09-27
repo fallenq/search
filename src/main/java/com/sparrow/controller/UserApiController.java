@@ -13,7 +13,7 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
-import com.service.tool.nozzle.ResponseServiceI;
+import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
 
@@ -21,8 +21,6 @@ import com.sparrow.entity.SparrowUserMobile;
 @RequestMapping("/api/sparrow/user")
 public class UserApiController {
 
-	@Autowired
-	private ResponseServiceI responseService;
 	@Autowired
 	private SpUserServiceI userService;
 	@Autowired
@@ -42,6 +40,7 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
 	public ResponseModel loginCheck(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		Integer type = Integer.parseInt(request.getParameter("type"));
@@ -70,6 +69,7 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
 	public ResponseModel register(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
 		String mobile = request.getParameter("mobile");
 		String vcode = request.getParameter("vcode");
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
@@ -89,6 +89,7 @@ public class UserApiController {
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout() {
+		ResponseImpl responseService = ResponseImpl.getInstance();
 		return responseService.combineResponse();
 	}
 
