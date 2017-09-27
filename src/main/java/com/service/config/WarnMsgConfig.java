@@ -53,17 +53,17 @@ public class WarnMsgConfig {
 	}
 	
 	public static String getCommonValue(int msgId) {
-		Map<Integer, String> commonMap = WarnMsgConfig.getCommonMap();
-		if (commonMap.containsKey(msgId)) {
-			return commonMap.get(msgId);
+		Map<Integer, String> messageMap = WarnMsgConfig.getCommonMap();
+		if (messageMap.containsKey(msgId)) {
+			return messageMap.get(msgId);
 		}
 		return "";
 	}
 	
 	public static String getSparrowValue(int msgId) {
-		Map<Integer, String> commonMap = WarnMsgConfig.getSparrowMap();
-		if (commonMap.containsKey(msgId)) {
-			return commonMap.get(msgId);
+		Map<Integer, String> messageMap = WarnMsgConfig.getSparrowMap();
+		if (messageMap.containsKey(msgId)) {
+			return messageMap.get(msgId);
 		}
 		return "";
 	}
