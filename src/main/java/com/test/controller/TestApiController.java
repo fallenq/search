@@ -29,6 +29,7 @@ public class TestApiController {
 	@ResponseBody
 	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	public ResponseModel testSession(HttpServletRequest request) {
+		responseService.successStatus();
 		return responseService.combineResponse();
 	}
 }
