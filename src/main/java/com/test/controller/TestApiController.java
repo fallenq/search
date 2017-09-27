@@ -1,4 +1,4 @@
-package com.sparrow.controller;
+package com.test.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +13,7 @@ import com.service.model.ResponseModel;
 import com.service.tool.nozzle.ResponseServiceI;
 
 @Controller
-@RequestMapping("/api/sparrow/test")
+@RequestMapping("/api/test")
 public class TestApiController {
 
 	@Autowired

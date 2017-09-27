@@ -8,17 +8,17 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Controller包(自动注入) -->
-    <context:component-scan base-package="com.sparrow.controller"/>
+    <context:component-scan base-package="com.test.controller"/>
     
     <!-- 登录验证器 -->
     <mvc:interceptors>  
         <mvc:interceptor>  
-            <mvc:mapping path="/api/sparrow/**"/>
-            <mvc:mapping path="/api/mobile/**"/>
-            <mvc:exclude-mapping path="/api/sparrow/user/login/check"/>
-            <mvc:exclude-mapping path="/api/sparrow/user/register/mobile"/>
+            <mvc:mapping path="/api/test/**"/>
+            <mvc:exclude-mapping path="/api/test/index"/>
+            <mvc:exclude-mapping path="/api/test/session"/>
             <bean class="com.service.config.interceptor.LoginInterceptor" />  
         </mvc:interceptor>  
     </mvc:interceptors>
+
 
 </beans>
