@@ -16,14 +16,20 @@ public class MobileTool {
 		return isPass;
 	}
 	
+	public static ResponseModel sendMobileMsg() {
+		ResponseImpl response = ResponseImpl.getInstance();
+		return response.combineResponse();
+	}
+	
 	/**
 	 * Send validate code to mobile
 	 * 
 	 * @param mobile
 	 * @param vcode
+	 * @param ipAddress
 	 * @return
 	 */
-	public static ResponseModel sendMobileCode(String mobile, String vcode) {
+	public static ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
 		ResponseImpl response = ResponseImpl.getInstance();
 		return response.combineResponse();
 	}

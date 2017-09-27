@@ -30,7 +30,7 @@ public class MobileApiController {
 		if (validateCode.length() == 0) {
 			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 		} else {
-			ResponseModel sendResponse = MobileTool.sendMobileCode(mobile, validateCode);
+			ResponseModel sendResponse = MobileTool.sendMobileCode(mobile, validateCode, CommonTool.getCLientIp(request));
 			if (responseService.isSuccess(sendResponse)) {
 				responseService.successStatus();
 			} else {

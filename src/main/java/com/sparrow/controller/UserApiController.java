@@ -1,5 +1,7 @@
 package com.sparrow.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +41,10 @@ public class UserApiController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/login/check", method = RequestMethod.POST)
-	public ResponseModel loginCheck(String username, String password, Integer type) {
+	public ResponseModel loginCheck(HttpServletRequest request) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		Integer type = Integer.parseInt(request.getParameter("type"));
 		boolean isPass = false;
 		SparrowUser sparrowUser = userService.getUserByParams(username, type);
 		try {
@@ -64,7 +69,9 @@ public class UserApiController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
-	public ResponseModel register(String mobile, String vcode) {
+	public ResponseModel register(HttpServletRequest request) {
+		String mobile = request.getParameter("mobile");
+		String vcode = request.getParameter("vcode");
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
 			return userFuncService.registerByMobile(mobile, vcode);
