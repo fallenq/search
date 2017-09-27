@@ -5,6 +5,9 @@ import java.util.Map;
 import com.service.tool.CommonTool;
 
 public class WarnMsgConfig {
+	
+	private static Map<Integer, String> commonMap 	= null;
+	private static Map<Integer, String> sparrowMap 	= null;
 	/**
 	 * common
 	 */
@@ -26,22 +29,26 @@ public class WarnMsgConfig {
 		return warnMap;
 	}
 	
-	public static Map<Integer, String> getCommonMap() {
-		Map<Integer, String> commonMap = CommonTool.emptyIntMap();
-		commonMap.put(1, "提交失败");
-		commonMap.put(2, "系统繁忙，清稍后");
+	public static synchronized Map<Integer, String> getCommonMap() {
+		if (commonMap == null) {
+			commonMap = CommonTool.emptyIntMap();
+			commonMap.put(1, "提交失败");
+			commonMap.put(2, "系统繁忙，清稍后");
+		}
 		return commonMap;
 	}
 	
-	public static Map<Integer, String> getSparrowMap() {
-		Map<Integer, String> sparrowMap = CommonTool.emptyIntMap();
-		sparrowMap.put(1, "提交成功");
-		sparrowMap.put(2, "提交失败");
-		sparrowMap.put(3, "注册成功");
-		sparrowMap.put(4, "注册失败，请稍后尝试");
-		sparrowMap.put(5, "该手机号已注册");
-		sparrowMap.put(6, "账号不存在");
-		sparrowMap.put(7, "用户名与密码不一致");
+	public static synchronized Map<Integer, String> getSparrowMap() {
+		if (sparrowMap == null) {
+			sparrowMap = CommonTool.emptyIntMap();
+			sparrowMap.put(1, "提交成功");
+			sparrowMap.put(2, "提交失败");
+			sparrowMap.put(3, "注册成功");
+			sparrowMap.put(4, "注册失败，请稍后尝试");
+			sparrowMap.put(5, "该手机号已注册");
+			sparrowMap.put(6, "账号不存在");
+			sparrowMap.put(7, "用户名与密码不一致");
+		}
 		return sparrowMap;
 	}
 	
