@@ -55,7 +55,7 @@ public class TestMybatis {
 //		System.out.println(redisService);
 //		redisService.set("test", "1");
 //		MobileTool mTool = new MobileTool();
-		System.out.println(MobileTool.getInstance().sendMobileCode("13212345678", "1234", "127.0.0.1", redisService));
+		System.out.println(MobileTool.getInstance().sendMobileCode("13212345679", "1234", "127.0.0.1", redisService));
 //		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 //		redisService.set("test", "test1");
 //		System.out.println(redisService.get("test"));

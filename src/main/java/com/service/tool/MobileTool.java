@@ -1,13 +1,10 @@
 package com.service.tool;
 
-import org.springframework.test.context.ContextConfiguration;
-
 import com.service.config.SparrowConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.impl.ResponseImpl;
 import com.service.tool.nozzle.RedisServiceI;
 
-@ContextConfiguration(locations = {"classpath:config/spring/spring.xml"})
 public class MobileTool {
 
 	/**
