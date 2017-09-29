@@ -2,6 +2,7 @@ package com.sparrow.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,10 +14,14 @@ import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
 import com.service.tool.MobileTool;
 import com.service.tool.impl.ResponseImpl;
+import com.service.tool.nozzle.RedisServiceI;
 
 @Controller
 @RequestMapping("/api/mobile")
 public class MobileApiController {
+	
+	@Autowired
+	private RedisServiceI redisService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/validate/code", method = RequestMethod.POST)
@@ -27,7 +32,7 @@ public class MobileApiController {
 		if (validateCode.length() == 0) {
 			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 		} else {
-			ResponseModel sendResponse = MobileTool.sendMobileCode(mobile, validateCode, CommonTool.getCLientIp(request));
+			ResponseModel sendResponse = MobileTool.getInstance().sendMobileCode(mobile, validateCode, CommonTool.getCLientIp(request), redisService);
 			if (responseService.isSuccess(sendResponse)) {
 				responseService.successStatus();
 			} else {

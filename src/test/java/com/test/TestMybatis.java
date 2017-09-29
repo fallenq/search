@@ -13,6 +13,7 @@ import com.service.config.WarnMsgConfig;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
+import com.service.tool.MobileTool;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
@@ -36,27 +37,31 @@ public class TestMybatis {
 //		this.testService = testService;
 //	}
 	
-	private SpUserServiceI userService;
+//	private SpUserServiceI userService;
 	@Autowired
 	private RedisServiceI redisService;
-
-	public SpUserServiceI getUserService() {
-		return userService;
-	}
-	
-	@Autowired
-	public void setUserService(SpUserServiceI userService) {
-		this.userService = userService;
-	}
+//
+//	public SpUserServiceI getUserService() {
+//		return userService;
+//	}
+//	
+//	@Autowired
+//	public void setUserService(SpUserServiceI userService) {
+//		this.userService = userService;
+//	}
 
 	@Test
 	public void test() {
-		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
+//		System.out.println(redisService);
+//		redisService.set("test", "1");
+//		MobileTool mTool = new MobileTool();
+		System.out.println(MobileTool.getInstance().sendMobileCode("13212345678", "1234", "127.0.0.1", redisService));
+//		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 //		redisService.set("test", "test1");
 //		System.out.println(redisService.get("test"));
 //		SparrowUser user = userService.getUserByMobile("13212345678");
-		SparrowUser user = userService.getUserById(1);
-		System.out.println(user.getNickname());
+//		SparrowUser user = userService.getUserById(1);
+//		System.out.println(user.getNickname());
 //		System.out.println(user.getUserMobile().getMobile());
 //		SparrowUser user = userService.getUserByParams("123d3sss3", 2);
 //		try {

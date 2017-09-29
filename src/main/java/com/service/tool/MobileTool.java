@@ -1,9 +1,13 @@
 package com.service.tool;
 
-import com.service.model.ResponseModel;
-import com.service.tool.impl.RedisImpl;
-import com.service.tool.impl.ResponseImpl;
+import org.springframework.test.context.ContextConfiguration;
 
+import com.service.config.SparrowConfig;
+import com.service.model.ResponseModel;
+import com.service.tool.impl.ResponseImpl;
+import com.service.tool.nozzle.RedisServiceI;
+
+@ContextConfiguration(locations = {"classpath:config/spring/spring.xml"})
 public class MobileTool {
 
 	/**
@@ -16,6 +20,10 @@ public class MobileTool {
 		boolean isPass = false;
 		return isPass;
 	}
+	
+	public static MobileTool getInstance() {
+		return new MobileTool();
+	}
 
 	/**
 	 * Send mobile message
@@ -25,7 +33,7 @@ public class MobileTool {
 	 * @param templateId
 	 * @return
 	 */
-	public static ResponseModel sendMobileMsg(String mobile, String content, String templateId) {
+	public ResponseModel sendMobileMsg(String mobile, String content, String templateId) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		responseService.successStatus();
 		return responseService.combineResponse();
@@ -39,13 +47,12 @@ public class MobileTool {
 	 * @param ipAddress
 	 * @return
 	 */
-	public static ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
+	public ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress, RedisServiceI redisService) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		RedisImpl redisImpl = RedisImpl.getInstance();
 		// TODO limit send count by ip
-		ResponseModel sendResult = MobileTool.sendMobileMsg(mobile, vcode, "");
+		ResponseModel sendResult = sendMobileMsg(mobile, vcode, "");
 		if (responseService.isSuccess(sendResult)) {
-//			redisImpl.
+			redisService.set(SparrowConfig.MOBILE_VALIDATE_CODE_REDIS_KEY_PREFIX + mobile, vcode, 300);
 			responseService.successStatus();
 			responseService.setDataValue("vcode", vcode);
 		} else {
