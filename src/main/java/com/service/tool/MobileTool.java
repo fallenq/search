@@ -4,7 +4,7 @@ import com.service.model.ResponseModel;
 import com.service.tool.impl.ResponseImpl;
 
 public class MobileTool {
-	
+
 	/**
 	 * Compare mobile code
 	 * 
@@ -15,12 +15,12 @@ public class MobileTool {
 		boolean isPass = false;
 		return isPass;
 	}
-	
+
 	public static ResponseModel sendMobileMsg() {
-		ResponseImpl response = ResponseImpl.getInstance();
-		return response.combineResponse();
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		return responseService.combineResponse();
 	}
-	
+
 	/**
 	 * Send validate code to mobile
 	 * 
@@ -30,8 +30,14 @@ public class MobileTool {
 	 * @return
 	 */
 	public static ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
-		ResponseImpl response = ResponseImpl.getInstance();
-		return response.combineResponse();
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		ResponseModel sendModel = MobileTool.sendMobileMsg();
+		if (responseService.isSuccess(sendModel)) {
+			responseService.successStatus();
+		} else {
+			responseService.setMessage(sendModel.getMessage());
+		}
+		return responseService.combineResponse();
 	}
 
 }
