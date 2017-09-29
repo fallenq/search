@@ -1,6 +1,7 @@
 package com.service.tool;
 
 import com.service.model.ResponseModel;
+import com.service.tool.impl.RedisImpl;
 import com.service.tool.impl.ResponseImpl;
 
 public class MobileTool {
@@ -16,8 +17,17 @@ public class MobileTool {
 		return isPass;
 	}
 
-	public static ResponseModel sendMobileMsg() {
+	/**
+	 * Send mobile message
+	 * 
+	 * @param mobile
+	 * @param content
+	 * @param templateId
+	 * @return
+	 */
+	public static ResponseModel sendMobileMsg(String mobile, String content, String templateId) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
+		responseService.successStatus();
 		return responseService.combineResponse();
 	}
 
@@ -31,11 +41,15 @@ public class MobileTool {
 	 */
 	public static ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		ResponseModel sendModel = MobileTool.sendMobileMsg();
-		if (responseService.isSuccess(sendModel)) {
+		RedisImpl redisImpl = RedisImpl.getInstance();
+		// TODO limit send count by ip
+		ResponseModel sendResult = MobileTool.sendMobileMsg(mobile, vcode, "");
+		if (responseService.isSuccess(sendResult)) {
+//			redisImpl.
 			responseService.successStatus();
+			responseService.setDataValue("vcode", vcode);
 		} else {
-			responseService.setMessage(sendModel.getMessage());
+			responseService.setMessage(sendResult.getMessage());
 		}
 		return responseService.combineResponse();
 	}
