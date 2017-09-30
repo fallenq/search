@@ -4,6 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -22,6 +24,8 @@ public class RedisImpl implements RedisServiceI {
 
 	private ValueOperations<String, Object> operationValue = null;
 
+	private static ApplicationContext app;
+
 	private ValueOperations<String, Object> getValueOperation() {
 		if (operationValue == null) {
 			operationValue = redisTemplate.opsForValue();
@@ -30,7 +34,8 @@ public class RedisImpl implements RedisServiceI {
 	}
 	
 	public static RedisImpl getInstance() {
-		return new RedisImpl();
+		app = new ClassPathXmlApplicationContext("classpath:config/spring/spring.xml");
+		return (RedisImpl) app.getBean("redisService");
 	}
 
 	@Override
