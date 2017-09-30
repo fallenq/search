@@ -15,6 +15,7 @@ import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
+import com.service.tool.impl.RedisImpl;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
@@ -39,9 +40,9 @@ public class TestMybatis {
 //	}
 	
 //	private SpUserServiceI userService;
-	@Autowired
-	@Qualifier("redisService")
-	private RedisServiceI redisService;
+//	@Autowired
+//	@Qualifier("redisService")
+//	private RedisServiceI redisService;
 //
 //	public SpUserServiceI getUserService() {
 //		return userService;
@@ -54,6 +55,7 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
+		RedisServiceI redisService = RedisImpl.getInstance();
 //		System.out.println(redisService);
 //		redisService.set("test", "1");
 //		MobileTool mTool = new MobileTool();
