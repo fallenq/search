@@ -17,7 +17,12 @@ public class MobileTool {
 		boolean isPass = false;
 		return isPass;
 	}
-	
+
+	/**
+	 * Get the instance
+	 * 
+	 * @return
+	 */
 	public static MobileTool getInstance() {
 		return new MobileTool();
 	}
@@ -57,5 +62,6 @@ public class MobileTool {
 		}
 		return responseService.combineResponse();
 	}
+
 
 }

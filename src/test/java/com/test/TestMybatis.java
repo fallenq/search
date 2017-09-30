@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -39,6 +40,7 @@ public class TestMybatis {
 	
 //	private SpUserServiceI userService;
 	@Autowired
+	@Qualifier("redisService")
 	private RedisServiceI redisService;
 //
 //	public SpUserServiceI getUserService() {
@@ -55,7 +57,8 @@ public class TestMybatis {
 //		System.out.println(redisService);
 //		redisService.set("test", "1");
 //		MobileTool mTool = new MobileTool();
-		System.out.println(MobileTool.getInstance().sendMobileCode("13212345679", "1234", "127.0.0.1", redisService));
+		System.out.println(redisService.ping());
+//		System.out.println(MobileTool.getInstance().sendMobileCode("13212345679", "1234", "127.0.0.1", redisService));
 //		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
 //		redisService.set("test", "test1");
 //		System.out.println(redisService.get("test"));

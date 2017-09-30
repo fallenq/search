@@ -3,6 +3,10 @@ package com.service.tool.impl;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,7 @@ import com.service.tool.nozzle.RedisServiceI;
 public class RedisImpl implements RedisServiceI {
 
 	@Autowired
+	@Qualifier("redisTemplate")
 	private RedisTemplate<String, Object> redisTemplate;
 
 	private ValueOperations<String, Object> operationValue = null;
@@ -25,8 +30,13 @@ public class RedisImpl implements RedisServiceI {
 		return operationValue;
 	}
 
-	public static RedisImpl getInstance() {
-		return new RedisImpl();
+	@Override
+	public String ping() {
+		return (String) redisTemplate.execute(new RedisCallback<Object>() {
+            public String doInRedis(RedisConnection connection) throws DataAccessException {
+                return connection.ping();
+            }
+        });
 	}
 
 	@Override
