@@ -3,7 +3,6 @@ package com.service.tool;
 import com.service.config.SparrowConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.impl.ResponseImpl;
-import com.service.tool.nozzle.RedisServiceI;
 
 public class MobileTool {
 
@@ -49,12 +48,12 @@ public class MobileTool {
 	 * @param ipAddress
 	 * @return
 	 */
-	public ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress, RedisServiceI redisService) {
+	public ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		// TODO limit send count by ip
 		ResponseModel sendResult = sendMobileMsg(mobile, vcode, "");
 		if (responseService.isSuccess(sendResult)) {
-			redisService.set(SparrowConfig.MOBILE_VALIDATE_CODE_REDIS_KEY_PREFIX + mobile, vcode, 300);
+			RedisTool.getCommonRedis().set(SparrowConfig.MOBILE_VALIDATE_CODE_REDIS_KEY_PREFIX + mobile, vcode, 300);
 			responseService.successStatus();
 			responseService.setDataValue("vcode", vcode);
 		} else {

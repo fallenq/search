@@ -3,11 +3,10 @@ package com.service.tool.impl;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -24,29 +23,27 @@ public class RedisImpl implements RedisServiceI {
 
 	private ValueOperations<String, Object> operationValue = null;
 
-	private static ApplicationContext app;
-
 	private ValueOperations<String, Object> getValueOperation() {
 		if (operationValue == null) {
 			operationValue = redisTemplate.opsForValue();
 		}
 		return operationValue;
 	}
-	
-	public static RedisImpl getInstance() {
-		app = new ClassPathXmlApplicationContext("classpath:config/spring/spring.xml");
-		return (RedisImpl) app.getBean("redisService");
-	}
 
 	@Override
 	public String ping() {
-		System.out.println(redisTemplate);
-		return "";
-//		return (String) redisTemplate.execute(new RedisCallback<Object>() {
-//            public String doInRedis(RedisConnection connection) throws DataAccessException {
-//                return connection.ping();
-//            }
-//        });
+		return redisTemplate.execute(new RedisCallback<String>() {
+			public String doInRedis(RedisConnection connection) throws DataAccessException {
+				return connection.ping();
+			}
+		});
+	}
+
+	@Override
+	public void selectDb(int dbIndex) {
+		JedisConnectionFactory redisConnectFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
+		redisConnectFactory.setDatabase(dbIndex);
+		redisTemplate.setConnectionFactory(redisConnectFactory);
 	}
 
 	@Override

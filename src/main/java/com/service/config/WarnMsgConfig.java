@@ -2,7 +2,9 @@ package com.service.config;
 
 import java.util.Map;
 
+import com.service.model.XmlModel;
 import com.service.tool.CommonTool;
+import com.service.tool.XmlTool;
 
 public class WarnMsgConfig {
 	
@@ -32,8 +34,15 @@ public class WarnMsgConfig {
 	public static synchronized Map<Integer, String> getCommonMap() {
 		if (commonMap == null) {
 			commonMap = CommonTool.emptyIntMap();
-			commonMap.put(WarnMsgConfig.COMMON_SUBMIT_ERROR, "提交失败");
-			commonMap.put(WarnMsgConfig.COMMON_SYSTEM_BUSY, "系统繁忙，清稍后");
+			XmlModel root = XmlTool.getXmlModelList("config/service/warn-common-msg.xml");
+			if (root != null && root.getChildList().size() > 0) {
+				for(XmlModel model : root.getChildList()){
+					Map<String, String> attributes = model.getAttributes();
+					commonMap.put(Integer.parseInt(attributes.get("id")), attributes.get("value"));
+				}
+			}
+//			commonMap.put(WarnMsgConfig.COMMON_SUBMIT_ERROR, "提交失败");
+//			commonMap.put(WarnMsgConfig.COMMON_SYSTEM_BUSY, "系统繁忙，清稍后");
 		}
 		return commonMap;
 	}
@@ -41,13 +50,20 @@ public class WarnMsgConfig {
 	public static synchronized Map<Integer, String> getSparrowMap() {
 		if (sparrowMap == null) {
 			sparrowMap = CommonTool.emptyIntMap();
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_SUCCESS, "提交成功");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_FAILURE, "提交失败");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS, "注册成功");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE, "注册失败，请稍后尝试");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_MOBILE_EXISTS, "该手机号已注册");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_NOEXISTS, "账号不存在");
-			sparrowMap.put(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR, "用户名与密码不一致");
+			XmlModel root = XmlTool.getXmlModelList("config/service/warn-sparrow-msg.xml");
+			if (root != null && root.getChildList().size() > 0) {
+				for(XmlModel model : root.getChildList()){
+					Map<String, String> attributes = model.getAttributes();
+					sparrowMap.put(Integer.parseInt(attributes.get("id")), attributes.get("value"));
+				}
+			}
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_SUCCESS, "提交成功");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_SUBMIT_FAILURE, "提交失败");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS, "注册成功");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE, "注册失败，请稍后尝试");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_MOBILE_EXISTS, "该手机号已注册");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_NOEXISTS, "账号不存在");
+//			sparrowMap.put(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR, "用户名与密码不一致");
 		}
 		return sparrowMap;
 	}

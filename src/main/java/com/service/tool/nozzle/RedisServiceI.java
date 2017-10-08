@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public interface RedisServiceI {
 	public String ping();
+	public void selectDb(int dbIndex);
 	public void set(String name, String value);
 	public void set(String name, String value, int timeout);
 	public void setForever(String name, String value);

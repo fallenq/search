@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<warn>
+	<message id="1" value="提交失败"/>
+	<message id="2" value="系统繁忙，清稍后"/>
+</warn>
