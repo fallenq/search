@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.config.SparrowConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
 import com.service.tool.impl.ResponseImpl;
@@ -26,7 +27,7 @@ public class CommonApiController {
 	@RequestMapping(value = "/login/validate", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (AddressTool.determineLoginIpLimit(CommonTool.getCLientIp(request), 1)) {
+		if (AddressTool.determineLoginIpLimit(CommonTool.getCLientIp(request), SparrowConfig.METHOD_LOGIN_VALIDATE)) {
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();
