@@ -11,7 +11,6 @@ import com.alibaba.fastjson.JSON;
 import com.service.config.ServiceConfig;
 import com.service.config.WarnMsgConfig;
 import com.service.model.LoginInfoModel;
-import com.service.tool.CommonTool;
 import com.service.tool.impl.ResponseImpl;
 
 public class LoginInterceptor implements HandlerInterceptor {
@@ -23,6 +22,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		LoginInfoModel loginInfo = (LoginInfoModel) session.getAttribute(ServiceConfig.USER_LOGIN_INFO);
 		if (loginInfo != null) {
+			// TODO: modify session ipAddress with login ipAddress
 //			String ipAddress = CommonTool.getCLientIp(request);
 //			if (!ipAddress.equals(loginInfo.getIpAddress())) {
 //				loginInfo.setIpAddress(ipAddress);
