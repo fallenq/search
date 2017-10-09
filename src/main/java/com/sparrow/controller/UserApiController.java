@@ -58,6 +58,19 @@ public class UserApiController {
 		}
 		return responseService.combineResponse();
 	}
+	
+	/**
+	 * Login through third platform
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/login/third", method = RequestMethod.POST)
+	public ResponseModel loginThird(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		return responseService.combineResponse();
+	}
 
 	/**
 	 * Register user through mobile
