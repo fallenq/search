@@ -58,7 +58,7 @@ public class UserApiController {
 		}
 		return responseService.combineResponse();
 	}
-	
+
 	/**
 	 * Login through third platform
 	 * 
@@ -95,13 +95,24 @@ public class UserApiController {
 	}
 
 	/**
+	 * Get user info
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public ResponseModel userInfo(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		return responseService.combineResponse();
+	}
+
+	/**
 	 * Login out
 	 * 
 	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public ResponseModel logout() {
+	public ResponseModel logout(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		return responseService.combineResponse();
 	}
