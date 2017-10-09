@@ -13,8 +13,9 @@
     <!-- 登录验证器 -->
     <mvc:interceptors>  
         <mvc:interceptor>  
-            <mvc:mapping path="/api/sparrow/**"/>
             <mvc:mapping path="/api/mobile/**"/>
+            <mvc:mapping path="/api/mobile/**"/>
+            <mvc:exclude-mapping path="/api/common/**"/>
             <mvc:exclude-mapping path="/api/sparrow/user/login/check"/>
             <mvc:exclude-mapping path="/api/sparrow/user/register/mobile"/>
             <bean class="com.service.config.interceptor.LoginInterceptor" />  

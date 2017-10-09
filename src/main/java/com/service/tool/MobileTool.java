@@ -36,6 +36,7 @@ public class MobileTool {
 	 */
 	public ResponseModel sendMobileMsg(String mobile, String content, String templateId) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
+		// TODO: use send sms with third api
 		responseService.successStatus();
 		return responseService.combineResponse();
 	}
@@ -48,9 +49,9 @@ public class MobileTool {
 	 * @param ipAddress
 	 * @return
 	 */
-	public ResponseModel sendMobileCode(String mobile, String vcode, String ipAddress) {
+	public ResponseModel sendMobileCode(String mobile, String vcode) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		// TODO limit send count by ip
+		// TODO: add mobile sms template ID
 		ResponseModel sendResult = sendMobileMsg(mobile, vcode, "");
 		if (responseService.isSuccess(sendResult)) {
 			RedisTool.getCommonRedis().set(SparrowConfig.MOBILE_VALIDATE_CODE_REDIS_KEY_PREFIX + mobile, vcode, 300);
