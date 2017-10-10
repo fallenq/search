@@ -10,7 +10,7 @@ public class LoginCodeValidateImpl extends BaseValidateModel {
 
 	@Override
 	public String getRedisKeyPrefix() {
-		return SparrowConfig.LOGIN_CODE_LIMIT_REDIS_KEY_PREFIX;
+		return SparrowConfig.LOGIN_CODE_REDIS_KEY_PREFIX;
 	}
 
 }

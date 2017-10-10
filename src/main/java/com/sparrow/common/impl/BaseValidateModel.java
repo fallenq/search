@@ -26,10 +26,10 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	@Override
 	public boolean determineLimit() {
 		RedisImpl redisService = (RedisImpl) RedisTool.getCommonRedis(1);
-		if (Integer.parseInt(redisService.get(redisKey)) > 0) {
-			return false;
+		if (redisService.get(redisKey).isEmpty()) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 }

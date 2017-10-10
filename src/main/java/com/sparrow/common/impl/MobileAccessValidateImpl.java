@@ -10,7 +10,7 @@ public class MobileAccessValidateImpl extends BaseValidateModel {
 
 	@Override
 	public String getRedisKeyPrefix() {
-		return SparrowConfig.MOBILE_ACCESS_LIMIT_REDIS_KEY_PREFIX;
+		return SparrowConfig.MOBILE_ACCESS_REDIS_KEY_PREFIX;
 	}
 
 }
