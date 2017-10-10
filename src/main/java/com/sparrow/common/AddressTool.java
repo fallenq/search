@@ -1,6 +1,14 @@
 package com.sparrow.common;
 
+import com.sparrow.common.impl.LoginCodeValidateImpl;
+import com.sparrow.common.impl.MobileAccessValidateImpl;
+import com.sparrow.common.impl.MobileSendValidateImpl;
+
 public class AddressTool {
+	
+	public static AddressTool getInstance() {
+		return new AddressTool();
+	}
 
 	/**
 	 * Determine mobile code send limit
@@ -9,7 +17,7 @@ public class AddressTool {
 	 * @param ipAddress
 	 * @return
 	 */
-	public static boolean determineMobileIpLimit(String mobile, String ipAddress) {
+	public boolean determineIpLimit(String mobile, String ipAddress, MobileSendValidateImpl validateImpl) {
 		// TODO limit send count by ip
 		return true;
 	}
@@ -20,7 +28,7 @@ public class AddressTool {
 	 * @param ipAddress
 	 * @return
 	 */
-	public static boolean determineMobileIpLimit(String ipAddress) {
+	public boolean determineIpLimit(String ipAddress, MobileAccessValidateImpl validateImpl) {
 		// TODO limit send count by ip
 		return true;
 	}
@@ -33,7 +41,7 @@ public class AddressTool {
 	 *            1-登录验证码
 	 * @return
 	 */
-	public static boolean determineLoginIpLimit(String ipAddress, int method) {
+	public boolean determineIpLimit(String ipAddress, LoginCodeValidateImpl validateImpl) {
 		// TODO limit send count by ip
 		return true;
 	}

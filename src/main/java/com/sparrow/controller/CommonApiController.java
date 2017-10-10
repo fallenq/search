@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.service.config.SparrowConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.AddressTool;
+import com.sparrow.common.impl.LoginCodeValidateImpl;
+import com.sparrow.common.impl.MobileAccessValidateImpl;
 
 @Controller
 @RequestMapping("/api/common")
@@ -27,7 +28,8 @@ public class CommonApiController {
 	@RequestMapping(value = "/login/validate", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (AddressTool.determineLoginIpLimit(CommonTool.getCLientIp(request), SparrowConfig.METHOD_LOGIN_VALIDATE)) {
+		String ipAddress = CommonTool.getCLientIp(request);
+		if (AddressTool.getInstance().determineIpLimit(ipAddress, MobileAccessValidateImpl.getInstance(ipAddress))) {
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();
@@ -43,7 +45,8 @@ public class CommonApiController {
 	@RequestMapping(value = "/mobile/validate", method = RequestMethod.POST)
 	public ResponseModel mobileValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (AddressTool.determineMobileIpLimit(CommonTool.getCLientIp(request))) {
+		String ipAddress = CommonTool.getCLientIp(request);
+		if (AddressTool.getInstance().determineIpLimit(ipAddress, LoginCodeValidateImpl.getInstance(ipAddress))) {
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();

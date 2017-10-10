@@ -14,6 +14,7 @@ import com.service.tool.CommonTool;
 import com.service.tool.MobileTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.AddressTool;
+import com.sparrow.common.impl.MobileSendValidateImpl;
 
 @Controller
 @RequestMapping("/api/mobile")
@@ -30,7 +31,7 @@ public class MobileApiController {
 	public ResponseModel validateCode(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		String mobile = request.getParameter("mobile");
-		if (AddressTool.determineMobileIpLimit(mobile, CommonTool.getCLientIp(request))) {
+		if (AddressTool.getInstance().determineIpLimit(mobile, CommonTool.getCLientIp(request), MobileSendValidateImpl.getInstance(mobile))) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.length() == 0) {
 				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
