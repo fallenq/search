@@ -10,4 +10,5 @@ public interface RedisServiceI {
 	public void setForever(String name, String value);
 	public void setWithTimeout(String name, String value, int timeout, TimeUnit unit);
 	public String get(String name);
+	public void delete(String name);
 }

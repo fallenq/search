@@ -77,4 +77,9 @@ public class RedisImpl implements RedisServiceI {
 		return (String) getValueOperation().get(name);
 	}
 
+	@Override
+	public void delete(String name) {
+		redisTemplate.delete(name);
+	}
+
 }

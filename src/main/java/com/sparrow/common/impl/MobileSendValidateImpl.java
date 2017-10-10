@@ -7,10 +7,11 @@ public class MobileSendValidateImpl extends BaseValidateModel {
 	public static MobileSendValidateImpl getInstance() {
 		return new MobileSendValidateImpl();
 	}
-
-	@Override
-	public String getRedisKeyPrefix() {
-		return SparrowConfig.MOBILE_SEND_REDIS_KEY_PREFIX;
+	
+	public MobileSendValidateImpl() {
+		super();
+		redisPrefix = SparrowConfig.MOBILE_SEND_REDIS_KEY_PREFIX;
+		redisLeftTime = SparrowConfig.MOBILE_SEND_TIME_LIMIT;
 	}
 
 }

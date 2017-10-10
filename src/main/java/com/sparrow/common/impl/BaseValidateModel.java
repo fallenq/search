@@ -1,20 +1,25 @@
 package com.sparrow.common.impl;
 
 import com.service.tool.RedisTool;
-import com.service.tool.impl.RedisImpl;
+import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
 
 public class BaseValidateModel implements ValidateModelServiceI {
-	
+
 	protected String redisKey = "";
 	protected String redisPrefix = "";
 	protected int redisLeftTime = 0;
-	
+	protected RedisServiceI redisService = null;
+
+	public BaseValidateModel() {
+		redisService = RedisTool.getCommonRedis(1);
+	}
+
 	@Override
 	public String getRedisKey() {
 		return redisKey;
 	}
-	
+
 	@Override
 	public void setRedisKey(String redisKey) {
 		this.redisKey = redisPrefix + redisKey;
@@ -22,7 +27,6 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determineLimit() {
-		RedisImpl redisService = (RedisImpl) RedisTool.getCommonRedis(1);
 		if (redisService.get(redisKey).isEmpty()) {
 			return true;
 		}
@@ -31,8 +35,18 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean setRedisValue(String value) {
-		
+		redisService.set(redisKey, value, redisLeftTime);
 		return false;
+	}
+
+	@Override
+	public String getRedisValue() {
+		return redisService.get(redisKey);
+	}
+
+	@Override
+	public void removeRedisValue() {
+		redisService.delete(redisKey);
 	}
 
 }

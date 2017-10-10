@@ -5,4 +5,6 @@ public interface ValidateModelServiceI {
 	public void setRedisKey(String redisKey);
 	public boolean determineLimit();
 	public boolean setRedisValue(String value);
+	public String getRedisValue();
+	public void removeRedisValue();
 }

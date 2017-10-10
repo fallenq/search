@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.config.ToolConfig;
+import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
 import com.service.tool.impl.ResponseImpl;
@@ -28,8 +30,18 @@ public class CommonApiController {
 	@RequestMapping(value = "/login/validate", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), MobileAccessValidateImpl.getInstance())) {
-			responseService.successStatus();
+		LoginCodeValidateImpl validateService = LoginCodeValidateImpl.getInstance();
+		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), validateService)) {
+			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
+			if (validateCode.length() > 0) {
+				validateService.setRedisValue(validateCode);
+				responseService.successStatus();
+			} else {
+				validateService.removeRedisValue();
+				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
+			}
+		} else {
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_CODE_ACCESSED));
 		}
 		return responseService.combineResponse();
 	}
@@ -44,8 +56,18 @@ public class CommonApiController {
 	@RequestMapping(value = "/mobile/validate", method = RequestMethod.POST)
 	public ResponseModel mobileValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), LoginCodeValidateImpl.getInstance())) {
-			responseService.successStatus();
+		MobileAccessValidateImpl validateService = MobileAccessValidateImpl.getInstance();
+		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), validateService)) {
+			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
+			if (validateCode.length() > 0) {
+				validateService.setRedisValue(validateCode);
+				responseService.successStatus();
+			} else {
+				validateService.removeRedisValue();
+				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
+			}
+		} else {
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_CODE_ACCESSED));
 		}
 		return responseService.combineResponse();
 	}
