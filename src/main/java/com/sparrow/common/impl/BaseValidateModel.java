@@ -7,11 +7,8 @@ import com.sparrow.common.nozzle.ValidateModelServiceI;
 public class BaseValidateModel implements ValidateModelServiceI {
 	
 	protected String redisKey = "";
-
-	@Override
-	public String getRedisKeyPrefix() {
-		return "";
-	}
+	protected String redisPrefix = "";
+	protected int redisLeftTime = 0;
 	
 	@Override
 	public String getRedisKey() {
@@ -20,7 +17,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	
 	@Override
 	public void setRedisKey(String redisKey) {
-		this.redisKey = getRedisKeyPrefix() + redisKey;
+		this.redisKey = redisPrefix + redisKey;
 	}
 
 	@Override
@@ -29,6 +26,12 @@ public class BaseValidateModel implements ValidateModelServiceI {
 		if (redisService.get(redisKey).isEmpty()) {
 			return true;
 		}
+		return false;
+	}
+
+	@Override
+	public boolean setRedisValue(String value) {
+		
 		return false;
 	}
 

@@ -25,6 +25,7 @@ public class WarnMsgConfig {
 	public static int SPARROW_USER_MOBILE_EXISTS = 5;
 	public static int SPARROW_USER_NOEXISTS = 6;
 	public static int SPARROW_USER_LOGININFO_ERROR = 7;
+	public static int SPARROW_USER_MOBILE_SENDED = 8;
 
 	public static Map<Integer, String> putValue(Map<Integer, String> warnMap, int msgId, String value) {
 		warnMap.put(msgId, value);

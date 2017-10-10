@@ -43,6 +43,8 @@ public class MobileApiController {
 					responseService.setMessage(sendResponse.getMessage());
 				}
 			}
+		} else {
+			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_MOBILE_SENDED));
 		}
 		return responseService.combineResponse();
 	}
