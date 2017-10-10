@@ -1,37 +1,16 @@
 package com.sparrow.common.impl;
 
-import com.sparrow.common.nozzle.ValidateModelServiceI;
+import com.service.config.SparrowConfig;
 
-public class LoginCodeValidateImpl implements ValidateModelServiceI {
+public class LoginCodeValidateImpl extends BaseValidateModel {
 	
-	private String redisKey = "";
-	
-	public static LoginCodeValidateImpl getInstance(String redisKey) {
-		LoginCodeValidateImpl model = new LoginCodeValidateImpl();
-		model.setRedisKey(redisKey);
-		return model;
+	public static LoginCodeValidateImpl getInstance() {
+		return new LoginCodeValidateImpl();
 	}
 
 	@Override
 	public String getRedisKeyPrefix() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-	
-	@Override
-	public String getRedisKey() {
-		return redisKey;
-	}
-	
-	@Override
-	public void setRedisKey(String redisKey) {
-		this.redisKey = getRedisKeyPrefix() + redisKey;
-	}
-
-	@Override
-	public boolean determineLimit() {
-		// TODO Auto-generated method stub
-		return false;
+		return SparrowConfig.LOGIN_CODE_LIMIT_REDIS_KEY_PREFIX;
 	}
 
 }

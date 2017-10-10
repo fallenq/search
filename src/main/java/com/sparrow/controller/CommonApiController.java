@@ -28,8 +28,7 @@ public class CommonApiController {
 	@RequestMapping(value = "/login/validate", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		String ipAddress = CommonTool.getCLientIp(request);
-		if (AddressTool.getInstance().determineIpLimit(ipAddress, MobileAccessValidateImpl.getInstance(ipAddress))) {
+		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), MobileAccessValidateImpl.getInstance())) {
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();
@@ -45,8 +44,7 @@ public class CommonApiController {
 	@RequestMapping(value = "/mobile/validate", method = RequestMethod.POST)
 	public ResponseModel mobileValidate(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		String ipAddress = CommonTool.getCLientIp(request);
-		if (AddressTool.getInstance().determineIpLimit(ipAddress, LoginCodeValidateImpl.getInstance(ipAddress))) {
+		if (AddressTool.getInstance().determineIpLimit(CommonTool.getCLientIp(request), LoginCodeValidateImpl.getInstance())) {
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();

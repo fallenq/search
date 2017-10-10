@@ -5,7 +5,7 @@ import com.sparrow.common.impl.MobileAccessValidateImpl;
 import com.sparrow.common.impl.MobileSendValidateImpl;
 
 public class AddressTool {
-	
+
 	public static AddressTool getInstance() {
 		return new AddressTool();
 	}
@@ -18,8 +18,12 @@ public class AddressTool {
 	 * @return
 	 */
 	public boolean determineIpLimit(String mobile, String ipAddress, MobileSendValidateImpl validateImpl) {
-		// TODO limit send count by ip
-		return true;
+		// TODO limit send count by mobile and ip
+		validateImpl.setRedisKey(mobile);
+		if (validateImpl.determineLimit()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -30,7 +34,11 @@ public class AddressTool {
 	 */
 	public boolean determineIpLimit(String ipAddress, MobileAccessValidateImpl validateImpl) {
 		// TODO limit send count by ip
-		return true;
+		validateImpl.setRedisKey(ipAddress);
+		if (validateImpl.determineLimit()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -43,7 +51,11 @@ public class AddressTool {
 	 */
 	public boolean determineIpLimit(String ipAddress, LoginCodeValidateImpl validateImpl) {
 		// TODO limit send count by ip
-		return true;
+		validateImpl.setRedisKey(ipAddress);
+		if (validateImpl.determineLimit()) {
+			return true;
+		}
+		return false;
 	}
 
 }

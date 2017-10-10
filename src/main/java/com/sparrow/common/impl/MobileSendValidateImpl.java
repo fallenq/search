@@ -1,37 +1,16 @@
 package com.sparrow.common.impl;
 
-import com.sparrow.common.nozzle.ValidateModelServiceI;
+import com.service.config.SparrowConfig;
 
-public class MobileSendValidateImpl implements ValidateModelServiceI {
+public class MobileSendValidateImpl extends BaseValidateModel {
 	
-	private String redisKey = "";
-	
-	public static MobileSendValidateImpl getInstance(String redisKey) {
-		MobileSendValidateImpl model = new MobileSendValidateImpl();
-		model.setRedisKey(redisKey);
-		return model;
+	public static MobileSendValidateImpl getInstance() {
+		return new MobileSendValidateImpl();
 	}
 
 	@Override
 	public String getRedisKeyPrefix() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-	
-	@Override
-	public String getRedisKey() {
-		return redisKey;
-	}
-	
-	@Override
-	public void setRedisKey(String redisKey) {
-		this.redisKey = getRedisKeyPrefix() + redisKey;
-	}
-
-	@Override
-	public boolean determineLimit() {
-		// TODO Auto-generated method stub
-		return false;
+		return SparrowConfig.MOBILE_SEND_LIMIT_REDIS_KEY_PREFIX;
 	}
 
 }

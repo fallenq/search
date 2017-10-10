@@ -31,7 +31,7 @@ public class MobileApiController {
 	public ResponseModel validateCode(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		String mobile = request.getParameter("mobile");
-		if (AddressTool.getInstance().determineIpLimit(mobile, CommonTool.getCLientIp(request), MobileSendValidateImpl.getInstance(mobile))) {
+		if (AddressTool.getInstance().determineIpLimit(mobile, CommonTool.getCLientIp(request), MobileSendValidateImpl.getInstance())) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.length() == 0) {
 				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
