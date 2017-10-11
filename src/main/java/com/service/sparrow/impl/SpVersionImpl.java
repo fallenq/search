@@ -44,6 +44,9 @@ public class SpVersionImpl implements SpVersionServiceI {
 		return false;
 	}
 
+	/**
+	 * Compare last version to know whether allow use
+	 */
 	@Override
 	public boolean compareVersion(int type, String code) {
 		SparrowVersion version = getLastedVersion(type);
