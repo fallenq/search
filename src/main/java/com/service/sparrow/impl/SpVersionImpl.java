@@ -47,13 +47,13 @@ public class SpVersionImpl implements SpVersionServiceI {
 	/**
 	 * Compare last version to know whether allow use
 	 */
-	@Override
-	public boolean compareVersion(int type, String code) {
-		SparrowVersion version = getLastedVersion(type);
-		if (version != null) {
-			return compareVersion(version, code);
-		}
-		return false;
-	}
+//	@Override
+//	public boolean compareVersion(int type, String code) {
+//		SparrowVersion version = getLastedVersion(type);
+//		if (version != null) {
+//			return compareVersion(version, code);
+//		}
+//		return false;
+//	}
 
 }
