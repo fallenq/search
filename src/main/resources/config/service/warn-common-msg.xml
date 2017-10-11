@@ -2,4 +2,5 @@
 <warn>
 	<message id="1" value="提交失败"/>
 	<message id="2" value="系统繁忙，清稍后"/>
+	<message id="3" value="客户已有新版本，请更新客服端"/>
 </warn>

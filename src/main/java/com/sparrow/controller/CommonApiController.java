@@ -92,10 +92,15 @@ public class CommonApiController {
 		String versionCode = request.getParameter("vcode");
 		SparrowVersion version = versionService.getLastedVersion(dtype);
 		int cmpStatus = versionService.compareVersion(version, versionCode);
-		if (cmpStatus == 0 || cmpStatus == 1) {
+		if (cmpStatus == 0) {
+			responseService.successStatus();
+		} else if (cmpStatus == 1) {
+			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_DEVICE_NEED_UPDATE));
 			responseService.successStatus();
 		} else {
-			responseService.setMessage("Need Update");
+			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_DEVICE_NEED_UPDATE));
+		}
+		if (cmpStatus != 0) {
 			String url = "";
 			if (version != null) {
 				url = version.getUrl();

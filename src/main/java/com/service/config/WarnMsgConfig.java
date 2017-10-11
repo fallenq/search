@@ -15,6 +15,7 @@ public class WarnMsgConfig {
 	 */
 	public static int COMMON_SUBMIT_ERROR = 1;
 	public static int COMMON_SYSTEM_BUSY = 2;
+	public static int COMMON_DEVICE_NEED_UPDATE	  = 3;
 	/**
 	 * sparrow
 	 */
