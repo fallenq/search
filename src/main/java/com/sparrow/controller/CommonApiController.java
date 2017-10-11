@@ -17,7 +17,6 @@ import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.AddressTool;
 import com.sparrow.common.impl.LoginCodeValidateImpl;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
-import com.sparrow.entity.SparrowVersion;
 
 @Controller
 @RequestMapping("/api/common")
@@ -90,7 +89,11 @@ public class CommonApiController {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		int dtype = Integer.parseInt(request.getParameter("dtype"));
 		String versionCode = request.getParameter("vcode");
-		SparrowVersion version = versionService.getLastedVersion(dtype);
+		if (versionService.compareVersion(dtype, versionCode)) {
+			responseService.successStatus();
+		} else {
+			responseService.setMessage("Need Update");
+		}
 		return responseService.combineResponse();
 	}
 

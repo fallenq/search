@@ -34,12 +34,21 @@ public class SpVersionImpl implements SpVersionServiceI {
 	 */
 	@Override
 	public boolean compareVersion(SparrowVersion version, String code) {
+		// TODO 增加判定具体逻辑
 		String[] codeList = StringTool.splitString(code, "\\.");
 		String[] versionList = StringTool.splitString(version.getCode(), "\\.");
 		for (int codeIndex = 0; codeIndex < codeList.length; codeIndex++) {
 			if (codeIndex < versionList.length - 1) {
-				
 			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean compareVersion(int type, String code) {
+		SparrowVersion version = getLastedVersion(type);
+		if (version != null) {
+			return compareVersion(version, code);
 		}
 		return false;
 	}
