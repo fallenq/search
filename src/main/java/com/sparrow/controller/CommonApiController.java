@@ -2,6 +2,7 @@ package com.sparrow.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,15 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.service.config.ToolConfig;
 import com.service.config.WarnMsgConfig;
 import com.service.model.ResponseModel;
+import com.service.sparrow.nozzle.SpVersionServiceI;
 import com.service.tool.CommonTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.AddressTool;
 import com.sparrow.common.impl.LoginCodeValidateImpl;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
+import com.sparrow.entity.SparrowVersion;
 
 @Controller
 @RequestMapping("/api/common")
 public class CommonApiController {
+
+	@Autowired
+	private SpVersionServiceI versionService;
 
 	/**
 	 * Get login validate
@@ -69,6 +75,22 @@ public class CommonApiController {
 		} else {
 			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_CODE_ACCESSED));
 		}
+		return responseService.combineResponse();
+	}
+
+	/**
+	 * Compare device version
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/version/compare", method = RequestMethod.POST)
+	public ResponseModel compareVersion(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		int dtype = Integer.parseInt(request.getParameter("dtype"));
+		String versionCode = request.getParameter("vcode");
+		SparrowVersion version = versionService.getLastedVersion(dtype);
 		return responseService.combineResponse();
 	}
 

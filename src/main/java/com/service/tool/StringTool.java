@@ -24,4 +24,15 @@ public class StringTool {
 		return uSplit[uSplit.length-1];
 	}
 	
+	/**
+	 * Split string to array
+	 * 
+	 * @param content
+	 * @param regex
+	 * @return
+	 */
+	public static String[] splitString(String content, String regex) {
+		return content.split(regex);
+	}
+	
 }
