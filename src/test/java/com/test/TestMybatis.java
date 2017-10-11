@@ -16,6 +16,7 @@ import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
 import com.service.tool.RedisTool;
+import com.service.tool.StringTool;
 import com.service.tool.impl.RedisImpl;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
@@ -56,13 +57,17 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
+//		String[] numbers = StringTool.splitString("127.0.0.1", "\\.");
+//		for (String number: numbers) {
+//			System.out.println("=>" + number);
+//		}
 //		System.out.println(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
-		MobileAccessValidateImpl sendService = MobileAccessValidateImpl.getInstance();
-		sendService.setRedisKey("127.0.0.1");
+//		MobileAccessValidateImpl sendService = MobileAccessValidateImpl.getInstance();
+//		sendService.setRedisKey("127.0.0.1");
 //		System.out.println(sendService.getRedisKey());
 //		sendService.setRedisValue("123");
 //		sendService.removeRedisValue();
-		System.out.println(sendService.getRedisValue());
+//		System.out.println(sendService.getRedisValue());
 //		RedisServiceI redisService = RedisImpl.getInstance();
 //		System.out.println(redisService);
 //		redisService.set("test", "1");
