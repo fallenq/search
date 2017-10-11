@@ -91,7 +91,8 @@ public class CommonApiController {
 		int dtype = Integer.parseInt(request.getParameter("dtype"));
 		String versionCode = request.getParameter("vcode");
 		SparrowVersion version = versionService.getLastedVersion(dtype);
-		if (versionService.compareVersion(version, versionCode)) {
+		int cmpStatus = versionService.compareVersion(version, versionCode);
+		if (cmpStatus == 0 || cmpStatus == 1) {
 			responseService.successStatus();
 		} else {
 			responseService.setMessage("Need Update");

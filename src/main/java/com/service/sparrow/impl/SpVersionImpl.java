@@ -33,15 +33,38 @@ public class SpVersionImpl implements SpVersionServiceI {
 	 * Compare version to know whether allow use
 	 */
 	@Override
-	public boolean compareVersion(SparrowVersion version, String code) {
+	public int compareVersion(SparrowVersion version, String code, Object... params) {
 		// TODO 增加判定具体逻辑
+		if (version == null) {
+			return -3;
+		}
+		if (version.getCode() == code) {
+			return 0;
+		}
+		if (version.getForceUpdate() > 0) {
+			// Need force update
+			return -2;
+		}
 		String[] codeList = StringTool.splitString(code, "\\.");
 		String[] versionList = StringTool.splitString(version.getCode(), "\\.");
-		for (int codeIndex = 0; codeIndex < codeList.length; codeIndex++) {
-			if (codeIndex < versionList.length - 1) {
+		int codeIndex = 0;
+		for (; codeIndex < codeList.length; codeIndex++) {
+			int tempCode = Integer.parseInt(codeList[codeIndex]);
+			if (codeIndex + 1 <= versionList.length) {
+				int tempVersion = Integer.parseInt(versionList[codeIndex]);
+				if (tempVersion < tempCode) {
+					return -1;
+				} else if (tempVersion == tempCode) {
+					continue;
+				} else if (tempVersion > tempCode) {
+					return 1;
+				}
 			}
 		}
-		return false;
+		if (codeIndex <= versionList.length) {
+			return 1;
+		}
+		return -1;
 	}
 
 	/**
