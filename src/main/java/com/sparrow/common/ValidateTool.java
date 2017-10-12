@@ -41,7 +41,8 @@ public class ValidateTool {
 		if (service == null) {
 			return false;
 		}
-		String mobile = "", ipAddress = "";
+		String mobile = "";
+		String ipAddress = "";
 		switch (type) {
 		case 1:
 		case 2:
@@ -49,8 +50,8 @@ public class ValidateTool {
 			return determine(ipAddress, service);
 		case 3:
 			mobile = (String) params[0];
-			ipAddress = (String) params[1];
-			return determine(mobile, ipAddress, service);
+//			ipAddress = (String) params[1];
+			return determine(mobile, service);
 		}
 		return false;
 	}
@@ -62,6 +63,7 @@ public class ValidateTool {
 	 * @param ipAddress
 	 * @return
 	 */
+	/*
 	public boolean determine(String mobile, String ipAddress, ValidateModelServiceI validateImpl) {
 		// TODO limit send count by mobile and ip
 		validateImpl.setRedisKey(mobile);
@@ -70,7 +72,8 @@ public class ValidateTool {
 		}
 		return false;
 	}
-
+	 */
+	
 	/**
 	 * Determine validate access limit
 	 * 
