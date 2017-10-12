@@ -10,10 +10,16 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	protected String redisPrefix = "";
 	protected int redisLeftTime = 0;
 	protected RedisServiceI redisService = null;
+//	protected ValidateModelServiceI validateService = null;
 
 	public BaseValidateModel() {
 		redisService = RedisTool.getCommonRedis(1);
 	}
+
+//	@Override
+//	public ValidateModelServiceI getValidateService() {
+//		return validateService;
+//	}
 
 	@Override
 	public String getRedisKey() {

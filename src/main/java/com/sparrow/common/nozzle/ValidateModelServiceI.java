@@ -1,6 +1,7 @@
 package com.sparrow.common.nozzle;
 
 public interface ValidateModelServiceI {
+//	public ValidateModelServiceI getValidateService();
 	public String getRedisKey();
 	public void setRedisKey(String redisKey);
 	public boolean determineLimit();

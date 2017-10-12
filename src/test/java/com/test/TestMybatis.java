@@ -19,7 +19,9 @@ import com.service.tool.RedisTool;
 import com.service.tool.StringTool;
 import com.service.tool.impl.RedisImpl;
 import com.service.tool.nozzle.RedisServiceI;
+import com.sparrow.common.ValidateTool;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
+import com.sparrow.common.impl.MobileSendValidateImpl;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
 //import com.service.tool.StringTool;
@@ -57,6 +59,7 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
+//		System.out.println(ValidateTool.getInstance().getValidateService(3).getRedisKey());
 //		String[] numbers = StringTool.splitString("127.0.0.1", "\\.");
 //		for (String number: numbers) {
 //			System.out.println("=>" + number);

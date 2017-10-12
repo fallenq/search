@@ -1,6 +1,10 @@
 package com.service.config;
 
 public class SparrowConfig {
+	// validate
+	public static int LOGIN_VALIDATE_TYPE = 1;
+	public static int MOBILE_VALIDATE_ACCESS_TYPE = 2;
+	public static int MOBILE_VALIDATE_SEND_TYPE = 3;
 	// Login
 	public static int LOGIN_CODE_TIME_LIMIT = 60;
 	public static String LOGIN_CODE_REDIS_KEY_PREFIX = "test:login:vcaccess:";
