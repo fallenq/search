@@ -24,7 +24,7 @@ import com.sparrow.common.nozzle.ValidateModelServiceI;
 public class MobileApiController {
 
 	/**
-	 * Send valiate code in sms
+	 * Send validate code in sms
 	 * 
 	 * @param request
 	 * @return
