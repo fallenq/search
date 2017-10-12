@@ -1,7 +1,5 @@
 package com.sparrow.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +31,13 @@ public class CommonApiController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/type/validate", method = RequestMethod.POST)
+	@RequestMapping(value = "/address/validate", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		int type = Integer.parseInt(request.getParameter("type"));
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
-		ArrayList<String> params = CommonTool.combineList(CommonTool.getCLientIp(request));
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
-		if (validateTool.determine(type, validateService, params)) {
+		if (validateTool.determine(type, validateService, CommonTool.getCLientIp(request))) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.length() > 0) {
 				validateService.setRedisValue(validateCode);

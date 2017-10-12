@@ -1,7 +1,5 @@
 package com.sparrow.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -37,9 +35,8 @@ public class MobileApiController {
 		String ipAddress = CommonTool.getCLientIp(request);
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
-		ArrayList<String> params = CommonTool.combineList(mobile, ipAddress);
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
-		if (validateTool.determine(type, validateService, params)) {
+		if (validateTool.determine(type, validateService, mobile, ipAddress)) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.length() == 0) {
 				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
@@ -47,6 +44,7 @@ public class MobileApiController {
 				ResponseModel sendResponse = MobileTool.getInstance().sendMobileCode(mobile, validateCode);
 				if (responseService.isSuccess(sendResponse)) {
 					validateService.setRedisValue(validateCode);
+					validateService.incrementLimit();
 					responseService.successStatus();
 				} else {
 					responseService.setMessage(sendResponse.getMessage());

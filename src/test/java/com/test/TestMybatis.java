@@ -24,6 +24,7 @@ import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.ValidateTool;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
 import com.sparrow.common.impl.MobileSendValidateImpl;
+import com.sparrow.common.nozzle.ValidateModelServiceI;
 import com.sparrow.entity.SparrowUser;
 //import com.service.tool.EncodeTool;
 //import com.service.tool.StringTool;
@@ -61,9 +62,13 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
-		ArrayList<String> params = CommonTool.combineList("1", "2");
-		System.out.println(params);
-//		System.out.println(ValidateTool.getInstance().getValidateService(3).getRedisKey());
+//		ArrayList<String> params = CommonTool.combineList("1", "2");
+//		System.out.println(params);
+
+		ValidateTool validateTool = ValidateTool.getInstance();
+		ValidateModelServiceI validateService = validateTool.getValidateService(3);
+		System.out.println(validateTool.determine(3, validateService, "13212345678", "127.0.0.1"));
+//		System.out.println(.getRedisKey());
 //		String[] numbers = StringTool.splitString("127.0.0.1", "\\.");
 //		for (String number: numbers) {
 //			System.out.println("=>" + number);

@@ -65,9 +65,12 @@ public class ValidateTool {
 	 */
 	public boolean determine(String mobile, String ipAddress, ValidateModelServiceI validateImpl) {
 		// TODO limit send count by mobile and ip
-		validateImpl.setRedisKey(mobile);
+		validateImpl.setRedisLimitKey(mobile);
 		if (validateImpl.determineLimit()) {
-			return true;
+			validateImpl.setRedisKey(mobile);
+			if (validateImpl.determine()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -81,7 +84,7 @@ public class ValidateTool {
 	public boolean determine(String keyName, ValidateModelServiceI validateImpl) {
 		// limit access count by keyName
 		validateImpl.setRedisKey(keyName);
-		if (validateImpl.determineLimit()) {
+		if (validateImpl.determine()) {
 			return true;
 		}
 		return false;

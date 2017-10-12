@@ -1,6 +1,10 @@
 package com.sparrow.common.impl;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import com.service.tool.RedisTool;
+import com.service.tool.TimeTool;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
 
@@ -8,7 +12,10 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	protected String redisKey = "";
 	protected String redisPrefix = "";
+	protected String redisLimitKey = "";
+	protected String redisLimitPrefix = "";
 	protected int redisLeftTime = 0;
+	protected int limitMax = 0;
 	protected RedisServiceI redisService = null;
 //	protected ValidateModelServiceI validateService = null;
 
@@ -32,8 +39,39 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	}
 
 	@Override
+	public void setRedisLimitKey(String redisLimitKey) {
+		try {
+			this.redisLimitKey = redisLimitPrefix + TimeTool.formatDate(new Date(), "yyyy-MM-dd") + ":" + redisLimitKey;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			this.redisLimitKey = "";
+		}
+	}
+
+	@Override
+	public boolean determine() {
+		try {
+			String redisKeyValue = redisService.get(redisKey);
+			if (redisKeyValue.isEmpty()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean determineLimit() {
-		if (redisService.get(redisKey).isEmpty()) {
+		if (redisLimitKey == "") {
+			return false;
+		}
+		try {
+			int limitValue = Integer.parseInt(redisService.get(redisLimitKey));
+			if (limitValue < limitMax) {
+				return true;
+			}
+		} catch (NumberFormatException e) {
 			return true;
 		}
 		return false;
@@ -48,6 +86,18 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	@Override
 	public String getRedisValue() {
 		return redisService.get(redisKey);
+	}
+
+	@Override
+	public void incrementLimit() {
+		if (redisLimitKey != "") {
+			try {
+				Integer.parseInt(redisService.get(redisLimitKey));
+				redisService.incrementLong(redisLimitKey, 1);
+			} catch (NumberFormatException e) {
+				redisService.set(redisLimitKey, String.valueOf(1), 86400);
+			}
+		}
 	}
 
 	@Override

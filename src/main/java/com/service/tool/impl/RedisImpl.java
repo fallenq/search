@@ -78,6 +78,11 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
+	public long incrementLong(String name, long disc) {
+		return getValueOperation().increment(name, disc);
+	}
+
+	@Override
 	public void delete(String name) {
 		redisTemplate.delete(name);
 	}
