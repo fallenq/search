@@ -37,9 +37,7 @@ public class MobileApiController {
 		String ipAddress = CommonTool.getCLientIp(request);
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
-		ArrayList<String> params = new ArrayList<String>();
-		params.add(mobile);
-		params.add(ipAddress);
+		ArrayList<String> params = CommonTool.combineList(mobile, ipAddress);
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
 		if (validateTool.determine(type, validateService, params)) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);

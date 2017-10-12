@@ -1,5 +1,6 @@
 package com.service.tool;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,15 @@ public class CommonTool {
 	public static Map<Integer, String> emptyIntMap() {
 		Map<Integer, String> emptyMap = new HashMap<Integer, String>();
 		return emptyMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T> ArrayList<T> combineList(T...params) {
+		ArrayList<T> list = new ArrayList<T>();
+		for (T param: params) {
+			list.add(param);
+		}
+		return list;
 	}
 
 	/**

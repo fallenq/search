@@ -38,8 +38,7 @@ public class CommonApiController {
 		int type = Integer.parseInt(request.getParameter("type"));
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
-		ArrayList<String> params = new ArrayList<String>();
-		params.add(CommonTool.getCLientIp(request));
+		ArrayList<String> params = CommonTool.combineList(CommonTool.getCLientIp(request));
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
 		if (validateTool.determine(type, validateService, params)) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);

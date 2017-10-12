@@ -1,5 +1,6 @@
 package com.test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.service.config.WarnMsgConfig;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
+import com.service.tool.CommonTool;
 import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
 import com.service.tool.RedisTool;
@@ -59,6 +61,8 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
+		ArrayList<String> params = CommonTool.combineList("1", "2");
+		System.out.println(params);
 //		System.out.println(ValidateTool.getInstance().getValidateService(3).getRedisKey());
 //		String[] numbers = StringTool.splitString("127.0.0.1", "\\.");
 //		for (String number: numbers) {
