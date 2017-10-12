@@ -47,7 +47,6 @@ public class CommonApiController {
 				validateService.setRedisValue(validateCode);
 				responseService.successStatus();
 			} else {
-				validateService.removeRedisValue();
 				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 			}
 		} else {

@@ -46,12 +46,11 @@ public class MobileApiController {
 			if (validateCode.length() == 0) {
 				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
 			} else {
-				validateService.setRedisValue(validateCode);
 				ResponseModel sendResponse = MobileTool.getInstance().sendMobileCode(mobile, validateCode);
 				if (responseService.isSuccess(sendResponse)) {
+					validateService.setRedisValue(validateCode);
 					responseService.successStatus();
 				} else {
-					validateService.removeRedisValue();
 					responseService.setMessage(sendResponse.getMessage());
 				}
 			}
