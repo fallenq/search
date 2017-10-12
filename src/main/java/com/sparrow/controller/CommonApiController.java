@@ -57,32 +57,6 @@ public class CommonApiController {
 	}
 
 	/**
-	 * Get mobile code validate
-	 * 
-	 * @param request
-	 * @return
-	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/mobile/validate", method = RequestMethod.POST)
-//	public ResponseModel mobileValidate(HttpServletRequest request) {
-//		ResponseImpl responseService = ResponseImpl.getInstance();
-//		MobileAccessValidateImpl validateService = MobileAccessValidateImpl.getInstance();
-//		if (ValidateTool.getInstance().determine(CommonTool.getCLientIp(request), validateService)) {
-//			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
-//			if (validateCode.length() > 0) {
-//				validateService.setRedisValue(validateCode);
-//				responseService.successStatus();
-//			} else {
-//				validateService.removeRedisValue();
-//				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
-//			}
-//		} else {
-//			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_CODE_ACCESSED));
-//		}
-//		return responseService.combineResponse();
-//	}
-
-	/**
 	 * Compare device version
 	 * 
 	 * @param request
