@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.config.ToolConfig;
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.ResponseCommonMsgEnum;
+import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpVersionServiceI;
 import com.service.tool.CommonTool;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.ValidateTool;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
@@ -43,10 +45,10 @@ public class CommonApiController {
 				validateService.setRedisValue(validateCode);
 				responseService.successStatus();
 			} else {
-				responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SUBMIT_ERROR));
+				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
 			}
 		} else {
-			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_CODE_ACCESSED));
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.CODE_ACCESSED.getValue()));
 		}
 		return responseService.combineResponse();
 	}

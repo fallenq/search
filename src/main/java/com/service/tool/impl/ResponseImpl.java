@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.service.config.ToolConfig;
+import com.service.config.enums.ResponseStatusEnum;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
 import com.service.tool.nozzle.ResponseServiceI;
@@ -79,22 +79,22 @@ public class ResponseImpl implements ResponseServiceI {
 
 	@Override
 	public void successStatus()	{
-		this.status = ToolConfig.RESPONSE_SUCCESS;
+		this.status = ResponseStatusEnum.SUCCESS.getValue();
 	}
 
 	@Override
 	public void failStatus()	{
-		this.status = ToolConfig.RESPONSE_FAILURE;
+		this.status = ResponseStatusEnum.FAILURE.getValue();
 	}
 
 	@Override
 	public boolean isSuccess() {
-		return this.status == ToolConfig.RESPONSE_SUCCESS;
+		return this.status == ResponseStatusEnum.SUCCESS.getValue();
 	}
 
 	@Override
 	public boolean isSuccess(ResponseModel model) {
-		return model.getStatus() == ToolConfig.RESPONSE_SUCCESS;
+		return model.getStatus() == ResponseStatusEnum.FAILURE.getValue();
 	}
 	
 	protected ResponseModel excuteMap(int status, String message, Map<String, Object> data) {
