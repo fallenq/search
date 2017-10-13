@@ -5,12 +5,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.service.config.SparrowConfig;
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.MobileUserTypeEnum;
+import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
@@ -32,7 +33,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			Map<String, Object> pwdSet = userService.createUserPwd();
 			SparrowUser user = new SparrowUser();
 			user.setNickname(mobile);
-			user.setUserType(SparrowConfig.MOBILE_USER_TYPE);
+			user.setUserType(MobileUserTypeEnum.MOBILE_USER_TYPE.getValue());
 			user.setSalt((String) pwdSet.get("salt"));
 			user.setLoginPwd((String) pwdSet.get("password"));
 			user.setUserMobileId(mobileId);
@@ -41,11 +42,11 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				userMobile.setUserId(userId);
 				mobileService.updateById(userMobile);
 				responseService.successStatus();
-				responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_SUCCESS));
+				responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_SUCCESS.getValue()));
 			}
 		}
 		if (!responseService.isSuccess()) {
-			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_REGIST_FAILURE));
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_FAILURE.getValue()));
 		}
 		return responseService.combineResponse();
 	}

@@ -3,11 +3,12 @@ package com.service.sparrow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.dao.nozzle.SparrowVersionServiceI;
 import com.service.sparrow.nozzle.SpVersionServiceI;
 import com.service.tool.StringTool;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowVersion;
 
@@ -81,10 +82,10 @@ public class SpVersionImpl implements SpVersionServiceI {
 		if (cmpStatus == 0) {
 			responseService.successStatus();
 		} else if (cmpStatus == 1) {
-			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_DEVICE_NEED_UPDATE));
+			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.DEVICE_NEED_UPDATE.getValue()));
 			responseService.successStatus();
 		} else {
-			responseService.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_DEVICE_NEED_UPDATE));
+			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.DEVICE_NEED_UPDATE.getValue()));
 		}
 		if (cmpStatus != 0) {
 			String url = "";

@@ -9,8 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.service.config.ServiceConfig;
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.model.LoginInfoModel;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 
 public class LoginInterceptor implements HandlerInterceptor {
@@ -31,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			return true;
 		} else {
 			ResponseImpl responseImpl = ResponseImpl.getInstance();
-			responseImpl.setMessage(WarnMsgConfig.getCommonValue(WarnMsgConfig.COMMON_SYSTEM_BUSY));
+			responseImpl.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SYSTEM_BUSY.getValue()));
 			response.setHeader("Content-type", "text/html;charset=UTF-8");
 			response.getWriter().write(JSON.toJSONString(responseImpl.combineResponse()));
 			return false;

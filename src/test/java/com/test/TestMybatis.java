@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.ResponseStatusEnum;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.CommonTool;
@@ -19,6 +19,7 @@ import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
 import com.service.tool.RedisTool;
 import com.service.tool.StringTool;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.RedisImpl;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.ValidateTool;
@@ -64,10 +65,10 @@ public class TestMybatis {
 	public void test() {
 //		ArrayList<String> params = CommonTool.combineList("1", "2");
 //		System.out.println(params);
-
-		ValidateTool validateTool = ValidateTool.getInstance();
-		ValidateModelServiceI validateService = validateTool.getValidateService(3);
-		System.out.println(validateTool.determine(3, validateService, "13212345678", "127.0.0.1"));
+//		System.out.println(ResponseStatusIntEnum.SUCCESS.getValue());
+//		ValidateTool validateTool = ValidateTool.getInstance();
+//		ValidateModelServiceI validateService = validateTool.getValidateService(3);
+//		System.out.println(validateTool.determine(3, validateService, "13212345678", "127.0.0.1"));
 //		System.out.println(.getRedisKey());
 //		String[] numbers = StringTool.splitString("127.0.0.1", "\\.");
 //		for (String number: numbers) {

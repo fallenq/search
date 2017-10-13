@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.service.config.WarnMsgConfig;
+import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
@@ -51,10 +52,10 @@ public class UserApiController {
 			if (isPass) {
 				responseService.successStatus();
 			} else {
-				responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_LOGININFO_ERROR));
+				responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_LOGININFO_ERROR.getValue()));
 			}
 		} catch (Exception e) {
-			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_NOEXISTS));
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 		}
 		return responseService.combineResponse();
 	}
@@ -89,7 +90,7 @@ public class UserApiController {
 		if (userMobile == null) {
 			return userFuncService.registerByMobile(mobile, vcode);
 		} else {
-			responseService.setMessage(WarnMsgConfig.getSparrowValue(WarnMsgConfig.SPARROW_USER_MOBILE_EXISTS));
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_EXISTS.getValue()));
 		}
 		return responseService.combineResponse();
 	}
