@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.service.config.enums.MobileUserTypeEnum;
+import com.service.config.enums.UserTypeEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
@@ -33,7 +33,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			Map<String, Object> pwdSet = userService.createUserPwd();
 			SparrowUser user = new SparrowUser();
 			user.setNickname(mobile);
-			user.setUserType(MobileUserTypeEnum.MOBILE_USER_TYPE.getValue());
+			user.setUserType(UserTypeEnum.MOBILE_USER_TYPE.getValue());
 			user.setSalt((String) pwdSet.get("salt"));
 			user.setLoginPwd((String) pwdSet.get("password"));
 			user.setUserMobileId(mobileId);
