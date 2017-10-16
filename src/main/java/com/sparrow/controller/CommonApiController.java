@@ -62,9 +62,9 @@ public class CommonApiController {
 	@ResponseBody
 	@RequestMapping(value = "/version/compare", method = RequestMethod.POST)
 	public ResponseModel compareVersion(HttpServletRequest request) {
-		int dtype = Integer.parseInt(request.getParameter("dtype"));
+//		int dtype = Integer.parseInt(request.getParameter("dtype"));
 		String versionCode = request.getParameter("vcode");
-		return versionService.compareLastVersion(dtype, versionCode);
+		return versionService.compareLastVersion(1, versionCode);
 	}
 
 }
