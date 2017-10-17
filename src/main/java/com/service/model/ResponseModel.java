@@ -31,6 +31,10 @@ public class ResponseModel {
 		this.data = data;
 	}
 	
+	public ResponseModel() {
+		
+	}
+	
 	public ResponseModel(int status, String message, Map<String, Object> data) {
 		this.status = status;
 		this.message = message;

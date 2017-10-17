@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.service.config.enums.ResponseStatusEnum;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
+import com.service.sparrow.nozzle.SpVersionServiceI;
 import com.service.tool.CommonTool;
 import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
@@ -37,6 +38,10 @@ import com.sparrow.entity.SparrowUser;
 @ContextConfiguration(locations = {"classpath:config/spring/spring.xml"})
 public class TestMybatis {
 
+
+	@Autowired
+	private SpVersionServiceI versionService;
+	
 //	private SparrowUserServiceI testService;
 //
 //	public SparrowUserServiceI getTestService() {
@@ -63,6 +68,7 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
+		System.out.println(versionService.compareLastVersion(1, "0.0.1"));
 //		ArrayList<String> params = CommonTool.combineList("1", "2");
 //		System.out.println(params);
 //		System.out.println(ResponseStatusIntEnum.SUCCESS.getValue());

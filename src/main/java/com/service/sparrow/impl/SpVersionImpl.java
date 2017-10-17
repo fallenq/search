@@ -1,6 +1,7 @@
 package com.service.sparrow.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.service.config.enums.ResponseCommonMsgEnum;
@@ -12,6 +13,7 @@ import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowVersion;
 
+@Service
 public class SpVersionImpl implements SpVersionServiceI {
 
 	@Autowired
