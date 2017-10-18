@@ -55,14 +55,14 @@ public class SpVersionImpl implements SpVersionServiceI {
 		String[] versionList = StringTool.splitString(version.getCode(), "\\.");
 		int codeIndex = 0;
 		for (; codeIndex < codeList.length; codeIndex++) {
-			int tempCode = Integer.parseInt(codeList[codeIndex]);
+			int compareCode = Integer.parseInt(codeList[codeIndex]);
 			if (codeIndex + 1 <= versionList.length) {
-				int tempVersion = Integer.parseInt(versionList[codeIndex]);
-				if (tempVersion < tempCode) {
+				int compareVersion = Integer.parseInt(versionList[codeIndex]);
+				if (compareVersion < compareCode) {
 					return -1;
-				} else if (tempVersion == tempCode) {
+				} else if (compareVersion == compareCode) {
 					continue;
-				} else if (tempVersion > tempCode) {
+				} else if (compareVersion > compareCode) {
 					return 1;
 				}
 			}
