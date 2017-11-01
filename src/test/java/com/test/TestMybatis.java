@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.service.config.SparrowConfig;
 import com.service.config.enums.ResponseStatusEnum;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
@@ -69,7 +70,8 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
-		System.out.println(JSON.toJSONString(versionService.compareLastVersion(1, "0.0.1")));
+//		System.out.println(SparrowConfig.LOGIN_CODE_REDIS_KEY_PREFIX);
+//		System.out.println(JSON.toJSONString(versionService.compareLastVersion(1, "0.0.1")));
 //		ArrayList<String> params = CommonTool.combineList("1", "2");
 //		System.out.println(params);
 //		System.out.println(ResponseStatusIntEnum.SUCCESS.getValue());
