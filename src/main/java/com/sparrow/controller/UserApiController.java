@@ -103,6 +103,7 @@ public class UserApiController {
 	 */
 	public ResponseModel userInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
+		
 		return responseService.combineResponse();
 	}
 
