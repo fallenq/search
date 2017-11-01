@@ -11,7 +11,7 @@ public class TimeTool {
 		return new Timestamp(System.currentTimeMillis());
 	}
 	
-	public static String formatDate(Date date, String...format)throws ParseException{
+	public static String formatDate(Date date, String...format) throws ParseException{
 		String fmtString = format.length > 0? format[0]: "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat sdf = new SimpleDateFormat(fmtString);
         return sdf.format(date);
