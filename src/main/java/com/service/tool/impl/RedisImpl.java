@@ -29,10 +29,6 @@ public class RedisImpl implements RedisServiceI {
 		}
 		return operationValue;
 	}
-	
-	private String getKeyName(String name) {
-		return ToolConfig.COMMON_PREFIX + name;
-	}
 
 	@Override
 	public String ping() {
@@ -62,7 +58,7 @@ public class RedisImpl implements RedisServiceI {
 
 	@Override
 	public void setForever(String name, String value) {
-		getValueOperation().set(getKeyName(name), value);
+		getValueOperation().set(name, value);
 	}
 
 	@Override
@@ -73,22 +69,22 @@ public class RedisImpl implements RedisServiceI {
 		if (unit == null) {
 			unit = TimeUnit.SECONDS;
 		}
-		getValueOperation().set(getKeyName(name), value, timeout, unit);
+		getValueOperation().set(name, value, timeout, unit);
 	}
 
 	@Override
 	public String get(String name) {
-		return (String) getValueOperation().get(getKeyName(name));
+		return (String) getValueOperation().get(name);
 	}
 
 	@Override
 	public long incrementLong(String name, long disc) {
-		return getValueOperation().increment(getKeyName(name), disc);
+		return getValueOperation().increment(name, disc);
 	}
 
 	@Override
 	public void delete(String name) {
-		redisTemplate.delete(getKeyName(name));
+		redisTemplate.delete(name);
 	}
 
 }
