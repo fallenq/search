@@ -103,7 +103,7 @@ public class UserApiController {
 	 */
 	public ResponseModel userInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		
+//		LoginInfoModel loginInfo = userFuncService.getLoginInfo(request);
 		return responseService.combineResponse();
 	}
 
@@ -116,6 +116,8 @@ public class UserApiController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
+		userFuncService.clearLoginInfo(request);
+		responseService.successStatus();
 		return responseService.combineResponse();
 	}
 

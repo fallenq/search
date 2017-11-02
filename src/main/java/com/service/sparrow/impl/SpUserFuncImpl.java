@@ -2,15 +2,20 @@ package com.service.sparrow.impl;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.config.enums.UserTypeEnum;
+import com.service.config.ServiceConfig;
 import com.service.config.enums.ResponseSparrowMsgEnum;
+import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
+import com.service.tool.SessionTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
@@ -49,6 +54,17 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_FAILURE.getValue()));
 		}
 		return responseService.combineResponse();
+	}
+
+	@Override
+	public LoginInfoModel getLoginInfo(HttpServletRequest request) {
+		LoginInfoModel loginInfo = SessionTool.getInstance(request).getSessionParam(ServiceConfig.USER_LOGIN_INFO);
+		return loginInfo;
+	}
+
+	@Override
+	public void clearLoginInfo(HttpServletRequest request) {
+		SessionTool.getInstance(request).removeSession(ServiceConfig.USER_LOGIN_INFO);
 	}
 
 }

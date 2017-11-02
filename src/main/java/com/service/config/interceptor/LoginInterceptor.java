@@ -2,26 +2,28 @@ package com.service.config.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
-import com.service.config.ServiceConfig;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.model.LoginInfoModel;
+import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 
 public class LoginInterceptor implements HandlerInterceptor {
+	
+	@Autowired
+	private SpUserFuncServiceI userFuncService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Validating user login info
-		HttpSession session = request.getSession();
-		LoginInfoModel loginInfo = (LoginInfoModel) session.getAttribute(ServiceConfig.USER_LOGIN_INFO);
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(request);
 		if (loginInfo != null) {
 			// TODO: modify session ipAddress with login ipAddress
 //			String ipAddress = CommonTool.getCLientIp(request);

@@ -3,6 +3,7 @@ package com.sparrow.entity;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -57,6 +58,7 @@ public class SparrowUserSearch extends Model<SparrowUserSearch> {
 	@TableField("update_at")
 	private Date updateAt;
 	@TableField("delete_flag")
+	@TableLogic
 	private Integer deleteFlag;
 	@TableField("delete_at")
 	private Date deleteAt;
