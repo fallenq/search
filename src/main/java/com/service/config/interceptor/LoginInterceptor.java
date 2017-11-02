@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.model.LoginInfoModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
+import com.service.tool.SessionTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 
@@ -23,7 +24,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Validating user login info
-		LoginInfoModel loginInfo = userFuncService.getLoginInfo(request);
+		SessionTool sessionTool = SessionTool.getInstance(request);
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(sessionTool);
 		if (loginInfo != null) {
 			// TODO: modify session ipAddress with login ipAddress
 //			String ipAddress = CommonTool.getCLientIp(request);
