@@ -2,8 +2,6 @@ package com.service.sparrow.impl;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,14 +55,14 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
-	public LoginInfoModel getLoginInfo(HttpServletRequest request) {
-		LoginInfoModel loginInfo = SessionTool.getInstance(request).getSessionParam(ServiceConfig.USER_LOGIN_INFO);
+	public LoginInfoModel getLoginInfo(SessionTool tool) {
+		LoginInfoModel loginInfo = tool.getSessionParam(ServiceConfig.USER_LOGIN_INFO);
 		return loginInfo;
 	}
 
 	@Override
-	public void clearLoginInfo(HttpServletRequest request) {
-		SessionTool.getInstance(request).removeSession(ServiceConfig.USER_LOGIN_INFO);
+	public void clearLoginInfo(SessionTool tool) {
+		tool.removeSession(ServiceConfig.USER_LOGIN_INFO);
 	}
 
 }

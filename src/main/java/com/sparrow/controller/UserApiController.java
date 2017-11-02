@@ -13,6 +13,7 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
+import com.service.tool.SessionTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
@@ -116,7 +117,8 @@ public class UserApiController {
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public ResponseModel logout(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		userFuncService.clearLoginInfo(request);
+		SessionTool sessionTool = SessionTool.getInstance(request);
+		userFuncService.clearLoginInfo(sessionTool);
 		responseService.successStatus();
 		return responseService.combineResponse();
 	}
