@@ -19,8 +19,7 @@ public class StringTool {
 	 * @return
 	 */
 	public static String uuCode() {
-		String uuString = StringTool.uuId();
-		String[] uSplit = uuString.split("-");
+		String[] uSplit = StringTool.splitString(StringTool.uuId(), "-");
 		return uSplit[uSplit.length-1];
 	}
 	
