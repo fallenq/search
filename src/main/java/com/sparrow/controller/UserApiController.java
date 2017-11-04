@@ -102,6 +102,8 @@ public class UserApiController {
 	 * @param request
 	 * @return
 	 */
+	@ResponseBody
+	@RequestMapping(value = "/info", method = RequestMethod.POST)
 	public ResponseModel userInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 //		LoginInfoModel loginInfo = userFuncService.getLoginInfo(request);
