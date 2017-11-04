@@ -6,6 +6,7 @@ import com.service.tool.SessionTool;
 
 public interface SpUserFuncServiceI {
 	public ResponseModel registerByMobile(String mobile, String vcode);
+	public void setLoginInfo(SessionTool tool, LoginInfoModel loginInfo);
 	public LoginInfoModel getLoginInfo(SessionTool tool);
 	public void clearLoginInfo(SessionTool tool);
 }

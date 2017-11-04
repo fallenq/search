@@ -5,6 +5,11 @@ public class LoginInfoModel {
 	private int userId;
 	private String nickname;
 	private String ipAddress;
+	
+	public LoginInfoModel(int userId, String nickname) {
+		this.userId = userId;
+		this.nickname = nickname;
+	}
 
 	public int getUserId() {
 		return userId;

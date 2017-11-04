@@ -55,6 +55,11 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
+	public void setLoginInfo(SessionTool tool, LoginInfoModel loginInfo) {
+		tool.setSessionParam(ServiceConfig.USER_LOGIN_INFO, loginInfo);
+	}
+
+	@Override
 	public LoginInfoModel getLoginInfo(SessionTool tool) {
 		LoginInfoModel loginInfo = tool.getSessionParam(ServiceConfig.USER_LOGIN_INFO);
 		return loginInfo;

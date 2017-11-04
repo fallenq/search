@@ -27,6 +27,16 @@ public class SessionTool {
 	 * @param keyName
 	 * @return
 	 */
+	public void setSessionParam(String name, Object object) {
+		session.setAttribute(name, object);
+	}
+
+	/**
+	 * Get session by name
+	 * 
+	 * @param keyName
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getSessionParam(String name) {
 		T object = (T) session.getAttribute(name);

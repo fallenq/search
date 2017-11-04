@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.service.config.enums.ResponseSparrowMsgEnum;
+import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
@@ -51,6 +52,7 @@ public class UserApiController {
 		try {
 			isPass = userService.compareUserLoginPwd(sparrowUser, password);
 			if (isPass) {
+				userFuncService.setLoginInfo(SessionTool.getInstance(request), new LoginInfoModel(sparrowUser.getId(), sparrowUser.getNickname()));
 				responseService.successStatus();
 			} else {
 				responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_LOGININFO_ERROR.getValue()));
