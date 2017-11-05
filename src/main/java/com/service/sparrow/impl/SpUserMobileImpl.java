@@ -9,12 +9,13 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.service.sparrow.dao.nozzle.SparrowUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.sparrow.entity.SparrowUserMobile;
+
 @Service("spUserMobileImpl")
 public class SpUserMobileImpl implements SpUserMobileServiceI {
 
 	@Autowired
 	private SparrowUserMobileServiceI mobileService;
-	
+
 	/**
 	 * Insert record
 	 */
@@ -22,7 +23,7 @@ public class SpUserMobileImpl implements SpUserMobileServiceI {
 	public int insert(SparrowUserMobile record) {
 		record.setCreatedAt(new Date());
 		boolean insertRes = mobileService.insert(record);
-		return insertRes? record.getId(): 0;
+		return insertRes ? record.getId() : 0;
 	}
 
 	/**
@@ -32,7 +33,7 @@ public class SpUserMobileImpl implements SpUserMobileServiceI {
 	public int updateById(SparrowUserMobile record) {
 		record.setUpdateAt(new Date());
 		boolean updateRes = mobileService.updateById(record);
-		return updateRes? record.getId(): 0;
+		return updateRes ? record.getId() : 0;
 	}
 
 	/**
@@ -41,6 +42,14 @@ public class SpUserMobileImpl implements SpUserMobileServiceI {
 	@Override
 	public SparrowUserMobile getUserMobileByMobile(String mobile) {
 		return mobileService.selectOne(new EntityWrapper<SparrowUserMobile>().eq("mobile", mobile));
+	}
+
+	/**
+	 * Get mobile by mobileId
+	 */
+	@Override
+	public SparrowUserMobile getUserMobileById(int mobileId) {
+		return mobileService.selectById(mobileId);
 	}
 
 }

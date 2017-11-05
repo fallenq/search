@@ -70,7 +70,7 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
-//		System.out.println(SparrowConfig.LOGIN_CODE_REDIS_KEY_PREFIX);
+		System.out.println(versionService.compareLastVersion(1, "0.0.1"));
 //		System.out.println(JSON.toJSONString(versionService.compareLastVersion(1, "0.0.1")));
 //		ArrayList<String> params = CommonTool.combineList("1", "2");
 //		System.out.println(params);

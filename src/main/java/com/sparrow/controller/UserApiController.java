@@ -108,7 +108,17 @@ public class UserApiController {
 	@RequestMapping(value = "/my/info", method = RequestMethod.POST)
 	public ResponseModel userInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-//		LoginInfoModel loginInfo = userFuncService.getLoginInfo(request);
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		SparrowUser sparrowUser = userService.getUserById(loginInfo.getUserId());
+		if (sparrowUser != null) {
+			responseService.setDataValue("nickname", sparrowUser.getNickname());
+			responseService.setDataValue("mobile", "");
+			SparrowUserMobile userMobile = mobileService.getUserMobileById(sparrowUser.getUserMobileId());
+			if (userMobile != null) {
+				responseService.setDataValue("mobile", "");
+			}
+			responseService.successStatus();
+		}
 		return responseService.combineResponse();
 	}
 
