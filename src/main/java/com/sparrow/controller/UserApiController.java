@@ -115,7 +115,7 @@ public class UserApiController {
 			responseService.setDataValue("mobile", "");
 			SparrowUserMobile userMobile = mobileService.getUserMobileById(sparrowUser.getUserMobileId());
 			if (userMobile != null) {
-				responseService.setDataValue("mobile", "");
+				responseService.setDataValue("mobile", userMobile.getMobile());
 			}
 			responseService.successStatus();
 		}
