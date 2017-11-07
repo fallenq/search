@@ -104,7 +104,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public void incrementLimit() {
-		if (redisLimitKey != "") {
+		if (!redisLimitKey.isEmpty()) {
 			try {
 				Integer.parseInt(redisService.get(redisLimitKey));
 				redisService.incrementLong(redisLimitKey, 1);
