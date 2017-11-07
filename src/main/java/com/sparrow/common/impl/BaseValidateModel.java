@@ -73,7 +73,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 				return true;
 			}
 		} catch (Exception e) {
-			return true;
+			return false;
 		}
 		return false;
 	}
