@@ -27,7 +27,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	private SpUserMobileServiceI mobileService;
 
 	@Override
-	public ResponseModel registerByMobile(String mobile, String vcode) {
+	public ResponseModel registerByMobile(String mobile) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		SparrowUserMobile userMobile = new SparrowUserMobile();
 		userMobile.setMobile(mobile);
@@ -68,6 +68,15 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public void clearLoginInfo(SessionTool tool) {
 		tool.removeSession(ServiceConfig.USER_LOGIN_INFO);
+	}
+
+	@Override
+	public ResponseModel editUser(String nickname, String mobile, SparrowUser sparrowUser) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		if (sparrowUser != null) {
+			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		}
+		return responseService.combineResponse();
 	}
 
 }

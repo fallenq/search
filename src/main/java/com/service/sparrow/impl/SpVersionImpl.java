@@ -44,7 +44,7 @@ public class SpVersionImpl implements SpVersionServiceI {
 		if (version == null) {
 			return -3;
 		}
-		if (version.getCode() == code) {
+		if (version.getCode().equals(code)) {
 			return 0;
 		}
 		if (version.getForceUpdate() > 0) {

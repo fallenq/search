@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
+import com.service.config.enums.SparrowValidateEnum;
 import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
@@ -17,6 +19,8 @@ import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.tool.SessionTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
+import com.sparrow.common.ValidateTool;
+import com.sparrow.common.nozzle.ValidateModelServiceI;
 import com.sparrow.entity.SparrowUser;
 import com.sparrow.entity.SparrowUserMobile;
 
@@ -89,12 +93,29 @@ public class UserApiController {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		String mobile = request.getParameter("mobile");
 		String vcode = request.getParameter("vcode");
+		ValidateModelServiceI validateService = ValidateTool.getInstance().getValidateService(SparrowValidateEnum.MOBILE_VALIDATE_SEND_TYPE.getValue());
+		if (!validateService.determine(mobile, vcode)) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.VALIDATE_CODE_ERROR.getValue()));
+		}
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
-			return userFuncService.registerByMobile(mobile, vcode);
+			return userFuncService.registerByMobile(mobile);
 		} else {
 			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_EXISTS.getValue()));
 		}
+		return responseService.combineResponse();
+	}
+	
+	/**
+	 * Edit info of user
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/edit/info", method = RequestMethod.POST)
+	public ResponseModel editInfo(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
 		return responseService.combineResponse();
 	}
 

@@ -62,8 +62,22 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	}
 
 	@Override
+	public boolean determine(String redisKey, String compareValue) {
+		try {
+			setRedisKey(redisKey);
+			String redisKeyValue = redisService.get(this.redisKey);
+			if (redisKeyValue.equals(compareValue)) {
+				return true;
+			}
+		} catch (Exception e) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean determineLimit() {
-		if (redisLimitKey == "") {
+		if (redisLimitKey.isEmpty()) {
 			return false;
 		}
 		try {

@@ -43,6 +43,7 @@ public class CommonApiController {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.length() > 0) {
 				validateService.setRedisValue(validateCode);
+				responseService.setDataValue("code", validateCode);
 				responseService.successStatus();
 			} else {
 				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
