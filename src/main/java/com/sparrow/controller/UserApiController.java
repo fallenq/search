@@ -140,6 +140,8 @@ public class UserApiController {
 				responseService.setDataValue("mobile", userMobile.getMobile());
 			}
 			responseService.successStatus();
+		} else {
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 		}
 		return responseService.combineResponse();
 	}
