@@ -57,6 +57,10 @@ public class SparrowUserMobile extends Model<SparrowUserMobile> {
 	private Date deleteAt;
 
 
+	public SparrowUserMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
 	public Integer getId() {
 		return id;
 	}

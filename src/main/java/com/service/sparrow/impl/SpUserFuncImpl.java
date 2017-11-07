@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.service.config.enums.UserTypeEnum;
 import com.service.config.ServiceConfig;
+import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
@@ -29,8 +30,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public ResponseModel registerByMobile(String mobile) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		SparrowUserMobile userMobile = new SparrowUserMobile();
-		userMobile.setMobile(mobile);
+		SparrowUserMobile userMobile = new SparrowUserMobile(mobile);
 		int mobileId = mobileService.insert(userMobile);
 		if (mobileId > 0) {
 			Map<String, Object> pwdSet = userService.createUserPwd();
@@ -45,13 +45,12 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				userMobile.setUserId(userId);
 				mobileService.updateById(userMobile);
 				responseService.successStatus();
-				responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_SUCCESS.getValue()));
 			}
 		}
-		if (!responseService.isSuccess()) {
-			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_FAILURE.getValue()));
+		if (responseService.isSuccess()) {
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_SUCCESS.getValue()));
 		}
-		return responseService.combineResponse();
+		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_REGIST_FAILURE.getValue()));
 	}
 
 	@Override
@@ -71,12 +70,26 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
-	public ResponseModel editUser(String nickname, String mobile, SparrowUser sparrowUser) {
+	public ResponseModel editUser(int userId, String nickname, SparrowUser sparrowUser) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
+		if (sparrowUser == null) {
+			sparrowUser = userService.getUserById(userId);
+		}
 		if (sparrowUser != null) {
 			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		} 
+		sparrowUser.setNickname(nickname);
+		if (userService.updateById(sparrowUser) > 0) {
+			responseService.successStatus();
+		} else {
+			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
 		}
 		return responseService.combineResponse();
+	}
+
+	@Override
+	public ResponseModel editUser(int userId, String nickname) {
+		return editUser(userId, nickname, null);
 	}
 
 }

@@ -63,6 +63,9 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determine(String redisKey, String compareValue) {
+		if (compareValue.isEmpty()) {
+			return false;
+		}
 		try {
 			setRedisKey(redisKey);
 			String redisKeyValue = redisService.get(this.redisKey);

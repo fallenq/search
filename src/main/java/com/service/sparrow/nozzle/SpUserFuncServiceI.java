@@ -40,10 +40,19 @@ public interface SpUserFuncServiceI {
 	/**
 	 * Edit user info
 	 * 
+	 * @param userId
 	 * @param nickname
-	 * @param mobile
 	 * @param sparrowUser
 	 * @return
 	 */
-	public ResponseModel editUser(String nickname, String mobile, SparrowUser sparrowUser);
+	public ResponseModel editUser(int userId, String nickname, SparrowUser sparrowUser);
+
+	/**
+	 * Edit user info
+	 * 
+	 * @param userId
+	 * @param nickname
+	 * @return
+	 */
+	public ResponseModel editUser(int userId, String nickname);
 }

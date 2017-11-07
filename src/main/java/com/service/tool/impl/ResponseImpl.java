@@ -103,22 +103,32 @@ public class ResponseImpl implements ResponseServiceI {
 
 	@Override
 	public ResponseModel combineResponse() {
-		return this.excuteMap(this.status, this.message, this.data);
+		return excuteMap(status, message, data);
 	}
 
 	@Override
 	public ResponseModel combineResponse(String message) {
-		return this.excuteMap(this.status, message, this.data);
+		return excuteMap(status, message, data);
 	}
 
 	@Override
 	public ResponseModel combineResponse(Map<String, Object> data) {
-		return this.excuteMap(this.status, this.message, data);
+		return excuteMap(status, message, data);
 	}
 
 	@Override
 	public ResponseModel combineResponse(String message, Map<String, Object> data) {
-		return this.excuteMap(this.status, message, data);
+		return excuteMap(status, message, data);
+	}
+
+	@Override
+	public ResponseModel combineResponse(int status) {
+		return excuteMap(status, message, data);
+	}
+
+	@Override
+	public ResponseModel successCombine() {
+		return combineResponse(ResponseStatusEnum.SUCCESS.getValue());
 	}
 
 }

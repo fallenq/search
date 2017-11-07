@@ -100,10 +100,8 @@ public class UserApiController {
 		SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 		if (userMobile == null) {
 			return userFuncService.registerByMobile(mobile);
-		} else {
-			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_EXISTS.getValue()));
 		}
-		return responseService.combineResponse();
+		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_EXISTS.getValue()));
 	}
 	
 	/**
@@ -116,7 +114,10 @@ public class UserApiController {
 	@RequestMapping(value = "/edit/info", method = RequestMethod.POST)
 	public ResponseModel editInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		return responseService.combineResponse();
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		String nickname = request.getParameter("nickname");
+		userFuncService.editUser(loginInfo.getUserId(), nickname);
+		return responseService.successCombine();
 	}
 
 	/**
@@ -154,8 +155,7 @@ public class UserApiController {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		SessionTool sessionTool = SessionTool.getInstance(request);
 		userFuncService.clearLoginInfo(sessionTool);
-		responseService.successStatus();
-		return responseService.combineResponse();
+		return responseService.successCombine();
 	}
 
 }
