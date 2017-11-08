@@ -74,10 +74,11 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
+			if (sparrowUser == null) {
+				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			}
 		}
-		if (sparrowUser == null) {
-			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
-		} else {
+		if (sparrowUser != null) {
 			sparrowUser.setNickname(nickname);
 			if (userService.updateById(sparrowUser) > 0) {
 				responseService.successStatus();
