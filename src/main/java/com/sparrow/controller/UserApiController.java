@@ -88,7 +88,7 @@ public class UserApiController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/register/mobile", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseModel register(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		String mobile = request.getParameter("mobile");

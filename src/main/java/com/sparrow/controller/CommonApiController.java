@@ -33,7 +33,7 @@ public class CommonApiController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/address/validate", method = RequestMethod.POST)
+	@RequestMapping(value = "/validate/address", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		int type = Integer.parseInt(request.getParameter("type"));
 		ResponseImpl responseService = ResponseImpl.getInstance();
@@ -41,7 +41,7 @@ public class CommonApiController {
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
 		if (validateTool.determine(type, validateService, CommonTool.getCLientIp(request))) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
-			if (validateCode.length() > 0) {
+			if (!validateCode.isEmpty()) {
 				validateService.setRedisValue(validateCode);
 				responseService.setDataValue("code", validateCode);
 				responseService.successStatus();

@@ -19,12 +19,12 @@ public class ValidateTool {
 	 */
 	public ValidateModelServiceI getValidateService(int type) {
 		switch (type) {
-		case 1:
-			return LoginCodeValidateImpl.getInstance();
-		case 2:
-			return MobileAccessValidateImpl.getInstance();
-		case 3:
-			return MobileSendValidateImpl.getInstance();
+			case 1:
+				return LoginCodeValidateImpl.getInstance();
+			case 2:
+				return MobileAccessValidateImpl.getInstance();
+			case 3:
+				return MobileSendValidateImpl.getInstance();
 		}
 		return null;
 	}
