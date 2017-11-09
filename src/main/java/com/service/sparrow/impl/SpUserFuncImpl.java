@@ -93,4 +93,22 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		return editUser(userId, nickname, null);
 	}
 
+	@Override
+	public ResponseModel getUserInfo(int userId, int method, String...params) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		SparrowUser sparrowUser = userService.getUserById(userId);
+		if (sparrowUser != null) {
+			responseService.setDataValue("user", sparrowUser);
+			responseService.setDataValue("mobile", null);
+			if (method == 1) {
+				SparrowUserMobile userMobile = mobileService.getUserMobileById(sparrowUser.getUserMobileId());
+				if (userMobile != null) {
+					responseService.setDataValue("mobile", userMobile);
+				}
+			}
+			responseService.successStatus();
+		}
+		return responseService.combineResponse();
+	}
+
 }

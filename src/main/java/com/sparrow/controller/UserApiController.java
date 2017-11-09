@@ -131,11 +131,12 @@ public class UserApiController {
 	public ResponseModel userInfo(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
-		SparrowUser sparrowUser = userService.getUserById(loginInfo.getUserId());
-		if (sparrowUser != null) {
+		ResponseModel userModel = userFuncService.getUserInfo(loginInfo.getUserId(), 1);
+		if (responseService.isSuccess(userModel)) {
+			SparrowUser sparrowUser = (SparrowUser) userModel.getData().get("user");
+			SparrowUserMobile userMobile = (SparrowUserMobile) userModel.getData().get("mobile");
 			responseService.setDataValue("nickname", sparrowUser.getNickname());
 			responseService.setDataValue("mobile", "");
-			SparrowUserMobile userMobile = mobileService.getUserMobileById(sparrowUser.getUserMobileId());
 			if (userMobile != null) {
 				responseService.setDataValue("mobile", userMobile.getMobile());
 			}

@@ -55,4 +55,14 @@ public interface SpUserFuncServiceI {
 	 * @return
 	 */
 	public ResponseModel editUser(int userId, String nickname);
+	
+	/**
+	 * Get User info by userId
+	 * 
+	 * @param userId
+	 * @param method
+	 * @param params
+	 * @return
+	 */
+	public ResponseModel getUserInfo(int userId, int method, String...params);
 }
