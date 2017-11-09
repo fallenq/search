@@ -15,6 +15,7 @@ import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.tool.SessionTool;
+import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.entity.SparrowUser;
@@ -35,7 +36,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (mobileId > 0) {
 			Map<String, Object> pwdSet = userService.createUserPwd();
 			SparrowUser user = new SparrowUser();
-			user.setNickname(mobile);
+			user.setNickname(StringTool.parseMobile(mobile, 1));
 			user.setUserType(UserTypeEnum.MOBILE_USER_TYPE.getValue());
 			user.setSalt((String) pwdSet.get("salt"));
 			user.setLoginPwd((String) pwdSet.get("password"));
