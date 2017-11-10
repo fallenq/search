@@ -76,6 +76,23 @@ public interface SpUserFuncServiceI {
 	public ResponseModel getUserInfo(int userId);
 	
 	/**
+	 * Mobile exist
+	 * 
+	 * @param mobile
+	 * @return
+	 */
+	public ResponseModel existMobile(String mobile);
+	
+	/**
+	 * Bind mobile to user
+	 * 
+	 * @param userId
+	 * @param mobile
+	 * @return
+	 */
+	public ResponseModel bindMobile(Integer userId, String mobile, String...params);
+	
+	/**
 	 * Unbind mobile of user by userId
 	 * 
 	 * @param userId

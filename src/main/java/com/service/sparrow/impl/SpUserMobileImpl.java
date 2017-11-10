@@ -36,6 +36,11 @@ public class SpUserMobileImpl implements SpUserMobileServiceI {
 		return updateRes ? record.getId() : 0;
 	}
 
+	@Override
+	public boolean delete(int mobileId) {
+		return mobileService.deleteById(mobileId);
+	}
+
 	/**
 	 * Get mobile of user by mobile
 	 */

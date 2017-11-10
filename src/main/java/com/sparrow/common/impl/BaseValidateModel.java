@@ -70,6 +70,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 			setRedisKey(redisKey);
 			String redisKeyValue = redisService.get(this.redisKey);
 			if (redisKeyValue.equals(compareValue)) {
+				removeRedisValue();
 				return true;
 			}
 		} catch (Exception e) {

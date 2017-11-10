@@ -60,10 +60,22 @@ public class MobileApiController {
 				}
 			}
 		} else {
-			responseService
-					.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_SENDED.getValue()));
+			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_SENDED.getValue()));
 		}
 		return responseService.combineResponse();
+	}
+
+	/**
+	 * Mobile if exist
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/exist", method = RequestMethod.POST)
+	public ResponseModel existMobile(HttpServletRequest request) {
+		String mobile = request.getParameter("mobile");
+		return userFuncService.existMobile(mobile);
 	}
 
 	/**
@@ -76,7 +88,14 @@ public class MobileApiController {
 	@RequestMapping(value = "/bind", method = RequestMethod.POST)
 	public ResponseModel bindMobile(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		return responseService.combineResponse();
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		String mobile = request.getParameter("mobile");
+		String vcode = request.getParameter("vcode");
+		ValidateModelServiceI validateService = ValidateTool.getInstance().getValidateService(SparrowValidateEnum.MOBILE_VALIDATE_SEND_TYPE.getValue());
+		if (!validateService.determine(mobile, vcode)) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.VALIDATE_CODE_ERROR.getValue()));
+		}
+		return userFuncService.bindMobile(loginInfo.getUserId(), mobile);
 	}
 
 	/**
@@ -86,10 +105,8 @@ public class MobileApiController {
 	 * @return
 	 */
 	public ResponseModel unbindMobile(HttpServletRequest request) {
-		ResponseImpl responseService = ResponseImpl.getInstance();
-		LoginInfoModel loginInfoModel = userFuncService.getLoginInfo(SessionTool.getInstance(request));
-		
-		return responseService.combineResponse();
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		return userFuncService.unbindMobile(loginInfo.getUserId());
 	}
 
 }
