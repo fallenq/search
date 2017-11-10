@@ -55,14 +55,31 @@ public interface SpUserFuncServiceI {
 	 * @return
 	 */
 	public ResponseModel editUser(int userId, String nickname);
-	
+
 	/**
 	 * Get User info by userId
 	 * 
 	 * @param userId
 	 * @param method
+	 *            0 - basic user info 1 - basic user info with mobile
 	 * @param params
 	 * @return
 	 */
-	public ResponseModel getUserInfo(int userId, int method, String...params);
+	public ResponseModel getUserInfo(int userId, int method, String... params);
+
+	/**
+	 * Get base info by userId
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public ResponseModel getUserInfo(int userId);
+	
+	/**
+	 * Unbind mobile of user by userId
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public ResponseModel unbindMobile(int userId);
 }

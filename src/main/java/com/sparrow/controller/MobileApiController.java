@@ -2,6 +2,7 @@ package com.sparrow.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,9 +12,12 @@ import com.service.config.ToolConfig;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.config.enums.SparrowValidateEnum;
+import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
+import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.tool.CommonTool;
 import com.service.tool.MobileTool;
+import com.service.tool.SessionTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.ValidateTool;
@@ -22,6 +26,9 @@ import com.sparrow.common.nozzle.ValidateModelServiceI;
 @Controller
 @RequestMapping("/api/mobile")
 public class MobileApiController {
+	
+	@Autowired
+	private SpUserFuncServiceI userFuncService;
 
 	/**
 	 * Send validate code in sms
@@ -53,8 +60,35 @@ public class MobileApiController {
 				}
 			}
 		} else {
-			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_SENDED.getValue()));
+			responseService
+					.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_SENDED.getValue()));
 		}
+		return responseService.combineResponse();
+	}
+
+	/**
+	 * Bind mobile to user
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/bind", method = RequestMethod.POST)
+	public ResponseModel bindMobile(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		return responseService.combineResponse();
+	}
+
+	/**
+	 * Unbind mobile with user
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public ResponseModel unbindMobile(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		LoginInfoModel loginInfoModel = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		
 		return responseService.combineResponse();
 	}
 

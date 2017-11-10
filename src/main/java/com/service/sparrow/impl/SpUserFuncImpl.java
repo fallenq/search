@@ -104,11 +104,38 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				SparrowUserMobile userMobile = mobileService.getUserMobileById(sparrowUser.getUserMobileId());
 				if (userMobile != null) {
 					responseService.setDataValue("mobile", userMobile);
+				} else {
+					responseService.setDataValue("mobile", null);
 				}
 			}
 			responseService.successStatus();
 		}
 		return responseService.combineResponse();
+	}
+
+	@Override
+	public ResponseModel getUserInfo(int userId) {
+		return getUserInfo(userId, 0);
+	}
+
+	@Override
+	public ResponseModel unbindMobile(int userId) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		ResponseModel userModel = getUserInfo(userId);
+		if (responseService.isSuccess(userModel)) {
+			SparrowUser user = (SparrowUser) userModel.getData().get("user");
+			if (user.getUserMobileId() == 0) {
+				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_MOBILE_UNBINDED.getValue()));
+			}
+			user.setUserMobileId(0);
+			if (userService.updateById(user) > 0) {
+				responseService.successStatus();
+			} else {
+				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+			}
+			return responseService.combineResponse();
+		}
+		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 	}
 
 }
