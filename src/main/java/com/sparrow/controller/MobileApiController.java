@@ -104,6 +104,8 @@ public class MobileApiController {
 	 * @param request
 	 * @return
 	 */
+	@ResponseBody
+	@RequestMapping(value = "/unbind", method = RequestMethod.POST)
 	public ResponseModel unbindMobile(HttpServletRequest request) {
 		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
 		return userFuncService.unbindMobile(loginInfo.getUserId());
