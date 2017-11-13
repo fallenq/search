@@ -3,10 +3,9 @@ package com.sparrow.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.service.config.ToolConfig;
 import com.service.config.enums.ResponseCommonMsgEnum;
@@ -19,7 +18,7 @@ import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.ValidateTool;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
 
-@Controller
+@RestController
 @RequestMapping("/api/common")
 public class CommonApiController {
 
@@ -32,7 +31,6 @@ public class CommonApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/validate/address", method = RequestMethod.POST)
 	public ResponseModel loginValidate(HttpServletRequest request) {
 		int type = Integer.parseInt(request.getParameter("type"));
@@ -60,7 +58,6 @@ public class CommonApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/version/compare", method = RequestMethod.POST)
 	public ResponseModel compareVersion(HttpServletRequest request) {
 //		int dtype = Integer.parseInt(request.getParameter("dtype"));

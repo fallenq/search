@@ -3,10 +3,9 @@ package com.sparrow.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.service.config.ToolConfig;
 import com.service.config.enums.ResponseCommonMsgEnum;
@@ -23,7 +22,7 @@ import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.ValidateTool;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
 
-@Controller
+@RestController
 @RequestMapping("/api/mobile")
 public class MobileApiController {
 	
@@ -36,7 +35,6 @@ public class MobileApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/validate/code", method = RequestMethod.POST)
 	public ResponseModel validateCode(HttpServletRequest request) {
 		int type = SparrowValidateEnum.MOBILE_VALIDATE_SEND_TYPE.getValue();
@@ -71,7 +69,6 @@ public class MobileApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/exist", method = RequestMethod.POST)
 	public ResponseModel existMobile(HttpServletRequest request) {
 		String mobile = request.getParameter("mobile");
@@ -84,7 +81,6 @@ public class MobileApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/bind", method = RequestMethod.POST)
 	public ResponseModel bindMobile(HttpServletRequest request) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
@@ -104,7 +100,6 @@ public class MobileApiController {
 	 * @param request
 	 * @return
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/unbind", method = RequestMethod.POST)
 	public ResponseModel unbindMobile(HttpServletRequest request) {
 		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
