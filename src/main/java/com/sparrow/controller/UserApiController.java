@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysql.fabric.Response;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.config.enums.SparrowValidateEnum;
