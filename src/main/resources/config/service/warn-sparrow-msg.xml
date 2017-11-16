@@ -12,4 +12,5 @@
 	<message id="10" value="用户已绑定手机号"/>
 	<message id="11" value="用户未绑定手机号"/>
 	<message id="12" value="手机号不存在"/>
+	<message id="13" value="用户密码与之前一致"/>
 </warn>

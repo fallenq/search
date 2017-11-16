@@ -75,9 +75,9 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
-		}
-		if (sparrowUser == null) {
-			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			if (sparrowUser == null) {
+				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			}
 		}
 		sparrowUser.setNickname(nickname);
 		if (userService.updateById(sparrowUser) > 0) {
@@ -91,6 +91,40 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public ResponseModel editUser(int userId, String nickname) {
 		return editUser(userId, nickname, null);
+	}
+
+	@Override
+	public ResponseModel editPassword(int userId, String password, int type, SparrowUser sparrowUser) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		if (password == null) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
+		}
+		if (password.isEmpty()) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
+		}
+		if (sparrowUser == null) {
+			sparrowUser = userService.getUserById(userId);
+			if (sparrowUser == null) {
+				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			}
+		}
+		if (type == 1) {
+			if (userService.compareUserLoginPwd(sparrowUser, password)) {
+				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_LOGIN_PASSWORD_SAME.getValue()));
+			}
+			Map<String, Object> pwdSet = userService.createUserPwd(sparrowUser, password);
+			sparrowUser.setLoginPwd((String) pwdSet.get("password"));
+			int updateUserId = userService.updateById(sparrowUser);
+			if (updateUserId > 0) {
+				return responseService.successCombine();
+			}
+		}
+		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+	}
+
+	@Override
+	public ResponseModel editPassword(int userId, String password) {
+		return editPassword(userId, password, 1, null);
 	}
 
 	@Override

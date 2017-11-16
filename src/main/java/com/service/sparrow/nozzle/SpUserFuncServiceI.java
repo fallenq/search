@@ -57,6 +57,26 @@ public interface SpUserFuncServiceI {
 	public ResponseModel editUser(int userId, String nickname);
 
 	/**
+	 * Edit user password
+	 * 
+	 * @param userId
+	 * @param password
+	 * @param type
+	 * @param sparrowUser
+	 * @return
+	 */
+	public ResponseModel editPassword(int userId, String password, int type, SparrowUser sparrowUser);
+
+	/**
+	 * Edit user password
+	 * 
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	public ResponseModel editPassword(int userId, String password);
+
+	/**
 	 * Get User info by userId
 	 * 
 	 * @param userId
@@ -74,7 +94,7 @@ public interface SpUserFuncServiceI {
 	 * @return
 	 */
 	public ResponseModel getUserInfo(int userId);
-	
+
 	/**
 	 * Mobile exist
 	 * 
@@ -82,7 +102,7 @@ public interface SpUserFuncServiceI {
 	 * @return
 	 */
 	public ResponseModel existMobile(String mobile);
-	
+
 	/**
 	 * Bind mobile to user
 	 * 
@@ -90,8 +110,8 @@ public interface SpUserFuncServiceI {
 	 * @param mobile
 	 * @return
 	 */
-	public ResponseModel bindMobile(Integer userId, String mobile, String...params);
-	
+	public ResponseModel bindMobile(Integer userId, String mobile, String... params);
+
 	/**
 	 * Unbind mobile of user by userId
 	 * 

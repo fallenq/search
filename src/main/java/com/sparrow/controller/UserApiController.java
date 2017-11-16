@@ -114,6 +114,20 @@ public class UserApiController {
 		userFuncService.editUser(loginInfo.getUserId(), nickname);
 		return responseService.successCombine();
 	}
+	
+	/**
+	 * Edit password of user
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/edit/password", method = RequestMethod.POST)
+	public ResponseModel editPassword(HttpServletRequest request) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		String password = request.getParameter("password");
+		return userFuncService.editPassword(loginInfo.getUserId(), password);
+	}
 
 	/**
 	 * Get user info
