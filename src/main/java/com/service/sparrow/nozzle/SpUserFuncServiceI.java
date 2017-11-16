@@ -75,6 +75,15 @@ public interface SpUserFuncServiceI {
 	 * @return
 	 */
 	public ResponseModel editPassword(int userId, String password);
+	
+	/**
+	 * Edit user password through mobile
+	 * 
+	 * @param mobile
+	 * @param password
+	 * @return
+	 */
+	public ResponseModel editPassword(String mobile, String password);
 
 	/**
 	 * Get User info by userId

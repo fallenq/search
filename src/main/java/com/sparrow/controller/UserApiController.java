@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.fabric.Response;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.config.enums.SparrowValidateEnum;
@@ -153,6 +154,19 @@ public class UserApiController {
 		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
 		String password = request.getParameter("password");
 		return userFuncService.editPassword(loginInfo.getUserId(), password);
+	}
+	
+	/**
+	 * Edit password of user through mobile
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/edit/mobile/password", method = RequestMethod.POST)
+	public ResponseModel editMobilePassword(HttpServletRequest request) {
+		String mobile = request.getParameter("mobile");
+		String password = request.getParameter("password");
+		return userFuncService.editPassword(mobile, password);
 	}
 
 	/**

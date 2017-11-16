@@ -98,8 +98,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		if (password == null) {
 			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
-		}
-		if (password.isEmpty()) {
+		} else if (password.isEmpty()) {
 			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
 		}
 		if (sparrowUser == null) {
@@ -125,6 +124,21 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public ResponseModel editPassword(int userId, String password) {
 		return editPassword(userId, password, 1, null);
+	}
+
+	@Override
+	public ResponseModel editPassword(String mobile, String password) {
+		ResponseImpl responseService = ResponseImpl.getInstance();
+		if (mobile == null) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
+		} else if (mobile.isEmpty()) {
+			return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
+		}
+		SparrowUser sparrowUser = userService.getUserByMobile(mobile);
+		if (sparrowUser == null) {
+			return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		}
+		return editPassword(sparrowUser.getId(), password, 1, sparrowUser);
 	}
 
 	@Override
