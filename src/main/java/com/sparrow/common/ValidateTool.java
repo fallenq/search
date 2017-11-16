@@ -41,16 +41,14 @@ public class ValidateTool {
 		if (service == null) {
 			return false;
 		}
-		String mobile = "";
-		String ipAddress = "";
 		switch (type) {
 		case 1:
 		case 2:
-			ipAddress = (String) params[0];
-			return determine(ipAddress, service);
+			String keyName = (String) params[0];
+			return determine(keyName, service);
 		case 3:
-			mobile = (String) params[0];
-			ipAddress = (String) params[1];
+			String mobile = (String) params[0];
+			String ipAddress = (String) params[1];
 			return determine(mobile, ipAddress, service);
 		}
 		return false;

@@ -76,7 +76,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
 			if (sparrowUser == null) {
-				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 			}
 		}
 		sparrowUser.setNickname(nickname);
@@ -105,12 +105,12 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
 			if (sparrowUser == null) {
-				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 			}
 		}
 		if (type == 1) {
 			if (userService.compareUserLoginPwd(sparrowUser, password)) {
-				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_LOGIN_PASSWORD_SAME.getValue()));
+				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_LOGIN_PASSWORD_SAME.getValue()));
 			}
 			Map<String, Object> pwdSet = userService.createUserPwd(sparrowUser, password);
 			sparrowUser.setLoginPwd((String) pwdSet.get("password"));
@@ -171,7 +171,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (responseService.isSuccess(userModel)) {
 			SparrowUser user = (SparrowUser) userModel.getData().get("user");
 			if (user.getUserMobileId() > 0) {
-				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_MOBILE_BINDED.getValue()));
+				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_BINDED.getValue()));
 			}
 			SparrowUserMobile userMobile = mobileService.getUserMobileByMobile(mobile);
 			if (userMobile != null) {
@@ -187,7 +187,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			}
 			return responseService.combineResponse();
 		}
-		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 	}
 
 	@Override
@@ -197,7 +197,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (responseService.isSuccess(userModel)) {
 			SparrowUser user = (SparrowUser) userModel.getData().get("user");
 			if (user.getUserMobileId() == 0) {
-				return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_MOBILE_UNBINDED.getValue()));
+				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_MOBILE_UNBINDED.getValue()));
 			}
 			int mobileId = user.getUserMobileId();
 			user.setUserMobileId(0);
@@ -209,7 +209,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			}
 			return responseService.combineResponse();
 		}
-		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 	}
 
 }
