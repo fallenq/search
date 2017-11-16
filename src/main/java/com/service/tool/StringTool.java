@@ -62,8 +62,11 @@ public class StringTool {
 	 * @return
 	 */
 	public static boolean isAvailableParam(String value) {
-		if (value != null && !value.isEmpty()) {
-			return true;
+		if (value != null) {
+			value = value.trim();
+			if (!value.isEmpty()) {
+				return true;
+			}
 		}
 		return false;
 	}
