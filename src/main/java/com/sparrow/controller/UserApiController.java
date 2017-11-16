@@ -114,19 +114,6 @@ public class UserApiController {
 		userFuncService.editUser(loginInfo.getUserId(), nickname);
 		return responseService.successCombine();
 	}
-	
-	/**
-	 * Edit password of user
-	 * 
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(value = "/edit/password", method = RequestMethod.POST)
-	public ResponseModel editPassword(HttpServletRequest request) {
-		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
-		String password = request.getParameter("password");
-		return userFuncService.editPassword(loginInfo.getUserId(), password);
-	}
 
 	/**
 	 * Get user info
@@ -153,6 +140,19 @@ public class UserApiController {
 			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
 		}
 		return responseService.combineResponse();
+	}
+	
+	/**
+	 * Edit password of user
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/edit/password", method = RequestMethod.POST)
+	public ResponseModel editPassword(HttpServletRequest request) {
+		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
+		String password = request.getParameter("password");
+		return userFuncService.editPassword(loginInfo.getUserId(), password);
 	}
 
 	/**
