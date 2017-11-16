@@ -24,4 +24,6 @@ public interface ResponseServiceI {
 	public ResponseModel combineResponse(int status);
 	public ResponseModel successCombine();
 	public ResponseModel errorParamCombine();
+	public ResponseModel noSpUserCombine();
+	public ResponseModel errorSubmitCombine();
 }

@@ -46,7 +46,7 @@ public class MobileApiController {
 		if (validateTool.determine(type, validateService, mobile, ipAddress)) {
 			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.isEmpty()) {
-				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+				return responseService.errorSubmitCombine();
 			} else {
 				ResponseModel sendResponse = MobileTool.getInstance().sendMobileCode(mobile, validateCode);
 				if (responseService.isSuccess(sendResponse)) {

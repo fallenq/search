@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.service.config.enums.ResponseCommonMsgEnum;
+import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.config.enums.ResponseStatusEnum;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
@@ -136,6 +137,16 @@ public class ResponseImpl implements ResponseServiceI {
 	@Override
 	public ResponseModel errorParamCombine() {
 		return combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
+	}
+
+	@Override
+	public ResponseModel noSpUserCombine() {
+		return combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+	}
+
+	@Override
+	public ResponseModel errorSubmitCombine() {
+		return combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
 	}
 
 }

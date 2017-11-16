@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.service.config.enums.UserTypeEnum;
 import com.service.config.ServiceConfig;
-import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
@@ -76,14 +75,14 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
 			if (sparrowUser == null) {
-				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+				return responseService.noSpUserCombine();
 			}
 		}
 		sparrowUser.setNickname(nickname);
 		if (userService.updateById(sparrowUser) > 0) {
 			responseService.successStatus();
 		} else {
-			responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+			return responseService.errorSubmitCombine();
 		}
 		return responseService.combineResponse();
 	}
@@ -102,7 +101,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
 			if (sparrowUser == null) {
-				return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+				return responseService.noSpUserCombine();
 			}
 		}
 		if (type == 1) {
@@ -116,7 +115,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				return responseService.successCombine();
 			}
 		}
-		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+		return responseService.errorSubmitCombine();
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 		}
 		SparrowUser sparrowUser = userService.getUserByMobile(mobile);
 		if (sparrowUser == null) {
-			return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			return responseService.noSpUserCombine();
 		}
 		return editPassword(sparrowUser.getId(), password, 1, sparrowUser);
 	}
@@ -191,13 +190,12 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			int mobileId = mobileService.insert(userMobile);
 			user.setUserMobileId(mobileId);
 			if (userService.updateById(user) > 0) {
-				responseService.successStatus();
+				return responseService.successCombine();
 			} else {
-				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+				return responseService.errorSubmitCombine();
 			}
-			return responseService.combineResponse();
 		}
-		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		return responseService.noSpUserCombine();
 	}
 
 	@Override
@@ -213,13 +211,12 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 			user.setUserMobileId(0);
 			if (userService.updateById(user) > 0) {
 				mobileService.delete(mobileId);
-				responseService.successStatus();
+				return responseService.successCombine();
 			} else {
-				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+				return responseService.errorSubmitCombine();
 			}
-			return responseService.combineResponse();
 		}
-		return responseService.combineResponse(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+		return responseService.noSpUserCombine();
 	}
 
 }

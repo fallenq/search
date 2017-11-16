@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.config.ToolConfig;
-import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpVersionServiceI;
@@ -44,7 +43,7 @@ public class CommonApiController {
 				responseService.setDataValue("code", validateCode);
 				responseService.successStatus();
 			} else {
-				responseService.setMessage(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.SUBMIT_ERROR.getValue()));
+				return responseService.errorSubmitCombine();
 			}
 		} else {
 			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.CODE_ACCESSED.getValue()));

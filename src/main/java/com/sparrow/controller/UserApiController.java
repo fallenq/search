@@ -60,7 +60,7 @@ public class UserApiController {
 				responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_LOGININFO_ERROR.getValue()));
 			}
 		} catch (Exception e) {
-			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			return responseService.noSpUserCombine();
 		}
 		return responseService.combineResponse();
 	}
@@ -137,7 +137,7 @@ public class UserApiController {
 			}
 			responseService.successStatus();
 		} else {
-			responseService.setMessage(WarnMsgTool.getSparrowValue(ResponseSparrowMsgEnum.USER_NOEXISTS.getValue()));
+			return responseService.noSpUserCombine();
 		}
 		return responseService.combineResponse();
 	}
