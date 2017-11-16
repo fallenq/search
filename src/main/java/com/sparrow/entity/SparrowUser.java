@@ -34,6 +34,10 @@ public class SparrowUser extends Model<SparrowUser> {
 	 */
 	private String nickname;
 	/**
+	 * 用户头像
+	 */
+	private String face;
+	/**
 	 * 用户手机ID
 	 */
 	@TableField("user_mobile_id")
@@ -100,6 +104,14 @@ public class SparrowUser extends Model<SparrowUser> {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getFace() {
+		return face;
+	}
+
+	public void setFace(String face) {
+		this.face = face;
 	}
 
 	public Integer getUserMobileId() {

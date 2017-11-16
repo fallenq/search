@@ -130,6 +130,7 @@ public class UserApiController {
 			SparrowUser sparrowUser = (SparrowUser) userModel.getData().get("user");
 			SparrowUserMobile userMobile = (SparrowUserMobile) userModel.getData().get("mobile");
 			responseService.setDataValue("nickname", sparrowUser.getNickname());
+			responseService.setDataValue("face", sparrowUser.getFace());
 			responseService.setDataValue("mobile", "");
 			if (userMobile != null) {
 				responseService.setDataValue("mobile", userMobile.getMobile());
