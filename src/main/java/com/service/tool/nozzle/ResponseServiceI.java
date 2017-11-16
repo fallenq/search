@@ -23,4 +23,5 @@ public interface ResponseServiceI {
 	public ResponseModel combineResponse(String message, Map<String, Object> data);
 	public ResponseModel combineResponse(int status);
 	public ResponseModel successCombine();
+	public ResponseModel errorParamCombine();
 }

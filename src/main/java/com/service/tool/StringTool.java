@@ -54,5 +54,20 @@ public class StringTool {
 			return mobile;
 		}
 	}
+	
+	/**
+	 * Validate whether error param
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static boolean isAvailableParam(String value) {
+		if (value == null) {
+			return false;
+		} else if (value.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 
 }

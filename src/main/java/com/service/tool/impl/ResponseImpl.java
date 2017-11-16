@@ -4,9 +4,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseStatusEnum;
 import com.service.model.ResponseModel;
 import com.service.tool.CommonTool;
+import com.service.tool.WarnMsgTool;
 import com.service.tool.nozzle.ResponseServiceI;
 
 @Service("responseImpl")
@@ -129,6 +131,11 @@ public class ResponseImpl implements ResponseServiceI {
 	@Override
 	public ResponseModel successCombine() {
 		return combineResponse(ResponseStatusEnum.SUCCESS.getValue());
+	}
+
+	@Override
+	public ResponseModel errorParamCombine() {
+		return combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.PARAM_ERROR.getValue()));
 	}
 
 }
