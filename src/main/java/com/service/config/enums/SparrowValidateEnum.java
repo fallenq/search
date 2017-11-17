@@ -4,7 +4,7 @@ import com.service.config.enums.nozzle.IntEnumI;
 
 public enum SparrowValidateEnum implements IntEnumI {
 	
-	LOGIN_VALIDATE_TYPE(1), MOBILE_VALIDATE_ACCESS_TYPE(2), MOBILE_VALIDATE_SEND_TYPE(3);
+	LOGIN_VALIDATE_TYPE(1), MOBILE_VALIDATE_ACCESS_TYPE(2), MOBILE_VALIDATE_SEND_TYPE(3), CODE_VALIDATE(4);
 	
 	private int value;
 	 

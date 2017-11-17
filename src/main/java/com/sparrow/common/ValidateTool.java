@@ -1,5 +1,6 @@
 package com.sparrow.common;
 
+import com.service.tool.StringTool;
 import com.sparrow.common.impl.LoginCodeValidateImpl;
 import com.sparrow.common.impl.MobileAccessValidateImpl;
 import com.sparrow.common.impl.MobileSendValidateImpl;
@@ -42,14 +43,18 @@ public class ValidateTool {
 			return false;
 		}
 		switch (type) {
-		case 1:
-		case 2:
-			String keyName = (String) params[0];
-			return determine(keyName, service);
-		case 3:
-			String mobile = (String) params[0];
-			String ipAddress = (String) params[1];
-			return determine(mobile, ipAddress, service);
+			case 1:
+			case 2:
+				String keyName = (String) params[0];
+				return determine(keyName, service);
+			case 3:
+				String mobile = (String) params[0];
+				String ipAddress = (String) params[1];
+				return determine(mobile, ipAddress, service);
+			case 4:
+				String compareKey = (String) params[0];
+				String compareValue = (String) params[1];
+				return determineValue(compareKey, compareValue, service);
 		}
 		return false;
 	}
@@ -80,6 +85,23 @@ public class ValidateTool {
 		// limit access count by keyName
 		validateImpl.setRedisKey(keyName);
 		if (validateImpl.determine()) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Determine validate value
+	 * 
+	 * @param keyName
+	 * @return
+	 */
+	public boolean determineValue(String compareKey, String compareValue, ValidateModelServiceI validateImpl) {
+		if (!StringTool.isAvailableParam(compareKey)) {
+			return false;
+		}
+		validateImpl.setRedisKey(compareKey);
+		if (validateImpl.determine(compareKey, compareValue)) {
 			return true;
 		}
 		return false;

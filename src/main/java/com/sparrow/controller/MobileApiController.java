@@ -70,12 +70,11 @@ public class MobileApiController {
 	 * @return
 	 */
 	@RequestMapping(value = "/compare/code", method = RequestMethod.POST)
-	public ResponseModel compareMobileCode(HttpServletRequest request) {
+	public ResponseModel compareMobileCode(String mobile, String code) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		String mobile = request.getParameter("mobile");
 		ValidateTool validateTool = ValidateTool.getInstance();
 		ValidateModelServiceI validateService = validateTool.getValidateService(SparrowValidateEnum.MOBILE_VALIDATE_SEND_TYPE.getValue());
-		if (validateTool.determine(SparrowValidateEnum.MOBILE_VALIDATE_ACCESS_TYPE.getValue(), validateService, mobile)) {
+		if (validateTool.determine(SparrowValidateEnum.CODE_VALIDATE.getValue(), validateService, mobile, code)) {
 			return responseService.successCombine();
 		}
 		return responseService.combineResponse(WarnMsgTool.getCommonValue(ResponseCommonMsgEnum.VALIDATE_CODE_ERROR.getValue()));
@@ -88,8 +87,7 @@ public class MobileApiController {
 	 * @return
 	 */
 	@RequestMapping(value = "/exist", method = RequestMethod.POST)
-	public ResponseModel existMobile(HttpServletRequest request) {
-		String mobile = request.getParameter("mobile");
+	public ResponseModel existMobile(String mobile) {
 		return userFuncService.existMobile(mobile);
 	}
 
