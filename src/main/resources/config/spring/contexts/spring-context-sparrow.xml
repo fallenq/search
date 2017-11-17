@@ -20,6 +20,7 @@
             <mvc:exclude-mapping path="/api/sparrow/user/register"/>
             <mvc:exclude-mapping path="/api/sparrow/user/edit/mobile/password"/>
             <mvc:exclude-mapping path="/api/mobile/validate/code"/>
+            <mvc:exclude-mapping path="/api/mobile/compare/code"/>
             <mvc:exclude-mapping path="/api/mobile/exist"/>
             <bean class="com.service.config.interceptor.LoginInterceptor" />  
         </mvc:interceptor>  
