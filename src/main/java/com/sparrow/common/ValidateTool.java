@@ -51,10 +51,6 @@ public class ValidateTool {
 				String mobile = (String) params[0];
 				String ipAddress = (String) params[1];
 				return determine(mobile, ipAddress, service);
-			case 4:
-				String compareKey = (String) params[0];
-				String compareValue = (String) params[1];
-				return determineValue(compareKey, compareValue, service);
 		}
 		return false;
 	}
@@ -91,23 +87,6 @@ public class ValidateTool {
 		// limit access count by keyName
 		validateImpl.setRedisKey(keyName);
 		if (validateImpl.determine()) {
-			return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Determine validate value
-	 * 
-	 * @param keyName
-	 * @return
-	 */
-	public boolean determineValue(String compareKey, String compareValue, ValidateModelServiceI validateImpl) {
-		if (!StringTool.isAvailableParam(compareKey)) {
-			return false;
-		}
-		validateImpl.setRedisKey(compareKey);
-		if (validateImpl.determine(compareKey, compareValue)) {
 			return true;
 		}
 		return false;

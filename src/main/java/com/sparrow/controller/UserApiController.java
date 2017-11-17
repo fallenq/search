@@ -162,9 +162,7 @@ public class UserApiController {
 	 * @return
 	 */
 	@RequestMapping(value = "/edit/mobile/password", method = RequestMethod.POST)
-	public ResponseModel editMobilePassword(HttpServletRequest request) {
-		String mobile = request.getParameter("mobile");
-		String password = request.getParameter("password");
+	public ResponseModel editMobilePassword(String mobile, String password) {
 		return userFuncService.editPassword(mobile, password);
 	}
 

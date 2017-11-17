@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import com.service.tool.RedisTool;
+import com.service.tool.StringTool;
 import com.service.tool.TimeTool;
 import com.service.tool.nozzle.RedisServiceI;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
@@ -63,7 +64,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determine(String redisKey, String compareValue) {
-		if (compareValue.isEmpty()) {
+		if (!StringTool.isAvailableParam(redisKey) || !StringTool.isAvailableParam(compareValue)) {
 			return false;
 		}
 		try {
