@@ -1,5 +1,7 @@
 package com.service.sparrow.nozzle;
 
+import java.util.Map;
+
 import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
 import com.service.tool.SessionTool;
@@ -41,20 +43,20 @@ public interface SpUserFuncServiceI {
 	 * Edit user info
 	 * 
 	 * @param userId
-	 * @param nickname
+	 * @param userInfo
 	 * @param sparrowUser
 	 * @return
 	 */
-	public ResponseModel editUser(int userId, String nickname, SparrowUser sparrowUser);
+	public ResponseModel editUser(int userId, Map<String, Object> userInfo, SparrowUser sparrowUser);
 
 	/**
 	 * Edit user info
 	 * 
 	 * @param userId
-	 * @param nickname
+	 * @param userInfo
 	 * @return
 	 */
-	public ResponseModel editUser(int userId, String nickname);
+	public ResponseModel editUser(int userId, Map<String, Object> userInfo);
 
 	/**
 	 * Edit user password

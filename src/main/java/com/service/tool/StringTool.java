@@ -56,12 +56,12 @@ public class StringTool {
 	}
 	
 	/**
-	 * Validate whether error param
+	 * Validate whether error string
 	 * 
 	 * @param value
 	 * @return
 	 */
-	public static boolean isAvailableParam(String value) {
+	public static boolean isAvailableString(String value) {
 		if (value != null) {
 			value = value.trim();
 			if (!value.isEmpty()) {
@@ -69,6 +69,19 @@ public class StringTool {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Parse string value
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static String parseString(String value) {
+		if (isAvailableString(value)) {
+			return value.trim();
+		}
+		return "";
 	}
 
 }

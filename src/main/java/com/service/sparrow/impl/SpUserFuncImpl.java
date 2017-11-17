@@ -70,7 +70,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
-	public ResponseModel editUser(int userId, String nickname, SparrowUser sparrowUser) {
+	public ResponseModel editUser(int userId, Map<String, Object> userInfo, SparrowUser sparrowUser) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		if (sparrowUser == null) {
 			sparrowUser = userService.getUserById(userId);
@@ -78,7 +78,8 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 				return responseService.noSpUserCombine();
 			}
 		}
-		sparrowUser.setNickname(nickname);
+		sparrowUser.setNickname((String) userInfo.getOrDefault("nickname", ""));
+		sparrowUser.setFace((String) userInfo.getOrDefault("face", ""));
 		if (userService.updateById(sparrowUser) > 0) {
 			responseService.successStatus();
 		} else {
@@ -88,14 +89,14 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	}
 
 	@Override
-	public ResponseModel editUser(int userId, String nickname) {
-		return editUser(userId, nickname, null);
+	public ResponseModel editUser(int userId, Map<String, Object> userInfo) {
+		return editUser(userId, userInfo, null);
 	}
 
 	@Override
 	public ResponseModel editPassword(int userId, String password, int type, SparrowUser sparrowUser) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (!StringTool.isAvailableParam(password)) {
+		if (!StringTool.isAvailableString(password)) {
 			return responseService.errorParamCombine();
 		}
 		if (sparrowUser == null) {
@@ -126,7 +127,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public ResponseModel editPassword(String mobile, String password) {
 		ResponseImpl responseService = ResponseImpl.getInstance();
-		if (!StringTool.isAvailableParam(mobile)) {
+		if (!StringTool.isAvailableString(mobile)) {
 			return responseService.errorParamCombine();
 		}
 		SparrowUser sparrowUser = userService.getUserByMobile(mobile);

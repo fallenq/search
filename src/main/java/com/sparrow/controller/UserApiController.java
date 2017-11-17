@@ -1,5 +1,7 @@
 package com.sparrow.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
+import com.service.tool.CommonTool;
 import com.service.tool.SessionTool;
+import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.ResponseImpl;
 import com.sparrow.common.ValidateTool;
@@ -108,11 +112,12 @@ public class UserApiController {
 	 */
 	@RequestMapping(value = "/edit/info", method = RequestMethod.POST)
 	public ResponseModel editInfo(HttpServletRequest request) {
-		ResponseImpl responseService = ResponseImpl.getInstance();
 		LoginInfoModel loginInfo = userFuncService.getLoginInfo(SessionTool.getInstance(request));
-		String nickname = request.getParameter("nickname");
-		userFuncService.editUser(loginInfo.getUserId(), nickname);
-		return responseService.successCombine();
+		Map<String, Object> userInfo = CommonTool.emptyMap();
+		userInfo.put("nickname", StringTool.parseString(request.getParameter("nickname")));
+		userInfo.put("face", StringTool.parseString(request.getParameter("face")));
+		userFuncService.editUser(loginInfo.getUserId(), userInfo);
+		return ResponseImpl.getInstance().successCombine();
 	}
 
 	/**

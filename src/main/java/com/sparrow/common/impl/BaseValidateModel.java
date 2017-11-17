@@ -51,7 +51,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determine() {
-		if (!StringTool.isAvailableParam(redisKey)) {
+		if (!StringTool.isAvailableString(redisKey)) {
 			return false;
 		}
 		try {
@@ -67,7 +67,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determine(String redisKey, String compareValue) {
-		if (!StringTool.isAvailableParam(redisKey) || !StringTool.isAvailableParam(compareValue)) {
+		if (!StringTool.isAvailableString(redisKey) || !StringTool.isAvailableString(compareValue)) {
 			return false;
 		}
 		try {
@@ -85,7 +85,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determineLimit() {
-		if (!StringTool.isAvailableParam(redisLimitKey)) {
+		if (!StringTool.isAvailableString(redisLimitKey)) {
 			return false;
 		}
 		try {
@@ -112,7 +112,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public void incrementLimit() {
-		if (!StringTool.isAvailableParam(redisLimitKey)) {
+		if (!StringTool.isAvailableString(redisLimitKey)) {
 			
 		} else if (redisLimitKey.isEmpty()) {
 			redisService.set(redisLimitKey, String.valueOf(1), 86400);

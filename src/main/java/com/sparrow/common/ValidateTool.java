@@ -43,7 +43,7 @@ public class ValidateTool {
 			return false;
 		}
 		String keyName = (String) params[0];
-		if (!StringTool.isAvailableParam(keyName)) {
+		if (!StringTool.isAvailableString(keyName)) {
 			return false;
 		}
 		switch (type) {
