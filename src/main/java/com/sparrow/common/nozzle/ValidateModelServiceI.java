@@ -9,6 +9,7 @@ public interface ValidateModelServiceI {
 	public boolean determine(String redisKey, String compareValue);
 	public boolean determineLimit();
 	public boolean setRedisValue(String value);
+	public void incrementLimit(int disc);
 	public void incrementLimit();
 	public String getRedisValue();
 	public void removeRedisValue();

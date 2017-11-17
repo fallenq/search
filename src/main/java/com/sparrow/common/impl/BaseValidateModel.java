@@ -111,19 +111,24 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	}
 
 	@Override
-	public void incrementLimit() {
+	public void incrementLimit(int disc) {
 		if (!StringTool.isAvailableString(redisLimitKey)) {
 			
 		} else if (redisLimitKey.isEmpty()) {
-			redisService.set(redisLimitKey, String.valueOf(1), 86400);
+			redisService.set(redisLimitKey, String.valueOf(disc), 86400);
 		} else {
 			try {
 				Integer.parseInt(redisService.get(redisLimitKey));
-				redisService.incrementLong(redisLimitKey, 1);
+				redisService.incrementLong(redisLimitKey, disc);
 			} catch (NumberFormatException e) {
-				redisService.set(redisLimitKey, String.valueOf(1), 86400);
+				redisService.set(redisLimitKey, String.valueOf(disc), 86400);
 			}
 		}
+	}
+
+	@Override
+	public void incrementLimit() {
+		incrementLimit(1);
 	}
 
 	@Override
