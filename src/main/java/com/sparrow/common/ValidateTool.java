@@ -42,15 +42,17 @@ public class ValidateTool {
 		if (service == null) {
 			return false;
 		}
+		String keyName = (String) params[0];
+		if (!StringTool.isAvailableParam(keyName)) {
+			return false;
+		}
 		switch (type) {
 			case 1:
 			case 2:
-				String keyName = (String) params[0];
 				return determine(keyName, service);
 			case 3:
-				String mobile = (String) params[0];
 				String ipAddress = (String) params[1];
-				return determine(mobile, ipAddress, service);
+				return determine(keyName, ipAddress, service);
 		}
 		return false;
 	}
@@ -63,9 +65,6 @@ public class ValidateTool {
 	 * @return
 	 */
 	public boolean determine(String mobile, String ipAddress, ValidateModelServiceI validateImpl) {
-		if (!StringTool.isAvailableParam(mobile)) {
-			return false;
-		}
 		// limit send count by mobile and ip
 		validateImpl.setRedisLimitKey(mobile);
 		if (validateImpl.determineLimit()) {
@@ -81,9 +80,6 @@ public class ValidateTool {
 	 * @return
 	 */
 	public boolean determine(String keyName, ValidateModelServiceI validateImpl) {
-		if (!StringTool.isAvailableParam(keyName)) {
-			return false;
-		}
 		// limit access count by keyName
 		validateImpl.setRedisKey(keyName);
 		if (validateImpl.determine()) {

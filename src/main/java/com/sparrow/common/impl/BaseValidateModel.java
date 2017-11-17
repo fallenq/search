@@ -51,6 +51,9 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determine() {
+		if (!StringTool.isAvailableParam(redisKey)) {
+			return false;
+		}
 		try {
 			String redisKeyValue = redisService.get(redisKey);
 			if (redisKeyValue.isEmpty()) {
@@ -82,7 +85,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determineLimit() {
-		if (redisLimitKey.isEmpty()) {
+		if (!StringTool.isAvailableParam(redisLimitKey)) {
 			return false;
 		}
 		try {
@@ -109,7 +112,11 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public void incrementLimit() {
-		if (!redisLimitKey.isEmpty()) {
+		if (!StringTool.isAvailableParam(redisLimitKey)) {
+			
+		} else if (redisLimitKey.isEmpty()) {
+			redisService.set(redisLimitKey, String.valueOf(1), 86400);
+		} else {
 			try {
 				Integer.parseInt(redisService.get(redisLimitKey));
 				redisService.incrementLong(redisLimitKey, 1);
