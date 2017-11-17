@@ -67,6 +67,9 @@ public class ValidateTool {
 	 * @return
 	 */
 	public boolean determine(String mobile, String ipAddress, ValidateModelServiceI validateImpl) {
+		if (!StringTool.isAvailableParam(mobile)) {
+			return false;
+		}
 		// limit send count by mobile and ip
 		validateImpl.setRedisLimitKey(mobile);
 		if (validateImpl.determineLimit()) {
@@ -82,6 +85,9 @@ public class ValidateTool {
 	 * @return
 	 */
 	public boolean determine(String keyName, ValidateModelServiceI validateImpl) {
+		if (!StringTool.isAvailableParam(keyName)) {
+			return false;
+		}
 		// limit access count by keyName
 		validateImpl.setRedisKey(keyName);
 		if (validateImpl.determine()) {
