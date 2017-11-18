@@ -1,6 +1,5 @@
 package com.service.tool;
 
-import com.service.config.SparrowConfig;
 import com.service.model.ResponseModel;
 import com.service.tool.impl.ResponseImpl;
 
@@ -54,7 +53,6 @@ public class MobileTool {
 		// TODO: add mobile sms template ID
 		ResponseModel sendResult = sendMobileMsg(mobile, vcode, "");
 		if (responseService.isSuccess(sendResult)) {
-			RedisTool.getCommonRedis().set(SparrowConfig.MOBILE_VALIDATE_CODE_REDIS_KEY_PREFIX + mobile, vcode, 300);
 			responseService.successStatus();
 			responseService.setDataValue("vcode", vcode);
 		} else {
