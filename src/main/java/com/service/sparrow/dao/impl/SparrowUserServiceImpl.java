@@ -20,7 +20,6 @@ public class SparrowUserServiceImpl extends ServiceImpl<SparrowUserMapper, Sparr
 
 	@Override
 	public SparrowUser getSparrowUserByMobile(String mobile) {
-		// TODO Auto-generated method stub
 		return baseMapper.selectByMobile(mobile, null);
 	}
 	

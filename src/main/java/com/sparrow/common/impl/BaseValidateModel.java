@@ -44,7 +44,6 @@ public class BaseValidateModel implements ValidateModelServiceI {
 		try {
 			this.redisLimitKey = redisLimitPrefix + TimeTool.formatDate(new Date(), "yyyy-MM-dd") + ":" + redisLimitKey;
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			this.redisLimitKey = "";
 		}
 	}

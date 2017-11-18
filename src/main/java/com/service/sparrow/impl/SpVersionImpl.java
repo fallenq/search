@@ -40,7 +40,6 @@ public class SpVersionImpl implements SpVersionServiceI {
 	 */
 	@Override
 	public int compareVersion(SparrowVersion version, String code, Object... params) {
-		// TODO 增加判定具体逻辑
 		if (version == null) {
 			return -3;
 		}
