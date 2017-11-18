@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.service.config.ToolConfig;
+import com.service.config.CommonConfig;
 
 public class CommonTool {
 
@@ -55,7 +55,7 @@ public class CommonTool {
 	 */
 	public static String getValidateNumber(int length) {
 		if (length == 0) {
-			length = ToolConfig.VALIDATE_CODE_LENGTH_DEFAULT;
+			length = CommonConfig.VALIDATE_CODE_LENGTH_DEFAULT;
 		}
 		String validateCode = "";
 		for (int countIndex = 0; countIndex < length; countIndex++) {

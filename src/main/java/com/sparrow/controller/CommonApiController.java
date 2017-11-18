@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.service.config.ToolConfig;
+import com.service.config.CommonConfig;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpVersionServiceI;
@@ -37,7 +37,7 @@ public class CommonApiController {
 		ValidateTool validateTool = ValidateTool.getInstance();
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
 		if (validateTool.determine(type, validateService, CommonTool.getCLientIp(request))) {
-			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
+			String validateCode = CommonTool.getValidateNumber(CommonConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (!validateCode.isEmpty()) {
 				validateService.setRedisValue(validateCode);
 				responseService.setDataValue("code", validateCode);

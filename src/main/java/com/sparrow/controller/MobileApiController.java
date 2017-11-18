@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.service.config.ToolConfig;
+import com.service.config.CommonConfig;
 import com.service.config.enums.ResponseCommonMsgEnum;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.config.enums.SparrowValidateEnum;
@@ -44,7 +44,7 @@ public class MobileApiController {
 		ValidateTool validateTool = ValidateTool.getInstance();
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
 		if (validateTool.determine(type, validateService, mobile, ipAddress)) {
-			String validateCode = CommonTool.getValidateNumber(ToolConfig.VALIDATE_CODE_LENGTH_FOUR);
+			String validateCode = CommonTool.getValidateNumber(CommonConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.isEmpty()) {
 				return responseService.errorSubmitCombine();
 			} else {

@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import com.service.config.ToolConfig;
+import com.service.config.CommonConfig;
 import com.service.tool.nozzle.RedisServiceI;
 
 @Service("redisService")
@@ -48,7 +48,7 @@ public class RedisImpl implements RedisServiceI {
 
 	@Override
 	public void set(String name, String value) {
-		setWithTimeout(name, value, ToolConfig.REDIS_DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+		setWithTimeout(name, value, CommonConfig.REDIS_DEFAULT_TIMEOUT, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class RedisImpl implements RedisServiceI {
 	@Override
 	public void setWithTimeout(String name, String value, int timeout, TimeUnit unit) {
 		if (timeout <= 0) {
-			timeout = ToolConfig.REDIS_DEFAULT_TIMEOUT;
+			timeout = CommonConfig.REDIS_DEFAULT_TIMEOUT;
 		}
 		if (unit == null) {
 			unit = TimeUnit.SECONDS;
