@@ -105,8 +105,7 @@ public class SpUserImpl implements SpUserServiceI {
 	private Map<String, Object> userPwdMap(String password, String salt) {
 		Map<String, Object> passwordMap = CommonTool.emptyMap();
 		passwordMap.put("salt", salt);
-//		passwordMap.put("key", password);
-		passwordMap.put("key", "123456");
+		passwordMap.put("key", password);
 		passwordMap.put("password", EncodeTool.encrypt(password + salt));
 		return passwordMap;
 	}
