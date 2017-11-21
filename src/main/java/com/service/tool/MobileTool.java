@@ -8,17 +8,6 @@ public class MobileTool {
 	private static MobileTool mobileTool = null;
 
 	/**
-	 * Compare mobile code
-	 * 
-	 * @param vcode
-	 * @return
-	 */
-	public static boolean compareMobileCode(String vcode) {
-		boolean isPass = false;
-		return isPass;
-	}
-
-	/**
 	 * Get the instance
 	 * 
 	 * @return
