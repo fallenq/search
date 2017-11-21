@@ -52,6 +52,8 @@ public class MobileApiController {
 				if (responseService.isSuccess(sendResponse)) {
 					validateService.setRedisValue(validateCode);
 					validateService.incrementLimit();
+					// TODO: 测试后删除
+					responseService.setDataValue("vcode", validateCode);
 					responseService.successStatus();
 				} else {
 					responseService.setMessage(sendResponse.getMessage());

@@ -41,7 +41,7 @@ public class RedisImpl implements RedisServiceI {
 
 	@Override
 	public void selectDb(int dbIndex) {
-		JedisConnectionFactory redisConnectFactory = (JedisConnectionFactory)redisTemplate.getConnectionFactory();
+		JedisConnectionFactory redisConnectFactory = (JedisConnectionFactory) redisTemplate.getConnectionFactory();
 		redisConnectFactory.setDatabase(dbIndex);
 		redisTemplate.setConnectionFactory(redisConnectFactory);
 	}
