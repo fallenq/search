@@ -7,9 +7,14 @@ import com.sparrow.common.impl.MobileSendValidateImpl;
 import com.sparrow.common.nozzle.ValidateModelServiceI;
 
 public class ValidateTool {
+	
+	private static ValidateTool validateTool = null;
 
 	public static ValidateTool getInstance() {
-		return new ValidateTool();
+		if (validateTool == null) {
+			validateTool = new ValidateTool();
+		}
+		return validateTool;
 	}
 
 	/**

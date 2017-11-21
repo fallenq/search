@@ -4,6 +4,8 @@ import com.service.model.ResponseModel;
 import com.service.tool.impl.ResponseImpl;
 
 public class MobileTool {
+	
+	private static MobileTool mobileTool = null;
 
 	/**
 	 * Compare mobile code
@@ -22,7 +24,10 @@ public class MobileTool {
 	 * @return
 	 */
 	public static MobileTool getInstance() {
-		return new MobileTool();
+		if (mobileTool == null) {
+			mobileTool = new MobileTool();
+		}
+		return mobileTool;
 	}
 
 	/**
