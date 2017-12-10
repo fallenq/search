@@ -8,5 +8,6 @@ public class CommonConfig {
 	public static int REDIS_DEFAULT_TIMEOUT = 60;
 	
 	public static String COMMON_REDIS_PREFIX = "test:";
+	public static String COMMON_SESSION_PREFIX = "test:";
 	
 }
