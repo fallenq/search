@@ -9,5 +9,7 @@ public class CommonConfig {
 	
 	public static String COMMON_REDIS_PREFIX = "test:";
 	public static String COMMON_SESSION_PREFIX = "test:";
+	public static String SESSION_DATA_PREFIX = "spring:session:sessions:";
+	public static String SESSION_COLUMN_PREFIX = "sessionAttr:";
 	
 }

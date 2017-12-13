@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.service.config.enums.UserTypeEnum;
+import com.alibaba.fastjson.JSON;
+import com.service.config.CommonConfig;
 import com.service.config.ServiceConfig;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.LoginInfoModel;
@@ -13,6 +15,7 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
+import com.service.tool.RedisTool;
 import com.service.tool.SessionTool;
 import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
@@ -55,12 +58,19 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 
 	@Override
 	public void setLoginInfo(SessionTool tool, LoginInfoModel loginInfo) {
-		tool.setSessionParam(ServiceConfig.USER_LOGIN_INFO, loginInfo);
+		tool.setSessionParam(ServiceConfig.USER_LOGIN_INFO, JSON.toJSON(loginInfo));
 	}
 
 	@Override
 	public LoginInfoModel getLoginInfo(SessionTool tool) {
-		LoginInfoModel loginInfo = tool.getSessionParam(ServiceConfig.USER_LOGIN_INFO);
+		String sessionRedisKey = CommonConfig.SESSION_DATA_PREFIX + tool.getSessionId();
+		String sesstionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + ServiceConfig.USER_LOGIN_INFO;
+		LoginInfoModel loginInfo = null;
+		try {
+			loginInfo = JSON.parseObject((String) RedisTool.getCommonRedis().hgetField(sessionRedisKey, sesstionDataKey), LoginInfoModel.class);
+		} catch (Exception e) {
+			
+		}
 		return loginInfo;
 	}
 
