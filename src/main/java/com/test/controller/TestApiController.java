@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.service.config.ServiceConfig;
 import com.service.model.LoginInfoModel;
 import com.service.model.ResponseModel;
+import com.service.tool.RedisTool;
 import com.service.tool.SessionTool;
+import com.service.tool.impl.RedisImpl;
 import com.service.tool.impl.ResponseImpl;
 import com.service.tool.nozzle.ResponseServiceI;
 
@@ -25,11 +28,12 @@ public class TestApiController {
 
 	@RequestMapping(value = "/session", method = RequestMethod.GET)
 	public ResponseModel testSession(HttpServletRequest request) {
-//		SessionTool tool = SessionTool.getInstance(request);
 		ResponseImpl responseService = ResponseImpl.getInstance();
-//		tool.setSessionParam(ServiceConfig.USER_LOGIN_INFO, new LoginInfoModel(1, "test"));
-//		responseService.setDataValue("test", new LoginInfoModel(1, "test"));
-//		responseService.setDataValue("sessionid", tool.getSessionId());
+		SessionTool tool = SessionTool.getInstance(request);
+		responseService.setDataValue("test", ServiceConfig.USER_LOGIN_INFO);
+		responseService.setDataValue("sessionid", tool.getSessionId());
+		tool.setSessionParam(ServiceConfig.USER_LOGIN_INFO, JSON.toJSON(new LoginInfoModel(1, "test")));
+		responseService.setDataValue(ServiceConfig.USER_LOGIN_INFO, RedisTool.getCommonRedis().hgetField("spring:session:sessions:"+tool.getSessionId(), "sessionAttr:"+ServiceConfig.USER_LOGIN_INFO));
 		responseService.successStatus();
 		return responseService.combineResponse();
 	}

@@ -1,5 +1,6 @@
 package com.service.tool.impl;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -24,6 +26,7 @@ public class RedisImpl implements RedisServiceI {
 
 	private ValueOperations<String, Object> operationValue = null;
 	private ZSetOperations<String, Object> operationZset = null;
+	private HashOperations<String, String, Object> operationHash = null;
 
 	private ValueOperations<String, Object> getValueOperation() {
 		if (operationValue == null) {
@@ -37,6 +40,13 @@ public class RedisImpl implements RedisServiceI {
 			operationZset = redisTemplate.opsForZSet();
 		}
 		return operationZset;
+	}
+	
+	private HashOperations<String, String, Object> getHashOperation() {
+		if (operationHash == null) {
+			operationHash = redisTemplate.opsForHash();
+		}
+		return operationHash;
 	}
 
 	@Override
@@ -143,6 +153,16 @@ public class RedisImpl implements RedisServiceI {
 	@Override
 	public double zincrby(String name, String item, double increment) {
 		return getZsetOperation().incrementScore(name, item, increment);
+	}
+
+	@Override
+	public List<Object> hgetall(String name) {
+		return getHashOperation().values(name);
+	}
+
+	@Override
+	public Object hgetField(String name, String column) {
+		return getHashOperation().get(name, column);
 	}
 
 }
