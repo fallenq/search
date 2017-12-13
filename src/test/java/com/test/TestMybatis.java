@@ -12,8 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.service.config.ServiceConfig;
 import com.service.config.SparrowConfig;
 import com.service.config.enums.ResponseStatusEnum;
+import com.service.model.LoginInfoModel;
 import com.service.sparrow.dao.nozzle.SparrowUserServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpVersionServiceI;
@@ -21,6 +23,7 @@ import com.service.tool.CommonTool;
 import com.service.tool.EncodeTool;
 import com.service.tool.MobileTool;
 import com.service.tool.RedisTool;
+import com.service.tool.SessionTool;
 import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
 import com.service.tool.impl.RedisImpl;

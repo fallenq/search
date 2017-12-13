@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SessionTool {
-	
+
 	private HttpSession session;
 
 	public HttpSession getSession() {
@@ -29,6 +29,15 @@ public class SessionTool {
 	 */
 	public void setSessionParam(String name, Object object) {
 		session.setAttribute(name, object);
+	}
+
+	/**
+	 * Get session id
+	 * 
+	 * @return
+	 */
+	public String getSessionId() {
+		return session.getId();
 	}
 
 	/**
