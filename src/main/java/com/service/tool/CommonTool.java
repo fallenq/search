@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.alibaba.fastjson.JSON;
 import com.service.config.CommonConfig;
 
 public class CommonTool {
@@ -26,11 +27,11 @@ public class CommonTool {
 		Map<Integer, String> emptyMap = new HashMap<Integer, String>();
 		return emptyMap;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static <T> ArrayList<T> combineList(T...params) {
+	public static <T> ArrayList<T> combineList(T... params) {
 		ArrayList<T> list = new ArrayList<T>();
-		for (T param: params) {
+		for (T param : params) {
 			list.add(param);
 		}
 		return list;
@@ -86,22 +87,40 @@ public class CommonTool {
 			return ip;
 		}
 		return request.getRemoteAddr();
-//		String ip = request.getHeader("x-forwarded-for");  
-//        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
-//            ip = request.getHeader("Proxy-Client-IP");  
-//        }  
-//        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
-//            ip = request.getHeader("WL-Proxy-Client-IP");  
-//        }  
-//        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
-//            ip = request.getHeader("HTTP_CLIENT_IP");  
-//        }  
-//        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
-//            ip = request.getHeader("HTTP_X_FORWARDED_FOR");  
-//        }  
-//        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {  
-//            ip = request.getRemoteAddr();  
-//        }  
-//        return ip;  
+		// String ip = request.getHeader("x-forwarded-for");
+		// if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		// ip = request.getHeader("Proxy-Client-IP");
+		// }
+		// if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		// ip = request.getHeader("WL-Proxy-Client-IP");
+		// }
+		// if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		// ip = request.getHeader("HTTP_CLIENT_IP");
+		// }
+		// if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		// ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		// }
+		// if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		// ip = request.getRemoteAddr();
+		// }
+		// return ip;
+	}
+
+	/**
+	 * Parse content to Class
+	 * 
+	 * @param content
+	 * @param clazz
+	 * @return
+	 */
+	public static <T> T parseObject(String content, Class<T> clazz) {
+		if (!StringTool.isAvailableString(content)) {
+			return null;
+		}
+		try {
+			return JSON.parseObject(content, clazz);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

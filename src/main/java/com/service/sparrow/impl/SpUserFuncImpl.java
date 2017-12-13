@@ -14,6 +14,7 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
+import com.service.tool.CommonTool;
 import com.service.tool.SessionTool;
 import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
@@ -62,16 +63,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public LoginInfoModel getLoginInfo(SessionTool tool) {
 		String loginInfoContent = tool.getSessionRedisValue(ServiceConfig.USER_LOGIN_INFO);
-		if (loginInfoContent.isEmpty()) {
-			return null;
-		}
-		LoginInfoModel loginInfo = null;
-		try {
-			loginInfo = JSON.parseObject(loginInfoContent, LoginInfoModel.class);
-		} catch (Exception e) {
-			
-		}
-		return loginInfo;
+		return CommonTool.parseObject(loginInfoContent, LoginInfoModel.class);
 	}
 
 	@Override
