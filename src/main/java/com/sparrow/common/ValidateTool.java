@@ -66,6 +66,21 @@ public class ValidateTool {
 		}
 		return false;
 	}
+	
+	/**
+	 * Determine validate access limit
+	 * 
+	 * @param keyName
+	 * @return
+	 */
+	public boolean determine(String keyName, ValidateModelServiceI validateImpl) {
+		// limit access count by keyName
+		validateImpl.setRedisKey(keyName);
+		if (validateImpl.determine()) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Determine mobile code send limit
@@ -79,21 +94,6 @@ public class ValidateTool {
 		validateImpl.setRedisLimitKey(mobile);
 		if (validateImpl.determineLimit()) {
 			return determine(mobile, validateImpl);
-		}
-		return false;
-	}
-	
-	/**
-	 * Determine validate access limit
-	 * 
-	 * @param keyName
-	 * @return
-	 */
-	public boolean determine(String keyName, ValidateModelServiceI validateImpl) {
-		// limit access count by keyName
-		validateImpl.setRedisKey(keyName);
-		if (validateImpl.determine()) {
-			return true;
 		}
 		return false;
 	}
