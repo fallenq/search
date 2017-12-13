@@ -1,6 +1,7 @@
 package com.service.tool.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,8 +157,8 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
-	public List<Object> hgetAll(String name) {
-		return getHashOperation().values(name);
+	public Map<String, Object> hgetAll(String name) {
+		return getHashOperation().entries(name);
 	}
 
 	@Override

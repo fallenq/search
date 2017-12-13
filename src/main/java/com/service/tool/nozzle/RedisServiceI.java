@@ -1,6 +1,6 @@
 package com.service.tool.nozzle;
 
-import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public interface RedisServiceI {
@@ -22,6 +22,6 @@ public interface RedisServiceI {
 	public boolean zadd(String name, String item, double score);
 	public double zscore(String name, String item);
 	public double zincrby(String name, String item, double increment);
-	public List<Object> hgetAll(String name);
+	public Map<String, Object> hgetAll(String name);
 	public Object hgetField(String name, String column);
 }
