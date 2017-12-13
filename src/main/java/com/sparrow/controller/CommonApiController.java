@@ -36,7 +36,7 @@ public class CommonApiController {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
-		if (validateTool.determine(type, validateService, CommonTool.getCLientIp(request))) {
+		if (validateTool.determine(validateService, CommonTool.getCLientIp(request))) {
 			String validateCode = CommonTool.getValidateNumber(CommonConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (!validateCode.isEmpty()) {
 				validateService.setRedisValue(validateCode);

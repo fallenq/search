@@ -10,6 +10,7 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
 import com.service.config.CommonConfig;
@@ -22,12 +23,20 @@ public class RedisImpl implements RedisServiceI {
 	private RedisTemplate<String, Object> redisTemplate;
 
 	private ValueOperations<String, Object> operationValue = null;
+	private ZSetOperations<String, Object> operationZset = null;
 
 	private ValueOperations<String, Object> getValueOperation() {
 		if (operationValue == null) {
 			operationValue = redisTemplate.opsForValue();
 		}
 		return operationValue;
+	}
+	
+	private ZSetOperations<String, Object> getZsetOperation() {
+		if (operationZset == null) {
+			operationZset = redisTemplate.opsForZSet();
+		}
+		return operationZset;
 	}
 
 	@Override
@@ -44,6 +53,16 @@ public class RedisImpl implements RedisServiceI {
 		JedisConnectionFactory redisConnectFactory = (JedisConnectionFactory) redisTemplate.getConnectionFactory();
 		redisConnectFactory.setDatabase(dbIndex);
 		redisTemplate.setConnectionFactory(redisConnectFactory);
+	}
+
+	@Override
+	public boolean hasKey(String name) {
+		return redisTemplate.hasKey(name);
+	}
+
+	@Override
+	public boolean expire(String name, int timeout, TimeUnit unit) {
+		return redisTemplate.expire(name, timeout, unit);
 	}
 
 	@Override
@@ -85,6 +104,21 @@ public class RedisImpl implements RedisServiceI {
 	@Override
 	public void delete(String name) {
 		redisTemplate.delete(name);
+	}
+
+	@Override
+	public boolean zadd(String name, String item, double score) {
+		return getZsetOperation().add(name, item, score);
+	}
+
+	@Override
+	public double zscore(String name, String item) {
+		return getZsetOperation().score(name, item);
+	}
+
+	@Override
+	public double zincrby(String name, String item, double increment) {
+		return getZsetOperation().incrementScore(name, item, increment);
 	}
 
 }

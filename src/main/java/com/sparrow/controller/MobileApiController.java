@@ -43,7 +43,7 @@ public class MobileApiController {
 		ResponseImpl responseService = ResponseImpl.getInstance();
 		ValidateTool validateTool = ValidateTool.getInstance();
 		ValidateModelServiceI validateService = validateTool.getValidateService(type);
-		if (validateTool.determine(type, validateService, mobile, ipAddress)) {
+		if (validateTool.determine(validateService, mobile, ipAddress)) {
 			String validateCode = CommonTool.getValidateNumber(CommonConfig.VALIDATE_CODE_LENGTH_FOUR);
 			if (validateCode.isEmpty()) {
 				return responseService.errorSubmitCombine();

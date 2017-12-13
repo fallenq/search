@@ -43,7 +43,7 @@ public class ValidateTool {
 	 * @param params
 	 * @return
 	 */
-	public boolean determine(int type, ValidateModelServiceI service, Object... params) {
+	public boolean determine(ValidateModelServiceI service, Object... params) {
 		if (service == null) {
 			return false;
 		}
@@ -51,11 +51,16 @@ public class ValidateTool {
 		if (!StringTool.isAvailableString(keyName)) {
 			return false;
 		}
+		int type = 0;
+		if (service instanceof LoginCodeValidateImpl || service instanceof MobileAccessValidateImpl) {
+			type = 1;
+		} else if (service instanceof MobileSendValidateImpl) {
+			type = 2;
+		}
 		switch (type) {
 			case 1:
-			case 2:
 				return determine(keyName, service);
-			case 3:
+			case 2:
 				String ipAddress = (String) params[1];
 				return determine(keyName, ipAddress, service);
 		}

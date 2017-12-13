@@ -2,6 +2,7 @@ package com.sparrow.common.impl;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import com.service.tool.RedisTool;
 import com.service.tool.StringTool;
@@ -15,6 +16,7 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	protected String redisPrefix = "";
 	protected String redisLimitKey = "";
 	protected String redisLimitPrefix = "";
+	protected String redisLimitItem = "";
 	protected int redisLeftTime = 0;
 	protected int limitMax = 0;
 	protected RedisServiceI redisService = null;
@@ -40,11 +42,13 @@ public class BaseValidateModel implements ValidateModelServiceI {
 	}
 
 	@Override
-	public void setRedisLimitKey(String redisLimitKey) {
+	public void setRedisLimitKey(String redisLimitItem) {
 		try {
-			this.redisLimitKey = redisLimitPrefix + TimeTool.formatDate(new Date(), "yyyy-MM-dd") + ":" + redisLimitKey;
+			this.redisLimitKey = redisLimitPrefix + TimeTool.formatDate(new Date(), "yyyy-MM-dd");
+			this.redisLimitItem = redisLimitItem;
 		} catch (ParseException e) {
 			this.redisLimitKey = "";
+			this.redisLimitItem = "";
 		}
 	}
 
@@ -84,11 +88,11 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public boolean determineLimit() {
-		if (!StringTool.isAvailableString(redisLimitKey)) {
+		if (!StringTool.isAvailableString(redisLimitKey) || !StringTool.isAvailableString(redisLimitItem)) {
 			return false;
 		}
 		try {
-			int limitValue = Integer.parseInt(redisService.get(redisLimitKey));
+			int limitValue = (int) redisService.zscore(redisLimitKey, redisLimitItem);
 			if (limitValue < limitMax) {
 				return true;
 			}
@@ -111,16 +115,12 @@ public class BaseValidateModel implements ValidateModelServiceI {
 
 	@Override
 	public void incrementLimit(int disc) {
-		if (!StringTool.isAvailableString(redisLimitKey)) {
-			
-		} else if (redisLimitKey.isEmpty()) {
-			redisService.set(redisLimitKey, String.valueOf(disc), 86400);
-		} else {
+		if (StringTool.isAvailableString(redisLimitKey) && StringTool.isAvailableString(redisLimitItem)) {
 			try {
-				Integer.parseInt(redisService.get(redisLimitKey));
-				redisService.incrementLong(redisLimitKey, disc);
-			} catch (NumberFormatException e) {
-				redisService.set(redisLimitKey, String.valueOf(disc), 86400);
+				redisService.zincrby(redisLimitKey, redisLimitItem, disc);
+			} catch (Exception e) {
+				redisService.zadd(redisLimitKey, redisLimitItem, disc);
+				redisService.expire(redisLimitKey, 1, TimeUnit.DAYS);
 			}
 		}
 	}
