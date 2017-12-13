@@ -64,10 +64,10 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 	@Override
 	public LoginInfoModel getLoginInfo(SessionTool tool) {
 		String sessionRedisKey = CommonConfig.SESSION_DATA_PREFIX + tool.getSessionId();
-		String sesstionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + ServiceConfig.USER_LOGIN_INFO;
+		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + ServiceConfig.USER_LOGIN_INFO;
 		LoginInfoModel loginInfo = null;
 		try {
-			loginInfo = JSON.parseObject((String) RedisTool.getCommonRedis().hgetField(sessionRedisKey, sesstionDataKey), LoginInfoModel.class);
+			loginInfo = JSON.parseObject((String) RedisTool.getCommonRedis().hgetField(sessionRedisKey, sessionDataKey), LoginInfoModel.class);
 		} catch (Exception e) {
 			
 		}
