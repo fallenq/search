@@ -156,7 +156,7 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
-	public List<Object> hgetall(String name) {
+	public List<Object> hgetAll(String name) {
 		return getHashOperation().values(name);
 	}
 

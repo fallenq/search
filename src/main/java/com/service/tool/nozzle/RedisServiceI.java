@@ -22,6 +22,6 @@ public interface RedisServiceI {
 	public boolean zadd(String name, String item, double score);
 	public double zscore(String name, String item);
 	public double zincrby(String name, String item, double increment);
-	public List<Object> hgetall(String name);
+	public List<Object> hgetAll(String name);
 	public Object hgetField(String name, String column);
 }
