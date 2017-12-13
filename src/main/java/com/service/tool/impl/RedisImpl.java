@@ -92,6 +92,30 @@ public class RedisImpl implements RedisServiceI {
 	}
 
 	@Override
+	public boolean setnx(String name, String value) {
+		return setnxWithTimeout(name, value, CommonConfig.REDIS_DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public boolean setnx(String name, String value, int timeout) {
+		return setnxWithTimeout(name, value, timeout, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public boolean setnxForever(String name, String value) {
+		return getValueOperation().setIfAbsent(name, value);
+	}
+
+	@Override
+	public boolean setnxWithTimeout(String name, String value, int timeout, TimeUnit unit) {
+		if (setnxForever(name, value)) {
+			expire(name, timeout, unit);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public String get(String name) {
 		return (String) getValueOperation().get(name);
 	}

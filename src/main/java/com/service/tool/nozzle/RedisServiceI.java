@@ -11,6 +11,10 @@ public interface RedisServiceI {
 	public void set(String name, String value, int timeout);
 	public void setForever(String name, String value);
 	public void setWithTimeout(String name, String value, int timeout, TimeUnit unit);
+	public boolean setnx(String name, String value);
+	public boolean setnx(String name, String value, int timeout);
+	public boolean setnxForever(String name, String value);
+	public boolean setnxWithTimeout(String name, String value, int timeout, TimeUnit unit);
 	public String get(String name);
 	public long incrementLong(String name, long disc);
 	public void delete(String name);
