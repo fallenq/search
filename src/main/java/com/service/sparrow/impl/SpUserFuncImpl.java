@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.service.config.enums.UserTypeEnum;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.service.config.ServiceConfig;
 import com.service.config.enums.ResponseSparrowMsgEnum;
 import com.service.model.LoginInfoModel;
@@ -15,7 +14,6 @@ import com.service.model.ResponseModel;
 import com.service.sparrow.nozzle.SpUserMobileServiceI;
 import com.service.sparrow.nozzle.SpUserServiceI;
 import com.service.sparrow.nozzle.SpUserFuncServiceI;
-import com.service.tool.CommonTool;
 import com.service.tool.SessionTool;
 import com.service.tool.StringTool;
 import com.service.tool.WarnMsgTool;
@@ -63,8 +61,7 @@ public class SpUserFuncImpl implements SpUserFuncServiceI {
 
 	@Override
 	public LoginInfoModel getLoginInfo(SessionTool tool) {
-		JSONObject loginInfo = tool.getSessionRedisObject(ServiceConfig.USER_LOGIN_INFO);
-		return CommonTool.parseJSONObject(loginInfo, LoginInfoModel.class);
+		return tool.getSessionRedis(ServiceConfig.USER_LOGIN_INFO, LoginInfoModel.class);
 	}
 
 	@Override

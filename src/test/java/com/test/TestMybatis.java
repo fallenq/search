@@ -72,17 +72,27 @@ public class TestMybatis {
 //	public void setUserService(SpUserServiceI userService) {
 //		this.userService = userService;
 //	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getSessionRedis(String name, String sessionId) {
+		if (!StringTool.isAvailableString(name)) {
+			return null;
+		}
+		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + sessionId;
+		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + name;
+		return (T) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
+	}
 
 	@Test
 	public void test() {
-		String sessionId = "21d7ceb3-8dee-447d-b438-9f0039df1811";
+		String sessionId = "6158506e-436b-4654-be6e-898b837a8cb6";
 		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + sessionId;
 		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + ServiceConfig.USER_LOGIN_INFO;
 		System.out.println(sessionId);
 		System.out.println(sessionKey);
 		System.out.println(sessionDataKey);
-		JSONObject loginInfo = (JSONObject) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
-		System.out.println(CommonTool.parseJSONObject(loginInfo, LoginInfoModel.class).getNickname());
+		JSONObject loginInfo = getSessionRedis(ServiceConfig.USER_LOGIN_INFO, sessionId);
+		System.out.println(loginInfo);
 		System.out.println(StringTool.parseMobile("13212345678", 1));
 //		System.out.println(versionService.compareLastVersion(1, "0.0.1"));
 //		System.out.println(JSON.toJSONString(versionService.compareLastVersion(1, "0.0.1")));

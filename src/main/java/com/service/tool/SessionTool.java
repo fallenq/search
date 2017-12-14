@@ -44,33 +44,31 @@ public class SessionTool {
 	}
 
 	/**
-	 * Get session object of redis
+	 * Get session of redis
 	 * 
 	 * @param name
 	 * @return
 	 */
-	public JSONObject getSessionRedisObject(String name) {
+	@SuppressWarnings("unchecked")
+	public <T> T getSessionRedis(String name) {
 		if (!StringTool.isAvailableString(name)) {
 			return null;
 		}
 		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + getSessionId();
 		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + name;
-		return (JSONObject) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
+		return (T) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
 	}
 
 	/**
-	 * Get session string of redis
+	 * Get session object of redis
 	 * 
 	 * @param name
+	 * @param clazz
 	 * @return
 	 */
-	public String getSessionRedisValue(String name) {
-		if (!StringTool.isAvailableString(name)) {
-			return "";
-		}
-		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + getSessionId();
-		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + name;
-		return (String) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
+	public <T> T getSessionRedis(String name, Class<T> clazz) {
+		JSONObject object = getSessionRedis(name);
+		return CommonTool.parseJSONObject(object, clazz);
 	}
 
 	/**
