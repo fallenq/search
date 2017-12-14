@@ -85,7 +85,7 @@ public class TestMybatis {
 
 	@Test
 	public void test() {
-		String sessionId = "6158506e-436b-4654-be6e-898b837a8cb6";
+		String sessionId = "a81cf755-44de-48be-9574-02f179c51aae";
 		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + sessionId;
 		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + ServiceConfig.USER_LOGIN_INFO;
 		System.out.println(sessionId);
