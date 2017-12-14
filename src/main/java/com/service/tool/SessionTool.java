@@ -3,6 +3,7 @@ package com.service.tool;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.alibaba.fastjson.JSONObject;
 import com.service.config.CommonConfig;
 
 public class SessionTool {
@@ -43,7 +44,22 @@ public class SessionTool {
 	}
 
 	/**
-	 * Get session value of redis
+	 * Get session object of redis
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public JSONObject getSessionRedisObject(String name) {
+		if (!StringTool.isAvailableString(name)) {
+			return null;
+		}
+		String sessionKey = CommonConfig.SESSION_DATA_PREFIX + getSessionId();
+		String sessionDataKey = CommonConfig.SESSION_COLUMN_PREFIX + name;
+		return (JSONObject) RedisTool.getCommonRedis().hgetField(sessionKey, sessionDataKey);
+	}
+
+	/**
+	 * Get session string of redis
 	 * 
 	 * @param name
 	 * @return

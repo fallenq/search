@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.service.config.CommonConfig;
 
 public class CommonTool {
@@ -113,14 +113,13 @@ public class CommonTool {
 	 * @param clazz
 	 * @return
 	 */
-	public static <T> T parseObject(String content, Class<T> clazz) {
-		if (!StringTool.isAvailableString(content)) {
-			return null;
+	public static <T> T parseJSONObject(JSONObject object, Class<T> clazz) {
+		if (object != null) {
+			try {
+				return object.toJavaObject(clazz);
+			} catch (Exception e) {
+			}
 		}
-		try {
-			return JSON.parseObject(content, clazz);
-		} catch (Exception e) {
-			return null;
-		}
+		return null;
 	}
 }
