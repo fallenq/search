@@ -77,7 +77,12 @@ public class MpGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.sparrow");
+        pc.setParent("flying");
+        pc.setEntity("entity.sparrow");
+        pc.setMapper("mapper.sparrow");
+        pc.setService("service.sparrow.dao.nozzle");
+        pc.setServiceImpl("service.sparrow.dao.impl");
+        pc.setXml("mybatis.mapper.sparrow");
 //        pc.setModuleName("test");
         mpg.setPackageInfo(pc);
 
